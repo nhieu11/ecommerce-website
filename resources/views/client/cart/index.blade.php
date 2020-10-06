@@ -68,7 +68,7 @@
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <a href="#" class="closed data-product-id="{$item->id}" "></a>
+                            <a href="#" class="closed data-product-id={{$item->id}}"></a>
                         </div>
                     </div>
                 </div>

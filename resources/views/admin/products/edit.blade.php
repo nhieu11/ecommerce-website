@@ -14,7 +14,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Sửa sản phẩm</div>
                     @if ($errors->any())
-                        @component('admin.layouts.components.arlert')
+                        @component('admin.layouts.components.alert')
                         @slot('type','danger')
                         @slot('stroke','cancel')
                         {{ $errors->first() }}
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Mã sản phẩm</label>
-                                    <input type="text" name="code" class="form-control" value="{{ $product->sku }}">
+                                    <input type="text" name="sku" class="form-control" value="{{ $product->sku }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Tên sản phẩm</label>
@@ -54,6 +54,10 @@
                                         <option value="0">Không</option>
                                         <option selected value="1">Có</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số lượng</label>
+                                    <input type="number" class="form-control" name="quantity" value="{{$product->quantity}}">
                                 </div>
                                 <div class="form-group">
                                     <label>Trạng thái</label>
@@ -73,7 +77,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Thông tin</label>
-                                    <textarea name="info" style="width: 100%;height: 100px;">
+                                    <textarea name="description" style="width: 100%;height: 100px;">
 
                                     </textarea>
                                 </div>
@@ -84,11 +88,11 @@
                                 <div class="form-group">
                                     <label>Miêu tả</label>
                                     <textarea id="editor" name="description" style="width: 100%;height: 100px;">
-                                        {{ $product->category->name }} //lưu vào $product tốn ram, dùng 2,3 lần trở lên (property)
+                                        {{-- {{ $product->category->name }} //lưu vào $product tốn ram, dùng 2,3 lần trở lên (property)
                                         {{ $product->category->name }}
                                         {{ $product->category->name }}
                                         {{ $product->category->name }}
-                                        {{ $product->category->name }}
+                                        {{ $product->category->name }} --}}
                                     </textarea>
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Sửa sản phẩm</button>

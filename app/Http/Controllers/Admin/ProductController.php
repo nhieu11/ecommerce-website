@@ -70,6 +70,7 @@ class ProductController extends Controller
             'sku',
             'name',
             'price',
+            'quantity',
             'img',
             'featured',
             'detail',

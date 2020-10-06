@@ -26,9 +26,9 @@
             </a>
         </li>
         <li>
-            <a href="/admin/orders" class="menu-orders"></a>
-                ><svg class="glyph stroked notepad ">
-                    <use xlink:href="#stroked-notepad" />
+            <a href="/admin/orders" class="menu-orders">
+                <svg class="glyph stroked notepad ">
+                    <use xlink:href="#stroked-notepad"/>
                 </svg>
                 Đơn hàng
             </a>

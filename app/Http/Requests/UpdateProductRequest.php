@@ -26,8 +26,9 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             // 'category_id' => 'required',
-            'sku' => 'required|unique:products,sku,{$this->products}',
-            'name' => 'required|numeric',
+            // 'sku' => 'required|unique:products,sku,{$this->products}',
+            'sku' => 'required',
+            'name' => 'required',
             'price' =>'required|numeric|min:0',
             'img' => 'sometimes|image',
             'quantity' =>'required|numeric'
