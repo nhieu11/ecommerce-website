@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\Client;
 
 use App\Entities\Product;
+use App\Entities\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Admin\CategoryController;
 
 class ProductController extends Controller
 {
+
     public function index(){
         $products = Product::paginate(); //mỗi trang có 5
-        return view('client.product.index',compact('products'));
+        $categories = Category::get();
+        $parent = 0;
+        return view('client.product.index',compact('products','categories','parent'));
     }
 
     public function detail($category , $product){

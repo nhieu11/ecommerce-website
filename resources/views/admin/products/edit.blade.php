@@ -59,13 +59,13 @@
                                     <label>Số lượng</label>
                                     <input type="number" class="form-control" name="quantity" value="{{$product->quantity}}">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select name="state" class="form-control">
                                         <option value="1">Còn hàng</option>
                                         <option selected value="0">Hết hàng</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -96,7 +96,7 @@
                                     </textarea>
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Sửa sản phẩm</button>
-                                <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
+                                <button class="btn btn-danger" type="button" onclick="quay_lai_trang_truoc()">Huỷ bỏ</button>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -133,5 +133,8 @@
                });
            });
 
+           function quay_lai_trang_truoc(){
+            history.back();
+        }
     </script>
     @endpush

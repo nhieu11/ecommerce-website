@@ -54,32 +54,13 @@
             </div>
             <div class="col-md-3 col-md-pull-9">
                 <div class="sidebar">
-                    <div class="side">
-                        <h2>Danh mục</h2>
+                    {{-- <div class="side"> --}}
+                        {{-- <h2>Danh mục</h2> --}}
                         <div class="fancy-collapse-panel">
                             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#menu1"
-                                                aria-expanded="true" aria-controls="collapseOne">Quần
-                                                Áo Nam
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="menu1" class="panel-collapse collapse" role="tabpanel"
-                                        aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <ul>
-                                                <li><a href="#">Áo Sơ mi nam</a></li>
-                                                <li><a href="#">Áo thun nam</a></li>
-                                                <li><a href="#">Áo Khoác nam</a></li>
-                                                <li><a href="#">Áo vest Nam</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
+
+                                {{-- @include('client.product.row_category', ['level' => 0 ]) --}}
+                                {{-- <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#menu2"
@@ -99,12 +80,71 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
+                                <div class="navbar navbar-default" role="navigation">
+                                    <div class="container">
+                                      <div class="collapse navbar-collapse">
+                                         <ul class="nav navbar-nav">
+                                            <li>
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style = "font-size:20px">Danh mục    <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                    {{-- @include('client.product.menu_use',['parent'=>0]) --}}
+                                                    @foreach ($categories as $category)
+                                                        @if ($category->parent_id == $parent)
+                                                            <li>
+                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}<b class="caret"></b></a>
+                                                                <ul class="dropdown-menu">
+                                                                @foreach($categories as $value)
+                                                                    {{-- <li><a href="#">{{$value->name}}</a></li> --}}
 
+                                                                    @if($category->id==$value->parent_id)
+                                                                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $value->name }}<b class="caret"></b></a>
+                                                                            <ul class="dropdown-menu">
+                                                                                @foreach($categories as $item)
+                                                                                    @if($value->id==$item->parent_id)
+                                                                                    <li><a href="#">{{ $item->name }}</a></li>
+                                                                                    @endif
+                                                                                    {{-- {{ $item->name }} --}}
+                                                                                @endforeach
+                                                                            </ul>
+                                                                            </li>
+                                                                    @endif
+                                                                @endforeach
+                                                                </ul>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                   {{-- <li><a href="#">Menu 1.1</a></li>
+                                                   <li class="divider"></li>
+                                                   <li><a href="#">Menu 1.1</a></li>
+                                                   <li class="divider"></li>
+                                                   <li>
+                                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.1 <b class="caret"></b></a>
+                                                      <ul class="dropdown-menu">
+                                                          <li><a href="#">Menu 1.2</a></li>
+                                                          <li>
+                                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.2 <b class="caret"></b></a>
+                                                              <ul class="dropdown-menu">
+                                                                 <li>
+                                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.3 <b class="caret"></b></a>
+                                                                     <ul class="dropdown-menu">
+                                                                        <li><a href="#">Menu 1.4</a></li>
+                                                                     </ul>
+                                                                 </li>
+                                                              </ul>
+                                                           </li>
+                                                       </ul>
+                                                   </li> --}}
+                                               </ul>
+                                           </li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                                </div>
 
                             </div>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                     <div class="side">
                         <h2>Khoảng giá</h2>
                         <form method="post" class="colorlib-form-2">
@@ -179,6 +219,16 @@ $(document).ready(function() {
             }
         })
     })
+    $('.navbar a.dropdown-toggle').on('click', function(e) {
+        var $el = $(this);
+        var $parent = $(this).offsetParent(".dropdown-menu");
+        $(this).parent("li").toggleClass('open');
+        if(!$parent.parent().hasClass('nav')) {
+             $el.next().css({"top": $el[0].offsetTop, "left": $parent.outerWidth() - 4});
+        }
+        $('.nav li.open').not($(this).parents("li")).removeClass("open");
+        return false;
+       });
 })
 {{-- debounce --}}
 

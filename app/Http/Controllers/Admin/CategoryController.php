@@ -11,20 +11,21 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     public function index(Request $request){
-        $categories = DB::table('categories')->select(['name','parent_id'])
-        ->get();
-        debugbar()->info($categories);
+        // $categories = DB::table('categories')->select(['name','parent_id'])
+        // ->get();
+        // debugbar()->info($categories);
 
-        if ($request->wantsJson()) {  //API
-            $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
-            return response()->json([
-                'name' => json_decode($res->getBody()->getContents())
-            ]);
-        }
+        // if ($request->wantsJson()) {  //API
+        //     $client = new \GuzzleHttp\Client();
+        //     $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
+        //     return response()->json([
+        //         'name' => json_decode($res->getBody()->getContents())
+        //     ]);
+        // }
 
 
         $categories = $this->getSubCategories(0); // Bắt thằng gốc
+        // dd($categories);
         //  foreach ($categories as $category ) {
         //      $category->sub = Category::whereParentId($category->id)->get();
         //  }
@@ -36,7 +37,7 @@ class CategoryController extends Controller
 
     }
 
-    private function getSubCategories($parentId, $ignoreId =null)
+    public function getSubCategories($parentId, $ignoreId =null)
     {
         $categories = Category::whereParentId($parentId)
         ->where('id','<>', $ignoreId)

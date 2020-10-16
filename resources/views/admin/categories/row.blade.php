@@ -11,8 +11,8 @@
                 <i class="fa fa-edit"></i></a>
                 <a class="btn-category btn-danger btn-destroy" href="/admin/categories/{{$category->id}}"><i class="fas fa-times"></i></i></a>
 
-                </div>
-                </div>
+            </div>
+        </div>
 
 @includeWhen($category->sub->count() ,'admin.categories.row',
 ['categories' => $category->sub,  'level' => $level + 1])

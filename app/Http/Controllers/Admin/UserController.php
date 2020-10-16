@@ -10,14 +10,14 @@ use GuzzleHttp\Client;
 class UserController extends Controller
 {
     public function index(){
-        $client = new Client();
-        $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
-        $content = json_decode($res->getBody()->getContents());
-        foreach($content as $key => $value) {
-            echo "{$key}: {$value}" . PHP_EOL;
-            echo "<br>";
-        }
-        debugbar()->info($content);
+        // $client = new Client();
+        // $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
+        // $content = json_decode($res->getBody()->getContents());
+        // foreach($content as $key => $value) {
+        //     echo "{$key}: {$value}" . PHP_EOL;
+        //     echo "<br>";
+        // }
+        // debugbar()->info($content);
         // $users = DB::table('users')->whereName('Hieu')->update([
         //     'created_at' => now(),
         //     'updated_at' => now(),

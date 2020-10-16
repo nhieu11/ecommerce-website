@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a href="shop.html" class="f-product-1" style="background-image: url(/assets/client/images/i1.jpg);">
+                <a href="" class="f-product-1" style="background-image: url(/assets/client/images/i1.jpg);">
                     <div class="desc">
                         <h2>Mẫu <br>cho <br>Nam</h2>
                     </div>

@@ -21,7 +21,7 @@
                 <span class="glyphicon glyphicon-remove"></span>
                 </a>
                     </div>  --}}
-                    @component('admin.layouts.components.arlert')
+                    @component('admin.layouts.components.alert')
                     @slot('type','danger')
                     @slot('stroke','cancel')
                     {{ $errors->first() }}
@@ -36,10 +36,7 @@
                                     <div class="form-group">
                                         <label>Danh mục</label>
                                         <select name="category_id" class="form-control">
-                                            <option value='1' selected>Nam</option>
-                                            <option value='3'>---|Áo khoác nam</option>
-                                            <option value='2'>Nữ</option>
-                                            <option value='4'>---|Áo khoác nữ</option>
+                                            @include('admin.products.row_product',['level'=>0])
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -91,7 +88,7 @@
                                     <textarea id="editor" name="description" style="width: 100%;height: 100px;"></textarea>
                                 </div>
                                 <button class="btn btn-success" type="submit">Thêm sản phẩm</button>
-                                <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
+                                <button class="btn btn-danger" type="button" onclick="quay_lai_trang_truoc()">Huỷ bỏ</button>
                             </div>
                         </div>
                     <div class="clearfix"></div>
@@ -128,6 +125,10 @@
                $('#img').click();
            });
        });
+
+        function quay_lai_trang_truoc(){
+            history.back();
+        }
 
 </script>
 @endpush
