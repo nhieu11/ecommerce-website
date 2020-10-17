@@ -57,18 +57,11 @@ class UserController extends Controller
     public function create(){
         return view('admin.users.create');
     }
-    public function store(Request $request){
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6|confirmed',
-            'full' => 'required',
-            'address' => 'required',
-            'phone' => 'required|numeric',
-        ]);
+    public function store(UpdateUserRequest $request){
         $input = $request->only([
             'email',
             'password',
-            'full',
+            'name',
             'address',
             'phone',
         ]);

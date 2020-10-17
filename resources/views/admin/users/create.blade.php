@@ -12,16 +12,16 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><i class="fas fa-user"></i> Thêm thành viên</div>
 
-                {{--  @if ($errors->any())
+                 @if ($errors->any())
                 @component('admin.layouts.components.alert')
                 @slot('type', 'danger')
                 @slot('stroke', 'cancel')
                 {{ $errors->first() }}
                 @endcomponent
-                @endif  --}}
+                @endif
 
                 <div class="panel-body">
-                    <form action="/admin/users" method="post">
+                    <form action="/admin/users" method="POST">
                     @csrf
                     <div class="row justify-content-center" style="margin-bottom:40px">
 
@@ -30,9 +30,9 @@
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" name="email" class="form-control">
-                                <div class="alert alert-danger" role="alert">
+                                {{-- <div class="alert alert-danger" role="alert">
                                     <strong>email đã tồn tại!</strong>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="form-group">
                                 <label>password</label>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Full name</label>
-                                <input type="full" name="full" class="form-control">
+                                <input type="name" name="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Address</label>

@@ -31,9 +31,9 @@
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="text" name="email" class="form-control" value="{{$user->email}}">
-                                <div class="alert alert-danger" role="alert">
+                                {{-- <div class="alert alert-danger" role="alert">
                                     <strong>email đã tồn tại!</strong>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="form-group">
                                 <label>password</label>
