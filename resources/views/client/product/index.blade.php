@@ -30,7 +30,7 @@
                             </div>
                             <div class="desc">
                                 <h3><a href="/product/{{ $product->category_id }}/{{ $product->id }}">{{ $product->name }}</a></h3>
-                                <p class="price"><span>{{ number_format($product->price) }}</span></p>
+                                <p class="price"><span>{{ number_format($product->price) }} VND</span></p>
                             </div>
                         </div>
                     </div>
