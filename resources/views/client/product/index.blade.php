@@ -9,7 +9,7 @@
                     <div class="col-md-4 text-center">
                         <div class="product-entry">
                             <div class="product-img"
-                                style="background-image: url(images/quan-kaki-xam-chuot-dam-qk171-9770.jpg);">
+                                style="background-image: url({{$product->avatar}});">
 
                                 <div class="cart">
                                     <p>

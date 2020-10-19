@@ -1,7 +1,7 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <form role="search"></form>
     <ul class="nav menu">
-        <li class="active">
+        <li>
             <a href="/admin" class="menu-dashboard">
                 <svg class="glyph stroked dashboard-dial">
                     <use xlink:href="#stroked-dashboard-dial"></use>
@@ -10,7 +10,7 @@
             </a>
         </li>
         <li>
-            <a href="/admin/categories" class="menu-dashboard">
+            <a href="/admin/categories" class="menu-categories">
                 <svg class="glyph stroked clipboard with paper">
                     <use xlink:href="#stroked-clipboard-with-paper" />
                 </svg>
