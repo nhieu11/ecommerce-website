@@ -60,11 +60,11 @@ class UserController extends Controller
     public function store(UpdateUserRequest $request){
         $input = $request->only([
             'email',
-            'password',
             'name',
             'address',
             'phone',
         ]);
+        $input['password'] = bcrypt("$request->password");
         $user = User::create($input);
         return redirect("/admin/users/{$user->id}/edit");
     }
@@ -75,11 +75,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $user){
         $input = $request->only([
             'email',
-            'password',
             'name',
             'address',
             'phone',
         ]);
+        $input['password'] = bcrypt("$request->password");
         $user = User::findOrFail($user);
         $user->fill($input);
         // print_r($user)
