@@ -92,17 +92,17 @@
                                                     @foreach ($categories as $category)
                                                         @if ($category->parent_id == $parent)
                                                             <li>
-                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}<b class="caret"></b></a>
+                                                                <a href="{{$category->id}}" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}<b class="caret"></b></a>
                                                                 <ul class="dropdown-menu">
                                                                 @foreach($categories as $value)
                                                                     {{-- <li><a href="#">{{$value->name}}</a></li> --}}
 
                                                                     @if($category->id==$value->parent_id)
-                                                                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $value->name }}<b class="caret"></b></a>
+                                                                            <li><a href="{{$value->id}}" class="dropdown-toggle" data-toggle="dropdown">{{ $value->name }}<b class="caret"></b></a>
                                                                             <ul class="dropdown-menu">
                                                                                 @foreach($categories as $item)
                                                                                     @if($value->id==$item->parent_id)
-                                                                                    <li><a href="#">{{ $item->name }}</a></li>
+                                                                                    <li><a href="{{$item->id}}" class="button">{{ $item->name }}</a></li>
                                                                                     @endif
                                                                                     {{-- {{ $item->name }} --}}
                                                                                 @endforeach
@@ -148,6 +148,7 @@
                     <div class="side">
                         <h2>Khoảng giá</h2>
                         <form method="post" class="colorlib-form-2">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -155,11 +156,11 @@
                                         <div class="form-field">
                                             <i class="icon icon-arrow-down3"></i>
                                             <select name="start" id="people" class="form-control">
-                                                <option value="#">100.000 VNĐ</option>
-                                                <option value="#">200.000 VNĐ</option>
-                                                <option value="#">300.000 VNĐ</option>
-                                                <option value="#">500.000 VNĐ</option>
-                                                <option value="#">1.000.000 VNĐ</option>
+                                                <option value="1">100.000 VNĐ</option>
+                                                <option value="2">200.000 VNĐ</option>
+                                                <option value="3">300.000 VNĐ</option>
+                                                <option value="5">500.000 VNĐ</option>
+                                                <option value="10">1.000.000 VNĐ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -170,18 +171,17 @@
                                         <div class="form-field">
                                             <i class="icon icon-arrow-down3"></i>
                                             <select name="end" id="people" class="form-control">
-                                                <option value="#">2.000.000 VNĐ</option>
-                                                <option value="#">4.000.000 VNĐ</option>
-                                                <option value="#">6.000.000 VNĐ</option>
-                                                <option value="#">8.000.000 VNĐ</option>
-                                                <option value="#">10.000.000 VNĐ</option>
+                                                <option value="20">2.000.000 VNĐ</option>
+                                                <option value="40">4.000.000 VNĐ</option>
+                                                <option value="60">6.000.000 VNĐ</option>
+                                                <option value="80">8.000.000 VNĐ</option>
+                                                <option value="100">10.000.000 VNĐ</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm
-                                kiếm</button>
+                            <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
                         </form>
                     </div>
 
