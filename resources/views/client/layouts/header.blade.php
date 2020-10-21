@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
-                        <li class="active"><a href="/">Trang chủ</a></li>
+                        <li><a href="/" class="menu-home">Trang chủ</a></li>
                         {{-- <li class="has-dropdown">
                             <a href="/shop">Cửa hàng</a>
                             <ul class="dropdown">

@@ -1,4 +1,4 @@
-@extends('client.layouts.app', ['activePage' => 'home', 'title' => 'Liên hệ'])
+@extends('client.layouts.app', ['activePage' => 'contact', 'title' => 'Liên hệ'])
 @section('content')
 <div id="colorlib-contact">
     <div class="container">
