@@ -35,10 +35,10 @@
                                     <strong>email đã tồn tại!</strong>
                                 </div> --}}
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>password</label>
                                 <input type="text" name="password" class="form-control" value="{{$user->password}}">
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label>Full name</label>
                                 <input type="name" name="name" class="form-control" value="{{$user->name}}">
