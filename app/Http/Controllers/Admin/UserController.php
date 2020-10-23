@@ -10,14 +10,14 @@ use GuzzleHttp\Client;
 class UserController extends Controller
 {
     public function index(){
-        $client = new Client();
-        $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
-        $content = json_decode($res->getBody()->getContents());
-        foreach($content as $key => $value) {
-            echo "{$key}: {$value}" . PHP_EOL;
-            echo "<br>";
-        }
-        debugbar()->info($content);
+        // $client = new Client();
+        // $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
+        // $content = json_decode($res->getBody()->getContents());
+        // foreach($content as $key => $value) {
+        //     echo "{$key}: {$value}" . PHP_EOL;
+        //     echo "<br>";
+        // }
+        // debugbar()->info($content);
         // $users = DB::table('users')->whereName('Hieu')->update([
         //     'created_at' => now(),
         //     'updated_at' => now(),
@@ -57,21 +57,14 @@ class UserController extends Controller
     public function create(){
         return view('admin.users.create');
     }
-    public function store(Request $request){
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6|confirmed',
-            'full' => 'required',
-            'address' => 'required',
-            'phone' => 'required|numeric',
-        ]);
+    public function store(UpdateUserRequest $request){
         $input = $request->only([
             'email',
-            'password',
-            'full',
+            'name',
             'address',
             'phone',
         ]);
+        $input['password'] = bcrypt("$request->password");
         $user = User::create($input);
         return redirect("/admin/users/{$user->id}/edit");
     }
@@ -82,11 +75,11 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $user){
         $input = $request->only([
             'email',
-            'password',
             'name',
             'address',
             'phone',
         ]);
+        $input['password'] = bcrypt("$request->password");
         $user = User::findOrFail($user);
         $user->fill($input);
         // print_r($user)

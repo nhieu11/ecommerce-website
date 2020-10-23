@@ -1,4 +1,4 @@
-@extends('client.layouts.app', ['activePage' => 'home', 'title' => 'Giỏ hàng'])
+@extends('client.layouts.app', ['activePage' => 'cart', 'title' => 'Giỏ hàng'])
 @section('content')
 <div class="colorlib-shop">
     <div class="container">
@@ -39,57 +39,61 @@
                         <span>Xóa</span>
                     </div>
                 </div>
-                @foreach (Cart::getContent() as $item)
+
+                @forelse (Cart::getContent() as $item)
                 <div class="product-cart">
                     <div class="one-forth">
                         <div class="product-img">
-                            <img class="img-thumbnail cart-img" src="images/ao-so-mi-hoa-tiet-den-asm1223-10191.jpg">
+                            <img class="img-thumbnail cart-img" src="{{$item->attributes['avatar']}}">
                         </div>
                         <div class="detail-buy">
-                            <h4>Mã : {{$item->attributes['sku']}}</h4>
-                            <h5>{{$item->name}}</h5>
+                            <h4>Mã : {{ $item->attributes['sku'] }}</h4>
+                            <h5>{{ $item->name }}</h5>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price">{{ number_format($item->price)}}</span>
+                            <span class="price">{{ number_format($item->price) }} đ</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
                             <input type="number"
-                                class="form-control input-number input-quantity text-center" data-product-id="{{ $item->id }}" value="{{ $item->quantity }}">
+                                class="form-control input-number input-quantity text-center"
+                                data-product-id="{{ $item->id }}"
+                                value="{{ $item->quantity }}">
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price unit-price">{{number_format($item->quantity * $item->price)}}</span>
+                            <span class="price unit-price">{{ number_format($item->quantity * $item->price) }} đ</span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <a href="#" class="closed data-product-id={{$item->id}}"></a>
+                            <a href="#" class="closed" data-product-id="{{ $item->id }}"></a>
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @empty
+
+                @endforelse
+
+
 
             </div>
         </div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="total-wrap">
-                    <div cqlass="row">
+                    <div class="row">
                         <div class="col-md-8">
 
                         </div>
                         <div class="col-md-3 col-md-push-1 text-center">
                             <div class="total">
-                                <div class="sub">
-
-                                </div>
                                 <div class="grand-total">
-                                    <p><span><strong>Tổng cộng:</strong></span> <span class="cart-total">{{ number_format(Cart::getTotal()) }}</span></p>
+                                    <p><span><strong>Tổng cộng:</strong></span> <span class="cart-total">{{ number_format(Cart::getTotal()) }} đ</span></p>
                                     <a href="checkout.html" class="btn btn-primary">Thanh toán <i
                                             class="icon-arrow-right-circle"></i></a>
                                 </div>
@@ -106,46 +110,46 @@
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 <script>
-    $(document).ready(function(){
-
-        $(".closed").on("click",function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: "/cart/remove",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    product_id: $(this).data("product_id"),
-                },
-            })
-            $(this).parents(".product-cart").remove()
+$(document).ready(function() {
+    $(".closed").on("click", function(e) {
+        e.preventDefault()
+        const _this = $(this)
+        $.ajax({
+            url: '/cart/remove',
+            method: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                product_id: $(this).data('product-id'),
+            },
+            success: function() {
+                _this.parents(".product-cart").remove()
+            }
         })
+    })
 
-
-        $(".input-quantity").on("change", _.debounce(function(){
-
-            const quantity = $(this).val()
-            const product_id = $(this).data('product-id')
-            const _input_quantity_context = $(this)
-            $.ajax({
-                url: '/cart/update',
-                method: 'POST',
-                data: {
-                     _token: "{{ csrf_token() }}",
-                   product_id: product_id,
-                    quantity: quantity
-                },
-                success: function(response){
-                    _input_quantity_context
+    $(".input-quantity").on("change", _.debounce(function() {
+        const quantity = $(this).val()
+        const product_id = $(this).data('product-id')
+        const _input_quantity_context = $(this)
+        $.ajax({
+            url: '/cart/update',
+            method: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                product_id: product_id,
+                quantity: quantity
+            },
+            success: function(response) {
+                _input_quantity_context
                     .parents('.product-cart')
                     .find('.unit-price')
                     .text(response.itemSubTotal + ' đ')
 
-                $(".cart-total").text(response.total + 'đ')
-                }
-            })
-        }, 1000))
-    })
-
+                $(".cart-total").text(response.total + ' đ')
+            }
+        })
+    }, 1000))
+})
 </script>
 
 @endpush

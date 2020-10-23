@@ -23,7 +23,7 @@
 	<link rel="stylesheet" href="/assets/client/css/style.css">
 	<link rel="stylesheet" href="/assets/client/css/custome.css">
 
-
+    @yield('css')
 
 </head>
 

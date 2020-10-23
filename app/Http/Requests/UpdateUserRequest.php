@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -23,8 +24,13 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('user');
         return [
-            'email'=>'required|email',
+            'email'=>[
+                'required',
+                'email',
+                Rule::unique('users')->ignore($id),
+            ],
             'name'=>'required|min:5',
             'phone'=>'required',
             'address'=>'required|min:8',
@@ -35,6 +41,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'email.required'=>'Không được để trống email',
+            'email.unique'=>'Email đã tồn tại',
             'email.email'=>'Email không đúng định dạng',
             'name.required'=>'Không được để trống Họ và tên',
             'name.min'=>'Họ tên không được nhỏ hơn 5 ký tự',

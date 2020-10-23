@@ -7,19 +7,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 
+use Admin\CategoryController;
+
 class ProductController extends Controller
 {
     public function index(){
         // DB::table('products') //truy vấn cả db
 
         $products = Product::with('category')->get(); //Lấy ra dssp, with() = category()->first(), $product trả về 1 mảng mà Product ở Entities sử dụng hàm category
-        return view('admin.products.index',[
-            'products' => $products
-        ]);
+
+        return view('admin.products.index',compact('products'));
     }
 
     public function create(){
-        return view('admin.products.create');
+        $categories = app('App\Http\Controllers\Admin\CategoryController')->getSubCategories(0);
+        return view('admin.products.create',compact('categories'));
     }
 
     public function store(Request $request){
@@ -71,15 +73,23 @@ class ProductController extends Controller
             'name',
             'price',
             'quantity',
-            'img',
             'featured',
             'detail',
             'description',
         ]);
+
+        if ($request->hasFile('img')){
+            $imgName=uniqid('vietpro_k88'). '.' . $request->img->getClientOriginalExtension();  //Đổi tên unique cho ảnh để không trùng ,getClientOriginalExtension : lấy ra phần đuôi (tên file mở rộng)
+            $destinationDir = public_path('/files/images/products'); //Directory , public_path : Trả tới địa chỉ đang có trên pc (hardaddress)
+            $request->img->move($destinationDir,$imgName);  //move($Location,$filesName), $Location: Là thư mục chứa file upload lên Sever, $filesName: Là tên mới của file.
+            $input['avatar'] = asset("/files/images/products/{$imgName}"); //asset trả tới địa chỉ đường dẫn trên server(browser) (softaddress)
+        }
+
         $product = Product::findOrFail($product);
         $product->fill($input);
         $product->save();
-        return back();
+        return redirect("/admin/products");
+
     }
     public function destroy($product){
         $deleted = Product::destroy($product);  //Trả về 1,2,3 nếu tìm thấy 1,2,3 bản ghi ngược lại là 0
