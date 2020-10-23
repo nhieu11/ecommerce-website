@@ -1,4 +1,70 @@
 @extends('client.layouts.app', ['activePage' => 'product', 'title' => 'Sản phẩm'])
+@section('css')
+<style>
+
+*{margin:0;padding:0;}
+.clearfix:before,.clearfix:after{
+	content: '';
+	display: table;
+	clear: both;
+}
+.menu-cap3{
+	width: 1200px;
+	margin: 0 auto;
+	list-style: none;
+	background-color: #e89e52;
+}
+.menu-cap3 > li{
+	float: left;
+}
+.menu-cap3 > li a{
+	font-size: 16px;
+	display: block;
+	padding: 10px 15px;
+	text-decoration: none;
+	border-right: 1px solid #e0caca;
+	color: #fff;
+}
+.menu-cap3 > li:last-child a{
+	border-right: 0;
+}
+.menu-cap3 li{
+	position: relative;
+}
+.menu-cap3 li .menu-sub{
+	list-style: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 200px;
+	box-shadow: 0px 1px 8px -4px #333;
+	background-color: #e89e51;
+	/*display: none;*/
+	opacity: 0;
+	visibility: hidden;
+	top: 150%;
+	transition: all 0.5s ease-in-out;
+}
+.menu-cap3 li .menu-sub ul{
+	top: 0;
+	/*left: 100%;*/
+	left: 150%;
+}
+.menu-cap3 li:hover > .menu-sub{
+	/*display: block;*/
+	opacity: 1;
+	visibility: visible;
+	top: 100%;
+}
+.menu-cap3 li .menu-sub li:hover > ul{
+	top: 0;
+	left: 100%;
+}
+.menu-cap3 li:hover > a {
+	background: #b36c22;
+}
+    </style>
+@endsection
 @section('content')
 <div class="colorlib-shop">
     <div class="container">
@@ -54,97 +120,46 @@
             </div>
             <div class="col-md-3 col-md-pull-9">
                 <div class="sidebar">
-                    {{-- <div class="side"> --}}
-                        {{-- <h2>Danh mục</h2> --}}
-                        <div class="fancy-collapse-panel">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                                {{-- @include('client.product.row_category', ['level' => 0 ]) --}}
-                                {{-- <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="headingOne">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#menu2"
-                                                aria-expanded="true" aria-controls="collapseOne">Quần
-                                                Áo Nữ
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="menu2" class="panel-collapse collapse" role="tabpanel"
-                                        aria-labelledby="headingOne">
-                                        <div class="panel-body">
-                                            <ul>
-                                                <li><a href="#">Áo Sơ mi Nữ</a></li>
-                                                <li><a href="#">Áo thun Nữ</a></li>
-                                                <li><a href="#">Áo Khoác Nữ</a></li>
-
+                    <div class="fancy-collapse-panel">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="navbar navbar-default" role="navigation">
+                                <div class="container">
+                                    <div class="collapse navbar-collapse">
+                                        <ul class="menu-cap3 clearfix">
+                                        <li>
+                                            <a href="#" style = "font-size:20px">Danh mục    <b class="caret"></b></a>
+                                            <ul class="menu-sub">
+                                                @foreach ($categories as $category)
+                                                    @if ($category->parent_id == $parent)
+                                                        <li>
+                                                            <a href="#" >{{ $category->name }}<b class="caret"></b></a>
+                                                            <ul class="menu-sub">
+                                                            @foreach($categories as $value)
+                                                                @if($category->id==$value->parent_id)
+                                                                        <li><a href="#" >{{ $value->name }}<b class="caret"></b></a>
+                                                                        <ul class="menu-sub">
+                                                                            @foreach($categories as $item)
+                                                                                @if($value->id==$item->parent_id)
+                                                                                <li><a href="#">{{ $item->name }}</a></li>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </ul>
+                                                                        </li>
+                                                                @endif
+                                                            @endforeach
+                                                            </ul>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
                                             </ul>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <div class="navbar navbar-default" role="navigation">
-                                    <div class="container">
-                                      <div class="collapse navbar-collapse">
-                                         <ul class="nav navbar-nav">
-                                            <li>
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style = "font-size:20px">Danh mục    <b class="caret"></b></a>
-                                                <ul class="dropdown-menu">
-                                                    {{-- @include('client.product.menu_use',['parent'=>0]) --}}
-                                                    @foreach ($categories as $category)
-                                                        @if ($category->parent_id == $parent)
-                                                            <li>
-                                                                <a href="{{$category->id}}" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}<b class="caret"></b></a>
-                                                                <ul class="dropdown-menu">
-                                                                @foreach($categories as $value)
-                                                                    {{-- <li><a href="#">{{$value->name}}</a></li> --}}
-
-                                                                    @if($category->id==$value->parent_id)
-                                                                            <li><a href="{{$value->id}}" class="dropdown-toggle" data-toggle="dropdown">{{ $value->name }}<b class="caret"></b></a>
-                                                                            <ul class="dropdown-menu">
-                                                                                @foreach($categories as $item)
-                                                                                    @if($value->id==$item->parent_id)
-                                                                                    <li><a href="{{$item->id}}" class="button">{{ $item->name }}</a></li>
-                                                                                    @endif
-                                                                                    {{-- {{ $item->name }} --}}
-                                                                                @endforeach
-                                                                            </ul>
-                                                                            </li>
-                                                                    @endif
-                                                                @endforeach
-                                                                </ul>
-                                                            </li>
-                                                        @endif
-                                                    @endforeach
-                                                   {{-- <li><a href="#">Menu 1.1</a></li>
-                                                   <li class="divider"></li>
-                                                   <li><a href="#">Menu 1.1</a></li>
-                                                   <li class="divider"></li>
-                                                   <li>
-                                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.1 <b class="caret"></b></a>
-                                                      <ul class="dropdown-menu">
-                                                          <li><a href="#">Menu 1.2</a></li>
-                                                          <li>
-                                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.2 <b class="caret"></b></a>
-                                                              <ul class="dropdown-menu">
-                                                                 <li>
-                                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu 1.3 <b class="caret"></b></a>
-                                                                     <ul class="dropdown-menu">
-                                                                        <li><a href="#">Menu 1.4</a></li>
-                                                                     </ul>
-                                                                 </li>
-                                                              </ul>
-                                                           </li>
-                                                       </ul>
-                                                   </li> --}}
-                                               </ul>
-                                           </li>
-                                        </ul>
-                                    </div>
-                                  </div>
+                                        </li>
+                                    </ul>
                                 </div>
-
+                                </div>
                             </div>
+
                         </div>
-                    {{-- </div> --}}
+                    </div>
                     <div class="side">
                         <h2>Khoảng giá</h2>
                         <form method="post" class="colorlib-form-2">
@@ -184,7 +199,6 @@
                             <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
