@@ -72,7 +72,7 @@
 				<div class="row row-pb-md">
 					<div class="col-md-3 colorlib-widget">
 						<h4>Giới thiệu</h4>
-						<p>VIETPRO STORE cửa hàng kinh doanh quần áo luôn mang tới sự hài lòng cho khách hàng về chất
+						<p>HUST STORE cửa hàng kinh doanh quần áo luôn mang tới sự hài lòng cho khách hàng về chất
 							lượng sản phẩm, quần
 							áo đều mang thương hiệu made in Việt Nam đẹp cả về kiểu cách lẫn chất lượng, nên sẽ giúp cho
 							bạn trở nên xinh
@@ -80,7 +80,7 @@
 						<p>
 							<ul class="colorlib-social-icons">
 
-								<li><a href="https://www.facebook.com/vietpro.edu/"><i class="icon-facebook"></i></a></li>
+								<li><a href="https://www.facebook.com/huststore.bk/"><i class="icon-facebook"></i></a></li>
 
 								<li><a href="https://www.youtube.com/channel/UCLjRjXUSy3g9iKRWTyw75Nw"><i class="icon-youtube"></i></a></li>
 							</ul>
@@ -115,10 +115,10 @@
 					<div class="col-md-4">
 						<h4>Thông tin liên hệ</h4>
 						<ul class="colorlib-footer-links">
-							<li>Số nhà B8A ngõ 18 đường Võ Văn Dũng - Hoàng Cầu - Đống Đa - Hà Nội</li>
-							<li><a href="tel://1234567920">0988 550 553</a></li>
+							<li>Số nhà 56A Tạ Quang Bửu - Hai Bà Trưng - Hà Nội</li>
+							<li><a href="tel://1234567920">0904 655 566</a></li>
 							<li><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							<li><a href="#">http://vietpro.edu.vn</a></li>
+							<li><a href="#">http://huststore.bk.vn</a></li>
 						</ul>
 					</div>
 				</div>
