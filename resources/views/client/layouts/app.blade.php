@@ -82,7 +82,7 @@
 
 								<li><a href="https://www.facebook.com/huststore.bk/"><i class="icon-facebook"></i></a></li>
 
-								<li><a href="https://www.youtube.com/channel/UCLjRjXUSy3g9iKRWTyw75Nw"><i class="icon-youtube"></i></a></li>
+								<li><a href="https://www.youtube.com/channel/huststore.bk"><i class="icon-youtube"></i></a></li>
 							</ul>
 						</p>
 					</div>
