@@ -11,7 +11,7 @@
                                     <h1 class="head-1">Sale</h1>
                                     <h2 class="head-3">45%</h2>
                                     <p class="category"><span>Nhưng mẫu thiết kế chuyên nghiệp</span></p>
-                                    <p><a href="#" class="btn btn-primary">Kết nối với shop</a></p>
+                                    <p><a href="#" class="btn btn-primary">Chat với shop</a></p>
                                 </div>
                             </div>
                         </div>
