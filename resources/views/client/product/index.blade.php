@@ -12,7 +12,7 @@
 	width: 1200px;
 	margin: 0 auto;
 	list-style: none;
-	
+
 }
 .menu-cap3 > li{
 	float: left;
@@ -23,7 +23,7 @@
 	padding: 10px 15px;
 	text-decoration: none;
 	border-right: 1px solid #e0caca;
-	
+
 }
 .menu-cap3 > li:last-child a{
 	border-right: 0;
@@ -132,15 +132,15 @@
                                                 @foreach ($categories as $category)
                                                     @if ($category->parent_id == $parent)
                                                         <li>
-                                                            <a href="#" >{{ $category->name }}<b class="caret"></b></a>
+                                                            <a href="/product/{{$category->id}}" >{{ $category->name }}<b class="caret"></b></a>
                                                             <ul class="menu-sub">
                                                             @foreach($categories as $value)
                                                                 @if($category->id==$value->parent_id)
-                                                                        <li><a href="#" >{{ $value->name }}<b class="caret"></b></a>
+                                                                        <li><a href="{{$value->id}}" >{{ $value->name }}<b class="caret"></b></a>
                                                                         <ul class="menu-sub">
                                                                             @foreach($categories as $item)
                                                                                 @if($value->id==$item->parent_id)
-                                                                                <li><a href="#">{{ $item->name }}</a></li>
+                                                                                <li><a href="{{$item->id}}" class="button">{{ $item->name }}</a></li>
                                                                                 @endif
                                                                             @endforeach
                                                                         </ul>
