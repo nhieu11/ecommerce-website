@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VIETPRO STORE</title>
+	<title>HUST STORE</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/assets/client/css/animate.css">
@@ -72,7 +72,7 @@
 				<div class="row row-pb-md">
 					<div class="col-md-3 colorlib-widget">
 						<h4>Giới thiệu</h4>
-						<p>VIETPRO STORE cửa hàng kinh doanh quần áo luôn mang tới sự hài lòng cho khách hàng về chất
+						<p>HUST STORE cửa hàng kinh doanh quần áo luôn mang tới sự hài lòng cho khách hàng về chất
 							lượng sản phẩm, quần
 							áo đều mang thương hiệu made in Việt Nam đẹp cả về kiểu cách lẫn chất lượng, nên sẽ giúp cho
 							bạn trở nên xinh

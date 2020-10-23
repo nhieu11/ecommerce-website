@@ -38,8 +38,9 @@ Route::group(['namespace' => 'client'], function() {
 
     Route::group(['prefix' => 'product'], function() {
         Route::get('','ProductController@index');
-        Route::get('{category}', 'ProductController@index');
+        Route::get('{category}', 'ProductController@category');
         Route::get('{category}/{product}','ProductController@detail');
+        Route::post('filter','ProductController@filter');
     });
 
     Route::group(['prefix' => 'cart'], function() {
