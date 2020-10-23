@@ -12,7 +12,7 @@
 	width: 1200px;
 	margin: 0 auto;
 	list-style: none;
-	background-color: #e89e52;
+	
 }
 .menu-cap3 > li{
 	float: left;
@@ -23,7 +23,7 @@
 	padding: 10px 15px;
 	text-decoration: none;
 	border-right: 1px solid #e0caca;
-	color: #fff;
+	
 }
 .menu-cap3 > li:last-child a{
 	border-right: 0;
@@ -127,7 +127,7 @@
                                     <div class="collapse navbar-collapse">
                                         <ul class="menu-cap3 clearfix">
                                         <li>
-                                            <a href="#" style = "font-size:20px">Danh mục    <b class="caret"></b></a>
+                                            <a href="#" style = "font-size:20px; color:black; ">Danh mục    <b class="caret"></b></a>
                                             <ul class="menu-sub">
                                                 @foreach ($categories as $category)
                                                     @if ($category->parent_id == $parent)
