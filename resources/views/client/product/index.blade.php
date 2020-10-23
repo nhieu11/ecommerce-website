@@ -12,7 +12,7 @@
 	width: 1200px;
 	margin: 0 auto;
 	list-style: none;
-	
+
 }
 .menu-cap3 > li{
 	float: left;
@@ -23,10 +23,11 @@
 	padding: 10px 15px;
 	text-decoration: none;
 	border-right: 1px solid #e0caca;
-	
+
 }
 .menu-cap3 > li:last-child a{
 	border-right: 0;
+    color: #000;
 }
 .menu-cap3 li{
 	position: relative;
@@ -38,7 +39,7 @@
 	left: 0;
 	width: 200px;
 	box-shadow: 0px 1px 8px -4px #333;
-	background-color: #e89e51;
+	background-color: #f8f8f8;;
 	/*display: none;*/
 	opacity: 0;
 	visibility: hidden;
@@ -60,9 +61,9 @@
 	top: 0;
 	left: 100%;
 }
-.menu-cap3 li:hover > a {
-	background: #b36c22;
-}
+/* .menu-cap3 li:hover > a {
+	background: #f8f8f8;
+} */
     </style>
 @endsection
 @section('content')
