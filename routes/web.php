@@ -40,9 +40,11 @@ Route::group(['namespace' => 'client'], function() {
         Route::get('','ProductController@index');
         Route::get('{category}', 'ProductController@category');
         Route::get('{category}/{product}','ProductController@detail');
-        Route::post('filter','ProductController@filter');
+
     });
 
+    Route::get('/filter','ProductController@filter');
+    
     Route::group(['prefix' => 'cart'], function() {
         Route::get('','CartController@index');
         Route::get('checkout','CartController@checkout');

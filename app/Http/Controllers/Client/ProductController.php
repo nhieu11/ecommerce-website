@@ -33,6 +33,7 @@ class ProductController extends Controller
     }
 
     public function filter(Request $request){
+        // dd($request->end);
         $data['products'] = Product::whereBetween('price',[$request->start, $request->end])->paginate();
         $categories = Category::get();
         $parent = 0;
