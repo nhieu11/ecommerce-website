@@ -23,4 +23,9 @@ class Product extends Model
             return $this->belongsTo(Category::class, 'category_id', 'id'); //Cùng cấp Category, thư mục khác phải viết namespace, nếu để mặc định thì không cần truyền vào para như 'category_id'
         } //Quy ước tên bảng số nhiều, tên cột số ít _
 
+
+        public function orderDetail(){
+            return $this->hasMany(OrderDetail::class, 'product_id', 'id');
+        }
+    }
 }
