@@ -33,7 +33,7 @@
 	<div id="page">
 
         @include('client.layouts.header')
-        {{-- @include('client.layouts.banner') --}}
+        @include('client.layouts.banner')
 		<!-- End header -->
 		<!-- main -->
 		@yield('content')
@@ -143,7 +143,7 @@
 	<script src="/assets/client/js/owl.carousel.min.js"></script>
 	<!-- Magnific Popup -->
 	<script src="/assets/client/js/jquery.magnific-popup.min.js"></script>
-    <script src="/assets/client/js/magnific-popup-options.js"></script>
+	<script src="/assets/client/js/magnific-popup-options.js"></script>
 
 <!-- Stellar Parallax -->
 	<script src="/assets/client/js/jquery.stellar.min.js"></script>
