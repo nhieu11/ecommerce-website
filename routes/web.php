@@ -89,7 +89,7 @@ Route::group([
     Route::group(['prefix' => 'orders'], function() {
         Route::get('','OrderController@index');
         Route::get('processed','OrderController@processed');
-        Route::get('{order}/edit','OrderController@edit');
+        Route::get('{order}/detail','OrderController@detail');
         Route::put('{order}','OrderController@update');
     });
 

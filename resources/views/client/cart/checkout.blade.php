@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fname">Họ & Tên</label>
-                                <input type="text" id="fname" class="form-control" name="name" placeholder="First Name" value="{{ auth()->guard('client')->user()->name }}">
+                                <input type="text" id="fname" class="form-control" name="name" placeholder="First Name" value="{{ $user->name }}">
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -37,7 +37,7 @@
                                 <label for="fname">Địa chỉ</label>
                                 <input type="text" id="address" name="address" class="form-control"
                                     placeholder="Nhập địa chỉ của bạn"
-                                    value="{{ auth()->guard('client')->user()->address }}">
+                                    value="{{ $user->address }}">
                             </div>
                         </div>
 
@@ -46,13 +46,13 @@
                                 <label for="email">Địa chỉ email</label>
                                 <input type="email" id="email" name="email" class="form-control"
                                     placeholder="Ex: youremail@domain.com"
-                                    value="{{ auth()->guard('client')->user()->email }}">
+                                    value="{{ $user->email }}">
                             </div>
                             <div class="col-md-6">
                                 <label for="Phone">Số điện thoại</label>
                                 <input type="text" id="zippostalcode" name="phone" class="form-control"
                                     placeholder="Ex: 0123456789"
-                                    value="{{ auth()->guard('client')->user()->phone }}">
+                                    value="{{ $user->phone }}">
                             </div>
                         </div>
                         <div class="form-group">

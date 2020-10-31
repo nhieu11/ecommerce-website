@@ -31,11 +31,6 @@ class SendMailToUser extends Mailable
     public function build()
     {
         return $this->from('duongshin2000@gmail.com')
-                    ->view('mails.MailTemplate')
-                    ->with(
-                      [
-                            'testVarOne' => '1',
-                            'testVarTwo' => '2',
-                      ]);
+                    ->view('mails.MailTemplate');
     }
 }
