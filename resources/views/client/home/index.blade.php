@@ -1,6 +1,7 @@
 @extends('client.layouts.app', ['activePage' => 'home', 'title' => 'Trang chủ'])
 
 @section('content')
+@include('client.layouts.banner')
 <div id="colorlib-featured-product">
     <div class="container">
         <div class="row">
