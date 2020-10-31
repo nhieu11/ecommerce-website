@@ -1,8 +1,7 @@
-@extends('client.layouts.app', ['activePage' => 'login', 'title' => 'Liên hệ'])
+@extends('client.layouts.app', ['activePage' => 'login', 'title' => 'Login'])
 @section('css')
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Bootstrap Sign in Form with Facebook and Twitter Buttons</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -142,73 +141,3 @@
     <p class="text-center text-muted small" style="font-size:20px">Don't have an account? <a href="#" style="font-size:20px">Sign up here!</a></p>
 </div>
 @endsection
-
-{{-- @push('js')
-<script>
-    window.fbAsyncInit = function() {
-        // FB JavaScript SDK configuration and setup
-        FB.init({
-          appId      : '718106402129554', // FB App ID
-          cookie     : true,  // enable cookies to allow the server to access the session
-          xfbml      : true,  // parse social plugins on this page
-          version    : 'v3.2' // use graph api version 2.8
-        });
-
-        // Check whether the user already logged in
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                //display user data
-                getFbUserData();
-            }
-        });
-    };
-
-    // Load the JavaScript SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Facebook login with JavaScript SDK
-    function fbLogin() {
-        FB.login(function (response) {
-            if (response.authResponse) {
-                // Get and display the user profile data
-                getFbUserData();
-            } else {
-                document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
-            }
-        }, {scope: 'email'});
-    }
-    // Save user data to the database
-    function saveUserData(userData){
-        $.post('/loginWithFacebook', {oauth_provider:'facebook',userData: JSON.stringify(userData)}, function(){ return true; });
-    }
-    // Fetch the user profile data from facebook
-    function getFbUserData(){
-        FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
-        function (response) {
-            document.getElementById('fbLink').setAttribute("onclick","fbLogout()");
-            document.getElementById('fbLink').innerHTML = 'Logout from Facebook';
-            document.getElementById('status').innerHTML = '<p>Thanks for logging in, ' + response.first_name + '!</p>';
-            document.getElementById('userData').innerHTML = '<h2>Facebook Profile Details</h2><p><img src="'+response.picture.data.url+'"/></p><p><b>FB ID:</b> '+response.id+'</p><p><b>Name:</b> '+response.first_name+' '+response.last_name+'</p><p><b>Email:</b> '+response.email+'</p><p><b>Gender:</b> '+response.gender+'</p><p><b>FB Profile:</b> <a target="_blank" href="'+response.link+'">click to view profile</a></p>';
-
-             // Save user data
-            saveUserData(response);
-        });
-    }
-
-    // Logout from facebook
-    function fbLogout() {
-        FB.logout(function() {
-            document.getElementById('fbLink').setAttribute("onclick","fbLogin()");
-            document.getElementById('fbLink').innerHTML = '<img src="images/fb-login-btn.png"/>';
-            document.getElementById('userData').innerHTML = '';
-            document.getElementById('status').innerHTML = '<p>You have successfully logout from Facebook.</p>';
-        });
-    }
-    </script>
-@endpush --}}
