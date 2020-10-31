@@ -156,7 +156,6 @@
             $(`.menu-${pageId}`).parents('li').addClass('active');
         })
     </script>
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @stack('js')
 </body>
 
