@@ -89,7 +89,7 @@ class CategoryController extends Controller
     public function destroy($category){
         $deleted = Category::destroy($category);
         if($deleted){
-            return respone()->json([], 204);
+            return response()->json([], 204);
         }
         return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404);
     }
