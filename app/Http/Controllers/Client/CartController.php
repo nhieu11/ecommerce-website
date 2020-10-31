@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Entities\OrderDetail;
 use App\Entities\Product;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMailToUser;
 use Illuminate\Http\Request;
 // use Darryldecode\Cart\Cart;
 use Cart;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -20,8 +23,20 @@ class CartController extends Controller
         return view('client.cart.checkout');
     }
 
-    public function complete()
+    public function complete(Request $request)
     {
+        $objDemo = new \stdClass();
+        $objDemo->demo_one = 'Demo One Value';
+        $objDemo->demo_two = 'Demo Two Value';
+        $objDemo->sender = 'SenderUserName';
+        $objDemo->receiver = 'ReceiverUserName';
+
+        Mail::to("bun2809@gmail.com")->send(new SendMailToUser($objDemo));
+        // $order_details = new OrderDetail();
+        // // $order_details->order_id = $request->name;
+        // $order_details->product_id = $request->parent_id;
+        // $order_details->save();
+        // $order_details = OrderDetail::create($input);
         return view('client.cart.complete');
     }
 

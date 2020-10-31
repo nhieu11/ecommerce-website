@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 
 use Admin\CategoryController;
+use App\Entities\Category;
 
 class ProductController extends Controller
 {
