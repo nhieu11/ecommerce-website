@@ -31,24 +31,27 @@
 
 											<th>Xử lý</th>
 										</tr>
-									</thead>
+                                    </thead>
+                                    @foreach ($orders as $order)
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>Nguyễn Thế Phúc</td>
-											<td>0356653300</td>
-											<td>Thường tín</td>
+											<td>{{$order->id}}</td>
+											<td>{{$order->name}}</td>
+											<td>{{$order->phone}}</td>
+											<td>{{$order->address}}</td>
 											<td>
-												<a href="detailorder.html" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
-
+                                                <a href="detailorder.html" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
 											</td>
 										</tr>
-
-									</tbody>
+                                    </tbody>
+                                    @endforeach
 								</table>
 							</div>
 						</div>
-						<div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                        <div>
+                        Phân trang
+                        </div>
 					</div>
 				</div>
 			</div>

@@ -29,10 +29,12 @@ class ProductController extends Controller
     public function detail($category , $product){
         // $product = Product::whereSlug($product)->findOrFail(); //Khi đi làm dùng slug abc-xyz-fgh
         $product = Product::findOrFail($product);
-        return view('client.product.detail');
+        $data['prd_new']=Product::orderby('created_at',"DESC")->take(8)->get();
+        return view('client.product.detail',$data,compact('product'));
     }
 
     public function filter(Request $request){
+        // dd($request->end);
         $data['products'] = Product::whereBetween('price',[$request->start, $request->end])->paginate();
         $categories = Category::get();
         $parent = 0;

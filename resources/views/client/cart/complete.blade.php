@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <td>Tổng tiền</td>
-                            <td>: ₫ 4.000.000</td>
+                            <td>: {{ number_format(Cart::getTotal()) }} đ</td>
                         </tr>
                         <tr>
                             <td>Phương thức thanh toán</td>
@@ -54,7 +54,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <h3 class="billing-title mt-20 pl-15">Địa chỉ thanh toán</h3>
                 <table class="order-rable">
                     <tbody>
@@ -76,7 +76,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
             <div class="col-md-4">
                 <h3 class="billing-title mt-20 pl-15">Địa chỉ giao hàng</h3>
                 <table class="order-rable">

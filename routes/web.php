@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Admin\ProductController;
+use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,12 +23,15 @@ Route::group(['namespace' => 'client'], function() {
     //Route::view('login','client.auth.login');
 
     Route::group(['middleware' => 'guest:client'], function() {
-        Route::get('login' , 'LoginController@showLoginForm');
-        Route::post('login' , 'LoginController@login');
+        Route::get('login' , 'ClientLoginController@showLoginForm');
+        Route::post('login' , 'ClientLoginController@login');
     });
 
     Route::group(['middleware' => 'auth:client'], function() {
-        Route::post('logout' ,'LoginController@logout');
+        Route::post('logout' ,'AdminLoginController@logout');
+        Route::get('checkout','CartController@checkout');
+        Route::post('complete','CartController@complete');
+        // Route::get('mail/send','MailController@send');
     });
 
 
@@ -40,13 +44,15 @@ Route::group(['namespace' => 'client'], function() {
         Route::get('','ProductController@index');
         Route::get('{category}', 'ProductController@category');
         Route::get('{category}/{product}','ProductController@detail');
-        Route::post('filter','ProductController@filter');
+
     });
+
+    Route::get('/filter','ProductController@filter');
 
     Route::group(['prefix' => 'cart'], function() {
         Route::get('','CartController@index');
-        Route::get('checkout','CartController@checkout');
-        Route::get('complete','CartController@complete');
+        // Route::get('checkout','CartController@checkout');
+        // Route::get('complete','CartController@complete');
         Route::post('add','CartController@add');
         Route::post('remove','CartController@remove');
         Route::post('update','CartController@update');
