@@ -40,12 +40,6 @@ class ClientLoginController extends Controller
 
     }
 
-    public function logout(){
-        session()->flush(); //xóa toàn bộ session nhưng không xóa user
-        Auth::logout();
-        return redirect('/login');
-    }
-
     protected function guard()
     {
         return Auth::guard('client');
