@@ -23,7 +23,7 @@ Route::group(['namespace' => 'client'], function() {
     //Route::view('login','client.auth.login');
 
     Route::group(['middleware' => 'guest:client'], function() {
-        Route::get('login' , 'ClientLoginController@showLoginForm');
+        Route::get('login' , 'ClientLoginController@showLoginForm')->name('client.login');
         Route::post('login' , 'ClientLoginController@login');
         // Route::post('login' , function(){dd($_REQUEST);});
     });
@@ -31,6 +31,7 @@ Route::group(['namespace' => 'client'], function() {
     Route::group(['middleware' => 'auth:client'], function() {
         Route::post('logout' ,'ClientLoginController@logout');
         Route::get('checkout','CartController@checkout');
+        Route::post('checkout','CartController@postCheckout');
         Route::post('complete','CartController@complete');
         // Route::get('mail/send','MailController@send');
     });
@@ -97,9 +98,9 @@ Route::group([
    });
 
 
-        Route::group(['middleware' => 'guest'], function() {
-            Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');
-            Route::post('login','AdminLoginController@login');
-        });
+    Route::group(['middleware' => 'guest'], function() {
+        Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');
+        Route::post('login','AdminLoginController@login');
+    });
 
 });

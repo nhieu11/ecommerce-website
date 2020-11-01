@@ -23,6 +23,29 @@ class ClientLoginController extends Controller
     //     return $credentials;
     // }
 
+    public function login(Request $request){
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|min:6',
+        ]);
+
+        $credentials = $request->only(['email','password']);
+        // dd($credentials);
+        if(Auth::guard('client')->attempt($credentials)){ //nếu ko có guard mặc định là web
+            return redirect('/');
+        } else {
+            return back()->withInput(['email'])
+                ->withErrors(['email' => 'Email hoặc password đã nhập sai!']);
+        }
+
+    }
+
+    public function logout(){
+        session()->flush(); //xóa toàn bộ session nhưng không xóa user
+        Auth::logout();
+        return redirect('/login');
+    }
+
     protected function guard()
     {
         return Auth::guard('client');

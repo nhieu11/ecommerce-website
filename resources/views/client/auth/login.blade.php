@@ -98,6 +98,13 @@
         </div>
     </div>
 </div> --}}
+@if ($errors->any())
+@component('admin.layouts.components.alert')
+@slot('type', 'danger')
+@slot('stroke', 'cancel')
+<span style="font-size: 30px">{{ $errors->first() }}</span>
+@endcomponent
+@endif
 <div class="login-form">
     <form action="/login" method="POST">
         @csrf

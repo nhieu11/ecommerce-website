@@ -27,10 +27,9 @@ class CartController extends Controller
         return view('client.cart.checkout',compact('user'));
     }
 
-    public function complete(Request $request)
-    {
+    public function postCheckout(Request $request){
+        dd($request);
         $user = auth()->guard('client')->user();
-        $date_created = now();
 
         $order = new Order();
         $order->name = $user->name;
@@ -44,6 +43,12 @@ class CartController extends Controller
         session()->flash('success','Tạo mới thành công');
 
         dd($order->id);
+    }
+
+    public function complete(Request $request)
+    {
+        $user = auth()->guard('client')->user();
+        $date_created = now();
 
         $invoice = new \stdClass();
         $invoice->demo_one = 'Demo One Value';
