@@ -51,7 +51,17 @@ class ClientLoginController extends Controller
         return Auth::guard('client');
     }
 
+    // protected function credentials(Request $request)
+    // {
+    //     $credentials = $request->only($this->username(), 'password');
+    //     $credentials['level'] = '2';
+    //     return $credentials;
+    // }
 
+    public function logout(){
+        Auth::logout();
+        return redirect('/');
+    }
 
 
 }
