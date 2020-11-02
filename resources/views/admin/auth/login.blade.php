@@ -22,7 +22,7 @@
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
-                <div class="panel-heading">VIETPRO LOGIN</div>
+                <div class="panel-heading">HUST STORE LOGIN</div>
 
                 @if (session("thongbao"))
                 <div class="alert alert-danger" role="alert">
@@ -54,7 +54,17 @@
 								</label>
 							</div>
 							<button type="submit" class="btn btn-primary">Login</button>
+							
 						</fieldset>
+							<br/>
+
+						<div align="center" class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+						<!-- @if($errors->has('g-recaptcha-response'))
+						<span class="invalid-feedback" style="display:block">
+							<strong>{{$errors->first('g-recaptcha-response')}}</strong>
+						</span>
+						@endif -->
+
 					</form>
 				</div>
 			</div>
@@ -85,6 +95,7 @@
 			if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
 </body>
 
 </html>
