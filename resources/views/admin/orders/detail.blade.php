@@ -35,10 +35,10 @@
 											<div class="panel panel-blue">
 												<div class="panel-heading dark-overlay">Thông tin khách hàng</div>
 												<div class="panel-body">
-													<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : Nguyễn thế phúc</strong> <br>
-													<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : Số điện thoại: 0356653300</strong>
+													<strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span> : {{$order->name}}</strong> <br>
+													<strong><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> : {{$order->phone}}</strong>
 													<br>
-													<strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : Thường tín</strong>
+													<strong><span class="glyphicon glyphicon-send" aria-hidden="true"></span> : {{$order->address}}</strong>
 												</div>
 											</div>
 										</div>
@@ -58,24 +58,27 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td>1</td>
-											<td>
-												<div class="row">
-													<div class="col-md-4">
-														<img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
-													</div>
-													<div class="col-md-8">
-														<p><b>Mã sản phẩm</b>: SP01</p>
-														<p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-														<p><b>Số lương</b> : 2</p>
-													</div>
-												</div>
-											</td>
-											<td>500.000 VNĐ</td>
-											<td>1.000.000 VNĐ</td>
+                                            @foreach (Cart::getContent() as $item)
+                                                <td>{{$item->id}}</td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img width="100px" src="{{$item->avatar}}" class="thumbnail">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <p><b>Mã sản phẩm</b>: {{$item->sku}}</p>
+                                                            <p><b>Tên Sản phẩm</b>: {{$item->name}}</p>
+                                                            <p><b>Số lương</b> : {{$item->quantity}}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ number_format($item->price) }} VNĐ</td>
+                                                <td>{{ number_format(($item->price)*($item->quantity)) }} VNĐ</td>
+                                            @endforeach
+
 
 										</tr>
-										<tr>
+										{{-- <tr>
 											<td>1</td>
 											<td>
 												<div class="row">
@@ -92,7 +95,7 @@
 											<td>500.000 VNĐ</td>
 											<td>500.000 VNĐ</td>
 
-										</tr>
+										</tr> --}}
 
 									</tbody>
 
@@ -104,7 +107,7 @@
 												<h4 align='right'>Tổng Tiền :</h4>
 											</th>
 											<th>
-												<h4 align='right' style="color: brown;">1.500.000 VNĐ</h4>
+												<h4 align='right' style="color: brown;">{{ number_format(Cart::getTotal()) }} VNĐ</h4>
 											</th>
 
 										</tr>

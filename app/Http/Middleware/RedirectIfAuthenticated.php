@@ -19,13 +19,16 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) { //Khi chưa đăng nhập bị đẩy về home
+
+            // dd($guard);
             switch ($guard) {
                 case 'web':
                     return redirect('/admin');
-
+                    break;
 
                 default:
-                return redirect('/');
+                    return redirect('/');
+                    break;
 
             }
             return redirect(RouteServiceProvider::HOME);

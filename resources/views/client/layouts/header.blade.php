@@ -27,7 +27,19 @@
                         <li><a href="/login" class="menu-login"> Login</a></li>
                         @endguest
                         @auth('client')
-                        <li><a href="/login" class="menu-login"> {{ auth()->guard('client')->user()->name }}</a></li>
+                        <li class="has-dropdown">
+                            <a href="#"> {{ auth()->guard('client')->user()->name }}</a>
+                            <ul class="dropdown">
+                                <li>
+                                    <a href="#">Thông tin</a>
+                                </li>
+                                <li>
+                                    <a href="login.html" onclick="event.preventDefault();document.getElementById('logout-form').submit()">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         @endauth
                     </ul>
                 </div>
@@ -35,4 +47,7 @@
         </div>
     </div>
 </nav>
+<form action="/logout" method="POST" id="logout-form">
+    @csrf
+</form>
 <input type="hidden" value="{{ $activePage ?? '' }}" id="page-id">

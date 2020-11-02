@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Entities\Order;
+use App\Entities\OrderDetail;
 use App\Entities\Product;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMailToUser;
 use Illuminate\Http\Request;
 // use Darryldecode\Cart\Cart;
 use Cart;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
+    // public $user = auth()->guard('client')->user();
+
     public function index()
     {
         return view('client.cart.index');
@@ -17,12 +23,46 @@ class CartController extends Controller
 
     public function checkout()
     {
-        return view('client.cart.checkout');
+        $user = auth()->guard('client')->user();
+        return view('client.cart.checkout',compact('user'));
     }
 
-    public function complete()
+    public function postCheckout(Request $request){
+        dd($request);
+        $user = auth()->guard('client')->user();
+
+        $order = new Order();
+        $order->name = $user->name;
+        $order->email = $user->email;
+        $order->phone = $user->phone;
+        $order->address = $user->address;
+        $order->processed = 0;
+        $order->created_at = now();
+        $order->updated_at = now();
+        $order->save();
+        session()->flash('success','Tạo mới thành công');
+
+        dd($order->id);
+    }
+
+    public function complete(Request $request)
     {
-        return view('client.cart.complete');
+        $user = auth()->guard('client')->user();
+        $date_created = now();
+
+        $invoice = new \stdClass();
+        $invoice->demo_one = 'Demo One Value';
+        $invoice->demo_two = 'Demo Two Value';
+        $invoice->sender = 'SenderUserName';
+        $invoice->receiver = 'ReceiverUserName';
+
+        Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
+        // $order_details = new OrderDetail();
+        // // $order_details->order_id = $request->name;
+        // $order_details->product_id = $request->parent_id;
+        // $order_details->save();
+        // $order_details = OrderDetail::create($input);
+        return view('client.cart.complete',compact('user','date_created'));
     }
 
     public function add(Request $request)

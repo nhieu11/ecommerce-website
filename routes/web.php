@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\Admin\ProductController;
+use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -22,12 +23,17 @@ Route::group(['namespace' => 'client'], function() {
     //Route::view('login','client.auth.login');
 
     Route::group(['middleware' => 'guest:client'], function() {
-        Route::get('login' , 'LoginController@showLoginForm');
-        Route::post('login' , 'LoginController@login');
+        Route::get('login' , 'ClientLoginController@showLoginForm')->name('client.login');
+        Route::post('login' , 'ClientLoginController@login');
+        // Route::post('login' , function(){dd($_REQUEST);});
     });
 
     Route::group(['middleware' => 'auth:client'], function() {
-        Route::post('logout' ,'LoginController@logout');
+        Route::post('logout' ,'ClientLoginController@logout');
+        Route::get('checkout','CartController@checkout');
+        Route::post('checkout','CartController@postCheckout');
+        Route::post('complete','CartController@complete');
+        // Route::get('mail/send','MailController@send');
     });
 
 
@@ -44,11 +50,11 @@ Route::group(['namespace' => 'client'], function() {
     });
 
     Route::get('/filter','ProductController@filter');
-    
+
     Route::group(['prefix' => 'cart'], function() {
         Route::get('','CartController@index');
-        Route::get('checkout','CartController@checkout');
-        Route::get('complete','CartController@complete');
+        // Route::get('checkout','CartController@checkout');
+        // Route::get('complete','CartController@complete');
         Route::post('add','CartController@add');
         Route::post('remove','CartController@remove');
         Route::post('update','CartController@update');
@@ -84,17 +90,17 @@ Route::group([
     Route::group(['prefix' => 'orders'], function() {
         Route::get('','OrderController@index');
         Route::get('processed','OrderController@processed');
-        Route::get('{order}/edit','OrderController@edit');
+        Route::get('{order}/detail','OrderController@detail');
         Route::put('{order}','OrderController@update');
     });
 
-        Route::post('logout','LoginController@logout');
+        Route::post('logout','AdminLoginController@logout');
    });
 
 
-        Route::group(['middleware' => 'guest'], function() {
-            Route::get('login','LoginController@showLoginForm')->name('admin.login');
-            Route::post('login','LoginController@login');
-        });
+    Route::group(['middleware' => 'guest'], function() {
+        Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');
+        Route::post('login','AdminLoginController@login');
+    });
 
 });

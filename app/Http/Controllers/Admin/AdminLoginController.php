@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
     public function showLoginForm(){
         return view('admin.auth.login');
@@ -37,7 +37,7 @@ class LoginController extends Controller
 
     }
     public function logout(){
-        session()->flush(); //xóa toàn bộ session nhưng không xóa user
+        // session()->flush(); //xóa toàn bộ session nhưng không xóa user
         Auth::logout();
         return redirect('/admin/login');
     }
