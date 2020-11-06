@@ -11,8 +11,8 @@ Hello <i>{{ $order->receiver }}</i>,
 <p><u>Values passed by With method:</u></p>
 
 <div>
-<p><b>testVarOne:</b>&nbsp;{{ $testVarOne }}</p>
-<p><b>testVarTwo:</b>&nbsp;{{ $testVarTwo }}</p>
+{{-- <p><b>testVarOne:</b>&nbsp;{{ $testVarOne }}</p>
+<p><b>testVarTwo:</b>&nbsp;{{ $testVarTwo }}</p> --}}
 </div>
 
 Thank You,

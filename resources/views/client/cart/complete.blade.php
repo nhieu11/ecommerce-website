@@ -13,7 +13,7 @@
                         <p><span>02</span></p>
                         <h3>Thanh toán</h3>
                     </div>
-                    <div class="process text-center">
+                    <div class="process text-center active">
                         <p><span>03</span></p>
                         <h3>Hoàn tất thanh toán</h3>
                     </div>
@@ -41,7 +41,7 @@
                         </tr>
                         <tr>
                             <td>Ngày mua</td>
-                            <td>: Oct 03, 2017</td>
+                            <td>: {{$date_created}}</td>
                         </tr>
                         <tr>
                             <td>Tổng tiền</td>
@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <td>Phương thức thanh toán</td>
-                            <td>: Nhận tiền mặt</td>
+                            <td>: COD</td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,20 +83,20 @@
                     <tbody>
                         <tr>
                             <td>Họ Tên</td>
-                            <td>: Nguyễn Văn A</td>
+                            <td>: {{$user->name}}</td>
                         </tr>
                         <tr>
                             <td>Số điện thoại</td>
-                            <td>: 0123 456 789</td>
+                            <td>: {{$user->phone}}</td>
                         </tr>
                         <tr>
                             <td>Địa chỉ</td>
-                            <td>: Số nhà B8A ngõ 18 đường Võ Văn Dũng - Hoàng Cầu - Đống Đa </td>
+                            <td>: {{$user->address}} </td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>Thành Phố</td>
                             <td>: Hà Nội</td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>
@@ -114,25 +114,26 @@
 
                                 <div class="col-md-4 offset-md-4 text-right">TỔNG CỘNG</div>
                             </div>
+                            @foreach (Cart::getContent() as $item)
                             <div class="list-row d-flex justify-content-between">
+                                <div class="col-md-4">Sản phẩm 1 : {{$item->name}}</div>
+                                <div class="col-md-4 text-right">x {{$item->quantity}}</div>
+                                <div class="col-md-4 text-right">₫ {{$item->price}}</div>
+                            </div>
+                            @endforeach
+
+                            {{-- <div class="list-row d-flex justify-content-between">
                                 <div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
                                 <div class="col-md-4 text-right">x 02</div>
                                 <div class="col-md-4 text-right">₫ 720.000</div>
 
-                            </div>
-
-                            <div class="list-row d-flex justify-content-between">
-                                <div class="col-md-4">Sản phẩm 1 : color:red ,size:XL</div>
-                                <div class="col-md-4 text-right">x 02</div>
-                                <div class="col-md-4 text-right">₫ 720.000</div>
-
-                            </div>
+                            </div> --}}
 
                             <div class="list-row border-bottom-0 d-flex justify-content-between">
                                 <div class="col-md-4">
                                     <h6>Tổng</h6>
                                 </div>
-                                <div class="col-md-4 offset-md-4 text-right">₫ 1.420.000</div>
+                                <div class="col-md-4 offset-md-4 text-right">{{ number_format(Cart::getTotal()) }} đ</div>
                             </div>
                         </div>
                     </div>
