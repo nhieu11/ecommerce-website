@@ -32,7 +32,7 @@ Route::group(['namespace' => 'client'], function() {
         Route::post('logout' ,'ClientLoginController@logout');
         Route::get('checkout','CartController@checkout');
         Route::post('checkout','CartController@postCheckout');
-        Route::post('complete','CartController@complete');
+        Route::get('complete','CartController@complete');
         // Route::get('mail/send','MailController@send');
     });
 

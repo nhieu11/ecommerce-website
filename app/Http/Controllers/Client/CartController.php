@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Cart;
 use Illuminate\Support\Facades\Mail;
 
+use function GuzzleHttp\Promise\all;
+
 class CartController extends Controller
 {
     // public $user = auth()->guard('client')->user();
@@ -28,41 +30,52 @@ class CartController extends Controller
     }
 
     public function postCheckout(Request $request){
-        dd($request);
+        // dd($request);
         $user = auth()->guard('client')->user();
 
         $order = new Order();
-        $order->name = $user->name;
-        $order->email = $user->email;
-        $order->phone = $user->phone;
-        $order->address = $user->address;
+        $order->name = $request->name;
+        $order->email = $request->email;
+        $order->phone = $request->phone;
+        $order->address = $request->address;
         $order->processed = 0;
         $order->created_at = now();
         $order->updated_at = now();
         $order->save();
-        session()->flash('success','Tạo mới thành công');
 
-        dd($order->id);
-    }
+        foreach (Cart::getContent() as $item) {
+            $orderDetail = new OrderDetail();
+            $orderDetail->order_id = $order->id;
+            $orderDetail->product_id = $item->id;
+            $orderDetail->sku = $item->attributes['sku'];
+            $orderDetail->name = $item->name;
+            $orderDetail->price = $item->price;
+            $orderDetail->quantity = $item->quantity;
+            $orderDetail->avatar = $item->attributes['avatar'];
+            $orderDetail->save();
+        }
 
-    public function complete(Request $request)
-    {
-        $user = auth()->guard('client')->user();
+        // Cart::clear();
+
         $date_created = now();
+        $infoOrder = Order::findOrFail($order->id)->orderDetail;
+        // foreach($infoOrder as $item){
+        //     dd($item->name);
+        // }
 
         $invoice = new \stdClass();
-        $invoice->demo_one = 'Demo One Value';
-        $invoice->demo_two = 'Demo Two Value';
-        $invoice->sender = 'SenderUserName';
-        $invoice->receiver = 'ReceiverUserName';
+        $invoice->sender = 'HustStore';
+        $invoice->name = $infoOrder;
+        $invoice->receiver = $request->name;
 
         Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
-        // $order_details = new OrderDetail();
-        // // $order_details->order_id = $request->name;
-        // $order_details->product_id = $request->parent_id;
-        // $order_details->save();
-        // $order_details = OrderDetail::create($input);
         return view('client.cart.complete',compact('user','date_created'));
+
+        return redirect('/complete');
+    }
+
+    public function complete()
+    {
     }
 
     public function add(Request $request)

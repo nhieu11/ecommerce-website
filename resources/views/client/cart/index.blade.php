@@ -123,7 +123,7 @@ $(document).ready(function() {
             },
             success: function() {
                 _this.parents(".product-cart").remove()
-            }
+                window.location.reload(false)
         })
     })
 

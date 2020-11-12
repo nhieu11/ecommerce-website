@@ -57,8 +57,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-                                            @foreach (Cart::getContent() as $item)
+                                            @foreach ($order->orderDetail as $item)
+                                            <tr>
                                                 <td>{{$item->id}}</td>
                                                 <td>
                                                     <div class="row">
@@ -74,29 +74,8 @@
                                                 </td>
                                                 <td>{{ number_format($item->price) }} VNĐ</td>
                                                 <td>{{ number_format(($item->price)*($item->quantity)) }} VNĐ</td>
+                                            </tr>
                                             @endforeach
-
-
-										</tr>
-										{{-- <tr>
-											<td>1</td>
-											<td>
-												<div class="row">
-													<div class="col-md-4">
-														<img width="100px" src="img/ao-khoac.jpg" class="thumbnail">
-													</div>
-													<div class="col-md-8">
-														<p><b>Mã sản phẩm</b>: SP02</p>
-														<p><b>Tên Sản phẩm</b>: Áo Khoác Bomber Nỉ Xanh Lá Cây AK179</p>
-														<p><b>Số lương</b> : 1</p>
-													</div>
-												</div>
-											</td>
-											<td>500.000 VNĐ</td>
-											<td>500.000 VNĐ</td>
-
-										</tr> --}}
-
 									</tbody>
 
 								</table>
