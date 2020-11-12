@@ -55,13 +55,10 @@ class CartController extends Controller
             $orderDetail->save();
         }
 
-        // Cart::clear();
+        Cart::clear();
 
         $date_created = now();
         $infoOrder = Order::findOrFail($order->id)->orderDetail;
-        // foreach($infoOrder as $item){
-        //     dd($item->name);
-        // }
 
         $invoice = new \stdClass();
         $invoice->sender = 'HustStore';
