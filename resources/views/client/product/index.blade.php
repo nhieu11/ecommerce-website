@@ -245,7 +245,7 @@ $(document).ready(function() {
         return false;
        });
 })
-{{-- debounce --}}
+// {{-- debounce --}}
 
 </script>
 @endpush

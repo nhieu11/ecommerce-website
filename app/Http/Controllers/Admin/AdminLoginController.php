@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\Captcha;
 
 class AdminLoginController extends Controller
 {
@@ -15,6 +16,7 @@ class AdminLoginController extends Controller
         $request->validate([
             'email'=>'required|email',
             'password'=>'required|min:6',
+            'g-recaptcha-response' => new Captcha(), 
         ]);
 
              $credentials = $request->only(['email','password']);
