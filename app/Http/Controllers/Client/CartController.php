@@ -30,14 +30,13 @@ class CartController extends Controller
     }
 
     public function postCheckout(Request $request){
-        // dd($request);
-        $user = auth()->guard('client')->user();
 
         $order = new Order();
         $order->name = $request->name;
         $order->email = $request->email;
         $order->phone = $request->phone;
         $order->address = $request->address;
+        $order->total = Cart::getTotal();
         $order->processed = 0;
         $order->created_at = now();
         $order->updated_at = now();
@@ -58,15 +57,15 @@ class CartController extends Controller
         Cart::clear();
 
         $date_created = now();
-        $infoOrder = Order::findOrFail($order->id)->orderDetail;
+        $infoOrder = Order::findOrFail($order->id);
 
         $invoice = new \stdClass();
         $invoice->sender = 'HustStore';
-        $invoice->name = $infoOrder;
+        $invoice->name = $infoOrder->orderDetail;
         $invoice->receiver = $request->name;
 
         Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
-        return view('client.cart.complete',compact('user','date_created'));
+        return view('client.cart.complete',compact('infoOrder','date_created'));
 
         return redirect('/complete');
     }

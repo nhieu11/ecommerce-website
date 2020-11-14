@@ -45,7 +45,7 @@
                         </tr>
                         <tr>
                             <td>Tổng tiền</td>
-                            <td>: {{ number_format(Cart::getTotal()) }} đ</td>
+                            <td>: {{ number_format($infoOrder->total) }} đ</td>
                         </tr>
                         <tr>
                             <td>Phương thức thanh toán</td>
@@ -83,15 +83,15 @@
                     <tbody>
                         <tr>
                             <td>Họ Tên</td>
-                            <td>: {{$user->name}}</td>
+                            <td>: {{$infoOrder->name}}</td>
                         </tr>
                         <tr>
                             <td>Số điện thoại</td>
-                            <td>: {{$user->phone}}</td>
+                            <td>: {{$infoOrder->phone}}</td>
                         </tr>
                         <tr>
                             <td>Địa chỉ</td>
-                            <td>: {{$user->address}} </td>
+                            <td>: {{$infoOrder->address}} </td>
                         </tr>
                         {{-- <tr>
                             <td>Thành Phố</td>
@@ -114,7 +114,7 @@
 
                                 <div class="col-md-4 offset-md-4 text-right">TỔNG CỘNG</div>
                             </div>
-                            @foreach (Cart::getContent() as $item)
+                            @foreach ($infoOrder->orderDetail as $item)
                             <div class="list-row d-flex justify-content-between">
                                 <div class="col-md-4">Sản phẩm 1 : {{$item->name}}</div>
                                 <div class="col-md-4 text-right">x {{$item->quantity}}</div>
@@ -133,7 +133,7 @@
                                 <div class="col-md-4">
                                     <h6>Tổng</h6>
                                 </div>
-                                <div class="col-md-4 offset-md-4 text-right">{{ number_format(Cart::getTotal()) }} đ</div>
+                                <div class="col-md-4 offset-md-4 text-right">{{ number_format($infoOrder->total) }} đ</div>
                             </div>
                         </div>
                     </div>
