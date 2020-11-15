@@ -89,14 +89,14 @@
                                                 <i class="icon-shopping-cart"></i>
                                             </a>
                                         </span>
-                                        <span><a href="/product/{{ $product->category_id }}/{{ $product->id }}"><i class="icon-eye"></i></a></span>
+                                        <span><a href="/product/{{ $product->id }}"><i class="icon-eye"></i></a></span>
 
 
                                     </p>
                                 </div>
                             </div>
                             <div class="desc">
-                                <h3><a href="/product/{{ $product->category_id }}/{{ $product->id }}">{{ $product->name }}</a></h3>
+                                <h3><a href="/product/{{ $product->id }}">{{ $product->name }}</a></h3>
                                 <p class="price"><span>{{ number_format($product->price) }} VND</span></p>
                             </div>
                         </div>
@@ -108,14 +108,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        {{$products->links()}}
                     </div>
                 </div>
             </div>
@@ -133,15 +126,15 @@
                                                 @foreach ($categories as $category)
                                                     @if ($category->parent_id == $parent)
                                                         <li>
-                                                            <a href="/product/{{$category->id}}" >{{ $category->name }}<b class="caret"></b></a>
+                                                            <a href="/product/categorize_byID/{{$category->id}}" >{{ $category->name }}<b class="caret"></b></a>
                                                             <ul class="menu-sub">
                                                             @foreach($categories as $value)
                                                                 @if($category->id==$value->parent_id)
-                                                                        <li><a href="/product/{{$value->id}}" >{{ $value->name }}<b class="caret"></b></a>
+                                                                        <li><a href="/product/categorize_byID/{{$value->id}}" >{{ $value->name }}<b class="caret"></b></a>
                                                                         <ul class="menu-sub">
                                                                             @foreach($categories as $item)
                                                                                 @if($value->id==$item->parent_id)
-                                                                                <li><a href="/product/{{$item->id}}" class="button">{{ $item->name }}</a></li>
+                                                                                <li><a href="/product/categorize_byID/{{$item->id}}" class="button">{{ $item->name }}</a></li>
                                                                                 @endif
                                                                             @endforeach
                                                                         </ul>
@@ -163,15 +156,15 @@
                     </div>
                     <div class="side">
                         <h2>Khoảng giá</h2>
-                        <form action="/filter" method="GET" class="colorlib-form-2">
-                            @csrf
+                        <form action="/product" method="GET" class="colorlib-form-2">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="guests">Từ:</label>
                                         <div class="form-field">
                                             <i class="icon icon-arrow-down3"></i>
-                                            <select name="start" id="people" class="form-control">
+                                            <select id="select-start" name="start" id="people" class="form-control">
+                                                <option value="{{App\Entities\Product::min('price')}}">Min Price</option>
                                                 <option value="100000">100.000 VNĐ</option>
                                                 <option value="200000">200.000 VNĐ</option>
                                                 <option value="300000">300.000 VNĐ</option>
@@ -192,6 +185,7 @@
                                                 <option value="6000000">6.000.000 VNĐ</option>
                                                 <option value="8000000">8.000.000 VNĐ</option>
                                                 <option value="10000000">10.000.000 VNĐ</option>
+                                                <option value="{{App\Entities\Product::max('price')}}">Max Price</option>
                                             </select>
                                         </div>
                                     </div>
@@ -231,19 +225,11 @@ $(document).ready(function() {
             method:"POST",
             success: function(response) {
                 $(".cart-total-quantity").text(response.cartTotalQuantity)
+                window.location.reload(false)
             }
         })
     })
-    $('.navbar a.dropdown-toggle').on('click', function(e) {
-        var $el = $(this);
-        var $parent = $(this).offsetParent(".dropdown-menu");
-        $(this).parent("li").toggleClass('open');
-        if(!$parent.parent().hasClass('nav')) {
-             $el.next().css({"top": $el[0].offsetTop, "left": $parent.outerWidth() - 4});
-        }
-        $('.nav li.open').not($(this).parents("li")).removeClass("open");
-        return false;
-       });
+
 })
 // {{-- debounce --}}
 
