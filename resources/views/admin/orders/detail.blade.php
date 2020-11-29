@@ -86,7 +86,7 @@
 												<h4 align='right'>Tổng Tiền :</h4>
 											</th>
 											<th>
-												<h4 align='right' style="color: brown;">{{ number_format(Cart::getTotal()) }} VNĐ</h4>
+												<h4 align='right' style="color: brown;">{{ number_format($order->total) }} VNĐ</h4>
 											</th>
 
 										</tr>
@@ -95,7 +95,7 @@
 									</tbody>
 								</table>
 								<div class="alert alert-primary" role="alert" align='right'>
-									<a name="" id="" class="btn btn-success" href="#" role="button">Đã xử lý</a>
+									<a onclick="return processed()" class="btn btn-success" href="/admin/orders/{{$order->id}}" role="button">Đã xử lý</a>
 								</div>
 							</div>
                         </div>
@@ -111,3 +111,10 @@
 	</div>
 	<!--end main-->
 @endsection
+@push('adminJs')
+    <script>
+        function processed(){
+            return confirm("Đơn hàng sau khi xử lý sẽ được tính vào doanh thu!!")
+        }
+    </script>
+@endpush

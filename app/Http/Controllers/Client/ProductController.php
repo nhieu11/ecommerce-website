@@ -11,33 +11,27 @@ use Admin\CategoryController;
 class ProductController extends Controller
 {
 
-    public function index(){
-        $products = Product::paginate(); //mỗi trang có 5
+    public function index(Request $request){
+        if($request->start == null){
+            $products = Product::paginate(6);
+        }else{
+            $products = Product::whereBetween('price',[$request->start, $request->end])->paginate();
+        }
         $categories = Category::get(); //get không dùng dc relationship
         $parent = 0;
         return view('client.product.index',compact('products','categories','parent'));
     }
 
-    public function category($id){
-        // $products = Product::paginate(); //mỗi trang có 5
+    public function categorize_byID($id){
         $categories = Category::get();
         $parent = 0;
-        $data['products']=Category::where('id',$id)->first()->products()->paginate();
-        return view('client.product.index',$data,compact('categories','parent'));
+        $products=Category::where('id',$id)->first()->products()->paginate(6);
+        return view('client.product.index',compact('categories','parent','products'));
     }
 
-    public function detail($category , $product){
-        // $product = Product::whereSlug($product)->findOrFail(); //Khi đi làm dùng slug abc-xyz-fgh
+    public function detail($product){
         $product = Product::findOrFail($product);
-        $data['prd_new']=Product::orderby('created_at',"DESC")->take(8)->get();
+        $data['prd_new']=Product::orderby('created_at',"DESC")->take(4)->get();
         return view('client.product.detail',$data,compact('product'));
-    }
-
-    public function filter(Request $request){
-        // dd($request->end);
-        $data['products'] = Product::whereBetween('price',[$request->start, $request->end])->paginate();
-        $categories = Category::get();
-        $parent = 0;
-        return view('client.product.index',$data,compact('categories','parent'));
     }
 }

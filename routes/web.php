@@ -25,15 +25,12 @@ Route::group(['namespace' => 'client'], function() {
     Route::group(['middleware' => 'guest:client'], function() {
         Route::get('login' , 'ClientLoginController@showLoginForm')->name('client.login');
         Route::post('login' , 'ClientLoginController@login');
-        // Route::post('login' , function(){dd($_REQUEST);});
     });
 
     Route::group(['middleware' => 'auth:client'], function() {
         Route::post('logout' ,'ClientLoginController@logout');
         Route::get('checkout','CartController@checkout');
         Route::post('checkout','CartController@postCheckout');
-        Route::get('complete','CartController@complete');
-        // Route::get('mail/send','MailController@send');
     });
 
 
@@ -44,17 +41,14 @@ Route::group(['namespace' => 'client'], function() {
 
     Route::group(['prefix' => 'product'], function() {
         Route::get('','ProductController@index');
-        Route::get('{category}', 'ProductController@category');
-        Route::get('{category}/{product}','ProductController@detail');
-
+        Route::get('categorize_byID/{categorize}', 'ProductController@categorize_byID');
+        Route::get('{product}','ProductController@detail');
     });
 
-    Route::get('/filter','ProductController@filter');
+
 
     Route::group(['prefix' => 'cart'], function() {
         Route::get('','CartController@index');
-        // Route::get('checkout','CartController@checkout');
-        // Route::get('complete','CartController@complete');
         Route::post('add','CartController@add');
         Route::post('remove','CartController@remove');
         Route::post('update','CartController@update');
@@ -91,7 +85,7 @@ Route::group([
         Route::get('','OrderController@index');
         Route::get('processed','OrderController@processed');
         Route::get('{order}/detail','OrderController@detail');
-        Route::put('{order}','OrderController@update');
+        Route::get('{order}','OrderController@update');
     });
 
         Route::post('logout','AdminLoginController@logout');

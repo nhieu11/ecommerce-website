@@ -70,10 +70,6 @@ class CartController extends Controller
         return redirect('/complete');
     }
 
-    public function complete()
-    {
-    }
-
     public function add(Request $request)
     {
         // Cart::clear(); // Xóa toàn bộ giỏ hàng
@@ -96,9 +92,7 @@ class CartController extends Controller
                 'avatar' => $product->avatar
             ]
         ]);
-        return response()->json([
-            'cartTotalQuantity' => Cart::getTotalQuantity(),
-        ], 200);
+        return back()->with('cartTotalQuantity', Cart::getTotalQuantity());
     }
 
     public function remove(Request $request)

@@ -16,39 +16,37 @@
 									</div>
 								</div>
 								<div class="col-md-7">
-									<form action="product/AddCart" method="post">
-
+									<form action="/cart/add" method="post">
+                                        @csrf
 										<div class="desc">
-											<h3>{{$product->name}}</h3>
+											<h3><input type="hidden" name="name" value="{{$product->name}}">{{$product->name}}</h3>
 											<p class="price">
-												<span>{{ number_format($product->price) }} VND</span>
+												<span ><input type="hidden" name="price" value="{{$product->price}}">{{ number_format($product->price) }} VND</span>
 											</p>
 											<p>Thông tin</p>
 											<p style="text-align: justify;">
 												{{--  HUST STORE sẽ giao hàng tận nơi khi chọn mua sản phẩm: Áo Sơ Mi Trắng Kem ASM844. Hoặc quí khách có thể đến tại địa chỉ shop có hiển thị bên dưới, khi chọn size phù hợp để xem và thử trực tiếp.  --}}
                                                 {{$product->detail}}
 											</p>
-
-
 											<div class="row row-pb-sm">
 												<div class="col-md-4">
-													<div class="input-group">
-														<span class="input-group-btn">
-															<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-																<i class="icon-minus2"></i>
-															</button>
-														</span>
-														<input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-														<span class="input-group-btn">
-															<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-																<i class="icon-plus2"></i>
-															</button>
-														</span>
-													</div>
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="quantity">
+                                                                <i class="icon-minus2"></i>
+                                                            </button>
+                                                        </span>
+                                                        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="quantity">
+                                                                <i class="icon-plus2"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
 												</div>
 											</div>
-											<input type="hidden" name="id_product" value="1">
-											<p><button class="btn btn-primary btn-addtocart" type="submit"> Thêm vào giỏ hàng</button></p>
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+											<button class="btn-add btn-primary btn-addtocart" style="padding:10px 20px 10px 20px; font-size:20px" type="submit"> Thêm vào giỏ hàng</button>
 										</div>
 									</form>
 								</div>
@@ -111,3 +109,29 @@
 		</div>
 		<!-- end main -->
 @endsection
+@push('js')
+<script>
+$('.btn').click(function(e){
+    e.preventDefault();
+
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            }
+        } else{
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+        }
+    } else {
+        input.val(0);
+    }
+});
+</script>
+@endpush

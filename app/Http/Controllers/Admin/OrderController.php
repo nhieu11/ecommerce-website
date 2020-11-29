@@ -22,7 +22,10 @@ class OrderController extends Controller
         $order = Order::Find($order_id);
         return view('admin.orders.detail',compact('order'));
     }
-    public function update(){
-
+    public function update($order_id){
+        $order = Order::find($order_id);
+        $order->processed = 1;
+        $order->save();
+        return redirect('/admin/orders/processed');
     }
 }

@@ -44,9 +44,9 @@
 								</div>
 								<div class="form-group">
 									<label for="">Tên Danh mục</label>
-									<input type="text" class="form-control" name="name"  placeholder="Tên danh mục mới" value="Áo khoác nữ">
+									<input type="   text" class="form-control" name="name"  placeholder="Tên danh mục mới" value="Áo khoác nữ">
 								</div>
-                                <button type="submit" class="btn btn-primary">Sửa danh mục</button>
+                                <button type="submit" class="btn btn-primary">Thêm danh mục</button>
                             </form>
 							</div>
 						</div>
