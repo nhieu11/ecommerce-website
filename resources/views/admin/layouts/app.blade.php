@@ -25,20 +25,25 @@
 
 	<!--main-->
 	@yield('content')
-	<!--end main-->
+    <!--end main-->
 
+@section('script')
+
+{{--  @endsection  --}}
 	<!-- javascript -->
 	<script src="/assets/admin/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/admin/js/bootstrap.min.js"></script>
      <script src="/assets/admin/js/chart.min.js"></script>
-    <script src="/assets/admin/js/chart-data.js"></script>
+
     <script>
         $(document).ready(function() {
             const pageId = $("#page-id").val();
             $(`.menu-${pageId}`).parents('li').addClass('active');
         })
     </script>
+    @show
 @stack('adminJs')
+
 </body>
 
 </html>
