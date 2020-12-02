@@ -45,7 +45,11 @@
                                         <td>{{ $user->address }}</td>
                                         <td>{{ $user->phone ?? '' }}</td>
                                         {{--  <td>{{ $user->created_at ?? '' }}</td>  --}}
-                                        <td>{{ $user->roles->pluck('name')->implode(', ') ?? '' }}</td>
+                                        <td>
+                                        <a class="btn btn-{{ $user->level == 1 ? 'danger' : 'success' }}" role="button">
+                                            {{ $user->level == 1 ? 'Admin' : 'User' }}
+                                        </a>
+                                        </td>
                                         <td>
                                             <a href="/admin/users/{{$user->id}}/edit" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
                                             <a href="/admin/users/{{$user->id}}" class="btn btn-danger btn-destroy"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>

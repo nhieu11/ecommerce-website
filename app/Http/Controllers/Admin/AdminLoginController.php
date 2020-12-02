@@ -16,12 +16,12 @@ class AdminLoginController extends Controller
         $request->validate([
             'email'=>'required|email',
             'password'=>'required|min:6',
-            'g-recaptcha-response' => new Captcha(), 
+            'g-recaptcha-response' => new Captcha(),
         ]);
 
              $credentials = $request->only(['email','password']);
             // $credentials = array_merge()
-            // $credentials['level'] = '1'
+            $credentials['level'] = '1';
             // {
             //     'level' => 'admin'
             // }

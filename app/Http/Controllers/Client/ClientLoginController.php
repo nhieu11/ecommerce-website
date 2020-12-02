@@ -23,34 +23,34 @@ class ClientLoginController extends Controller
     //     return $credentials;
     // }
 
-    public function login(Request $request){
-        $request->validate([
-            'email'=>'required|email',
-            'password'=>'required|min:6',
-        ]);
+    // public function login(Request $request){
+    //     $request->validate([
+    //         'email'=>'required|email',
+    //         'password'=>'required|min:6',
+    //     ]);
 
-        $credentials = $request->only(['email','password']);
-        // dd($credentials);
-        if(Auth::guard('client')->attempt($credentials)){ //nếu ko có guard mặc định là web
-            return redirect('/');
-        } else {
-            return back()->withInput(['email'])
-                ->withErrors(['email' => 'Email hoặc password đã nhập sai!']);
-        }
+    //     $credentials = $request->only(['email','password']);
+    //     // dd($credentials);
+    //     if(Auth::guard('client')->attempt($credentials)){ //nếu ko có guard mặc định là web
+    //         return redirect('/');
+    //     } else {
+    //         return back()->withInput(['email'])
+    //             ->withErrors(['email' => 'Email hoặc password đã nhập sai!']);
+    //     }
 
-    }
+    // }
 
     protected function guard()
     {
         return Auth::guard('client');
     }
 
-    // protected function credentials(Request $request)
-    // {
-    //     $credentials = $request->only($this->username(), 'password');
-    //     $credentials['level'] = '2';
-    //     return $credentials;
-    // }
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+        $credentials['level'] = '2';
+        return $credentials;
+    }
 
     public function logout(){
         Auth::logout();
