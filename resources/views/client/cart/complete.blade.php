@@ -118,7 +118,7 @@
                             <div class="list-row d-flex justify-content-between">
                                 <div class="col-md-4">Sản phẩm 1 : {{$item->name}}</div>
                                 <div class="col-md-4 text-right">x {{$item->quantity}}</div>
-                                <div class="col-md-4 text-right">₫ {{$item->price}}</div>
+                                <div class="col-md-4 text-right">₫ {{ number_format($item->price) }}</div>
                             </div>
                             @endforeach
 
@@ -131,7 +131,7 @@
 
                             <div class="list-row border-bottom-0 d-flex justify-content-between">
                                 <div class="col-md-4">
-                                    <h6>Tổng</h6>
+                                    <h6>Tổng tiền đơn hàng</h6>
                                 </div>
                                 <div class="col-md-4 offset-md-4 text-right">{{ number_format($infoOrder->total) }} đ</div>
                             </div>

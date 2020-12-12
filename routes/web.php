@@ -45,7 +45,8 @@ Route::group(['namespace' => 'client'], function() {
         Route::get('{product}','ProductController@detail');
     });
 
-
+    Route::post('/check-coupon','CartController@check_coupon');
+    Route::get('/unset-coupon','CartController@unset_coupon');
 
     Route::group(['prefix' => 'cart'], function() {
         Route::get('','CartController@index');
@@ -59,7 +60,7 @@ Route::group(['namespace' => 'client'], function() {
 
 Route::group([
     'prefix' => 'admin',
-    'namespace' => 'admin'
+    'namespace' => 'Admin'
 
 ], function () {
     Route::resources([
@@ -91,6 +92,14 @@ Route::group([
         Route::post('logout','AdminLoginController@logout');
    });
 
+   //Coupon
+   Route::group(['prefix' => 'coupon'], function() {
+
+        Route::get('/insert_coupon','CouponController@insert_coupon');
+        Route::get('/delete-coupon/{coupon_id}','CouponController@delete_coupon');
+        Route::get('','CouponController@list_coupon');
+        Route::post('/insert-coupon-code','CouponController@insert_coupon_code');
+    });
 
     Route::group(['middleware' => 'guest'], function() {
         Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');

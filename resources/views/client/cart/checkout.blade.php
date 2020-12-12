@@ -32,6 +32,11 @@
                                 <input type="text" id="fname" class="form-control" name="name" placeholder="First Name" value="{{ $user->name }}">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="bill" value="{{ $bill }}">
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="fname">Địa chỉ</label>
@@ -77,8 +82,31 @@
                                 {{-- <li><span>1 x Tên sản phẩm</span> <span>₫ 780.000</span></li> --}}
                             </ul>
                         </li>
+                        @if(Session::get('coupon'))
+                        <li>
 
-                        <li><span>Tổng tiền đơn hàng</span> <span>{{ number_format(Cart::getTotal()) }} đ</span></li>
+                            @foreach(Session::get('coupon') as $key => $cou)
+                                @if($cou['coupon_condition']==1)
+                                    Mã giảm : {{$cou['coupon_number']}} %
+                                    <p>
+                                        @php
+                                        $total_coupon = (Cart::getTotal()*$cou['coupon_number'])/100;
+                                        echo '<li>Tổng giảm:'.number_format($total_coupon,0,',','.').'đ</li>';
+                                        @endphp
+                                    </p>
+                                @elseif($cou['coupon_condition']==2)
+                                    Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
+                                    <p>
+                                        @php
+                                        $total_coupon = Cart::getTotal() - $cou['coupon_number'];
+                                        @endphp
+                                    </p>
+                                @endif
+                            @endforeach
+                        </li>
+                        @endif
+                        <li><p></p></li>
+                        <li><span>Tổng tiền đơn hàng</span> <span>{{ number_format($bill) }} đ</span></li>
                     </ul>
                 </div>
 

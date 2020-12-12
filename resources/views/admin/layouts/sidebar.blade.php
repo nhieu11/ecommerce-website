@@ -33,6 +33,11 @@
                 Đơn hàng
             </a>
         </li>
+        <li>
+            <a href="/admin/coupon" class="menu-coupon">
+                Quản lý mã giảm giá
+            </a>
+        </li>
         <li role="presentation" class="divider"></li>
         <li>
             <a href="/admin/users" class="menu-users">

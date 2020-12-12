@@ -54,11 +54,11 @@
 								</label>
 							</div>
 							<button type="submit" class="btn btn-primary">Login</button>
-							
+
 						</fieldset>
 							<br/>
 
-						<div align="center" class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+						{{-- <div align="center" class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div> --}}
 						<!-- @if($errors->has('g-recaptcha-response'))
 						<span class="invalid-feedback" style="display:block">
 							<strong>{{$errors->first('g-recaptcha-response')}}</strong>
@@ -95,7 +95,7 @@
 			if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>

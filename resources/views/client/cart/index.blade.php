@@ -87,15 +87,70 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="total-wrap">
                     <div class="row">
-                        <div class="col-md-8">
-
+                        <div class="col-md-3 col-md-push-1 text-center">
+                            <div class="total">
+                                <div class="grand-total">
+                                    @if(session()->has('message'))
+                                        <div class="alert alert-success">
+                                            {!! session()->get('message') !!}
+                                        </div>
+                                    @elseif(session()->has('error'))
+                                        <div class="alert alert-danger">
+                                            {!! session()->get('error') !!}
+                                        </div>
+                                    @endif
+                                    <form method="POST" action="{{url('/check-coupon')}}">
+                                        @csrf
+                                            <input type="text" class="form-control" name="coupon" placeholder="Nhập mã giảm giá"><br>
+                                            <input type="submit" class="btn btn-default check_coupon" name="check_coupon" value="Tính mã giảm giá">
+                                    </form>
+                                    @if(Session::get('coupon'))
+                                    <a class="btn btn-default check_out" href="{{url('/unset-coupon')}}">Xóa mã khuyến mãi</a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
                         </div>
                         <div class="col-md-3 col-md-push-1 text-center">
                             <div class="total">
                                 <div class="grand-total">
-                                    <p><span><strong>Tổng cộng:</strong></span> <span class="cart-total">{{ number_format(Cart::getTotal()) }} đ</span></p>
-                                    <a href="/checkout" class="btn btn-primary">Thanh toán <i
-                                            class="icon-arrow-right-circle"></i></a>
+                                    <p>Tổng cộng: {{ number_format(Cart::getTotal()) }} đ</p>
+                                    @if(Session::get('coupon'))
+                                        <li>
+
+                                            @foreach(Session::get('coupon') as $key => $cou)
+                                                @if($cou['coupon_condition']==1)
+                                                    Mã giảm : {{$cou['coupon_number']}} %
+                                                    <p>
+                                                        @php
+                                                        $total_coupon = (Cart::getTotal()*$cou['coupon_number'])/100;
+                                                        $bill = Cart::getTotal()-$total_coupon;
+                                                        echo '<p><li>Tổng giảm:'.number_format($total_coupon,0,',','.').'đ</li></p>';
+                                                        @endphp
+                                                    </p>
+                                                @elseif($cou['coupon_condition']==2)
+                                                    Mã giảm : {{number_format($cou['coupon_number'],0,',','.')}} k
+                                                    <p>
+                                                        @php
+                                                        $bill = Cart::getTotal() - $cou['coupon_number'];
+                                                        @endphp
+                                                    </p>
+                                                @endif
+                                            @endforeach
+                                        </li>
+                                        @php
+                                        echo '<p><span><strong>Thành tiền:</strong></span> <span class="cart-total">'.number_format($bill,0,',','.').'đ</span></p>';
+                                        @endphp
+                                    @else
+                                        @php
+                                        echo '<p><span><strong>Thành tiền:</strong></span> <span class="cart-total">'.number_format(Cart::getTotal(),0,',','.').'đ</span></p>';
+                                        @endphp
+                                    @endif
+
+                                    <a href="/checkout" class="btn btn-primary">Thanh toán <i class="icon-arrow-right-circle"></i></a>
+
+
                                 </div>
                             </div>
                         </div>
