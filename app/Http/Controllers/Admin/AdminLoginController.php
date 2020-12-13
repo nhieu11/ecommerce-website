@@ -19,7 +19,7 @@ class AdminLoginController extends Controller
             'g-recaptcha-response' => new Captcha(),
         ]);
 
-             $credentials = $request->only(['email','password']);
+            $credentials = $request->only(['email','password']);
             // $credentials = array_merge()
             $credentials['level'] = '1';
             // {
