@@ -37,7 +37,8 @@
             const pageId = $("#page-id").val();
             $(`.menu-${pageId}`).parents('li').addClass('active');
         })
-    </script>
+	</script>
+
 @stack('adminJs')
 </body>
 
