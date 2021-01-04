@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Entities\Social; //sử dụng model Social
 use App\Entities\User;
+use App\Mail\SendMailToUser;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite; //sử dụng Socialite
 use Illuminate\Support\Str;
@@ -35,18 +38,16 @@ class ClientLoginController extends Controller
             $account_name = User::where('id',$account->user)->first();
             $request->merge([
                 'password' => $account_name->password,
-                'name' => $account_name->name,
+                'email' => $account_name->email,
                 ]);
 
-            $credentials = $request->only('name', 'password');
+            $credentials = $request->only('email', 'password');
             $credentials['level'] = '2';
 
-            Auth::guard('client')->attempt($credentials);
-
-            if(auth('client')){
-
-                dd(auth()->guard('client')->user());
-            }
+            if(Auth::guard('client')->attempt($credentials)){
+                return redirect('/');
+            };
+            //dd(auth()->guard('client')->user());
 
             // Session::put('login',$account_name->name);
             // Session::put('id',$account_name->id);
@@ -59,40 +60,67 @@ class ClientLoginController extends Controller
             ]);
 
             $orang = User::where('email',$provider->getEmail())->first();
-
+            $temp_pass = Str::random(8);
             if(!$orang){
                 $orang = User::create([
                     'name' => $provider->getName(),
                     'email' => $provider->getEmail(),
-                    'password' => '',
+                    'password' => Hash::make($temp_pass),
                     'level' => 2
                 ]);
             }
             $facebook_login->login()->associate($orang);
             $facebook_login->save();
-            sleep(500);
-            dd($account);
+
+            $account = Social::where('provider','facebook')->where('provider_user_id',$provider->getId())->first();
             $account_name = User::where('id',$account->user)->first();
 
-            Session::put('login',$account_name->name);
-            Session::put('id',$account_name->id);
-            dd("asd");
-            return redirect('/');
+            $credentials['email']=$account_name->email;
+            $credentials['password']=$account_name->password;
+            $credentials['level']='2';
+
+            if(Auth::guard('client')->attempt($credentials)){
+                $welcome = new \stdClass();
+                $welcome->sender = 'HustStore';
+                $welcome->pass = $temp_pass;
+                $welcome->receiver = $account_name->name;
+                Mail::to($account_name->email)->send(new SendMailToUser($welcome));
+                return redirect('/');
+            };
+
+            return redirect('/')->with('status', 'Failed to Authenticate !');
         }
     }
 
+    public function login(Request $request){
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|min:6',
+        ]);
 
-    protected function guard()
-    {
-        return Auth::guard('client');
-    }
-
-    protected function credentials(Request $request)
-    {
-        $credentials = $request->only($this->username(), 'password');
+        $credentials = $request->only(['email','password']);
         $credentials['level'] = '2';
-        return $credentials;
+
+        if(Auth::guard('client')->attempt($credentials)){ //nếu ko có guard mặc định là web
+            return redirect('/');
+        } else {
+            return back()->withInput(['email'])
+                ->withErrors(['email' => 'Invalid credentials. ']);
+        }
+
     }
+    // protected function guard()
+    // {
+    //     return Auth::guard('client');
+    // }
+
+    // protected function credentials(Request $request)
+    // {
+    //     $credentials = $request->only($this->username(), 'password');
+    //     dd($credentials);
+    //     $credentials['level'] = '2';
+    //     return $credentials;
+    // }
 
     public function logout(){
         Auth::logout();

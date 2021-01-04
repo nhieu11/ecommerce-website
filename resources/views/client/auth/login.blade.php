@@ -114,14 +114,14 @@
             {{-- <label class="float-left form-check-label"  style="font-size:20px"><input type="checkbox"> Remember me</label> --}}
             <a href="#" class="float-right" style="font-size:20px">Forgot Password?</a>
         </div>
-		<div class="or-seperator" style="font-size:20px"><i>or</i></div>
+		{{-- <div class="or-seperator" style="font-size:20px"><i>or</i></div>
         <p class="text-center" style="font-size:20px">Login with your social media account</p>
         <div class="text-center social-btn">
             <a href="{{ URL::to('/login-facebook') }}" id="fbLink" class="btn btn-secondary" style="font-size:20px"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
-            {{-- <div class="fb-login-button" data-size="small" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div> --}}
+            <div class="fb-login-button" data-size="small" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
             <a href="#" class="btn btn-info" style="font-size:20px"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
 			<a href="#" class="btn btn-danger" style="font-size:20px"><i class="fa fa-google"></i>&nbsp; Google</a>
-        </div>
+        </div> --}}
     </form>
     <p class="text-center text-muted small" style="font-size:20px">Don't have an account? <a href="#" style="font-size:20px">Sign up here!</a></p>
 </div>

@@ -20,11 +20,7 @@ class AdminLoginController extends Controller
         ]);
 
             $credentials = $request->only(['email','password']);
-            // $credentials = array_merge()
             $credentials['level'] = '1';
-            // {
-            //     'level' => 'admin'
-            // }
 
             if(Auth::guard('web')->attempt($credentials)){ //nếu ko có guard mặc định là web
                 return redirect('/admin');
@@ -32,10 +28,6 @@ class AdminLoginController extends Controller
                 return back()->withInput(['email'])
                     ->withErrors(['email' => 'Invalid credentials. ']);
             }
-
-
-            // Auth::check();
-            // Auth::guard('web')->check();
 
     }
     public function logout(){

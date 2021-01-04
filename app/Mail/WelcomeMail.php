@@ -16,9 +16,9 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pass)
     {
-        //
+        $this->pass = $pass;
     }
 
     /**
@@ -28,6 +28,7 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->view("welcome");
+        return $this->from('duongshin2000@gmail.com')
+        ->view('mails.MailTemplate');
     }
 }
