@@ -24,7 +24,7 @@
             <div class="col-md-7">
                 <form action="/checkout" method="post" class="colorlib-form">
                     @csrf
-                    <h2>Chi tiết thanh toán</h2>
+                    <h2>Chi tiết đặt hàng</h2>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                    <button type="submit" class="btn btn-primary">Đặt hàng</button>
                 </form>
             </div>
             <div class="col-md-5">
@@ -108,6 +108,7 @@
                         <li><p></p></li>
                         <li><span>Tổng tiền đơn hàng</span> <span>{{ number_format($bill) }} đ</span></li>
                     </ul>
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
                 </div>
 
                 {{-- <div class="row">

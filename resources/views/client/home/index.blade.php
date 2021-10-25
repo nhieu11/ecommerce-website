@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <a href="" class="f-product-1" style="background-image: url(/assets/client/images/i1.jpg);">
+                <a href="" class="f-product-1" style="background-image: url(/assets/client/images/35--min.png);">
                     <div class="desc">
                         <h2>Mẫu <br>cho <br>Nam</h2>
                     </div>
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div id="colorlib-intro" class="colorlib-intro" style="background-image: url(/assets/client/images/banner-1.jpg);"
+<div id="colorlib-intro" class="colorlib-intro" style="background-image: url(/assets/client/images/demo1-9776.jpg);"
     data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">

@@ -149,6 +149,7 @@
                                     @endif
 
                                     <a href="/checkout" class="btn btn-primary">Thanh toán <i class="icon-arrow-right-circle"></i></a>
+                                    <a href="" class="btn btn-danger">Xóa giỏ hàng <i class="icon-arrow-right-circle"></i></a>
 
 
                                 </div>
