@@ -58,7 +58,7 @@
 						</fieldset>
 							<br/>
 
-						<div align="center" class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
+						{{-- <div align="center" class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div> --}}
 						<!-- @if($errors->has('g-recaptcha-response'))
 						<span class="invalid-feedback" style="display:block">
 							<strong>{{$errors->first('g-recaptcha-response')}}</strong>

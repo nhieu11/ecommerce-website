@@ -20,7 +20,9 @@
                         <li><a href="/about" class="menu-about">Giới thiệu</a></li>
                         <li><a href="/contact" class="menu-contact">Liên hệ</a></li>
                         <li><a href="/cart" class="menu-cart"><i class="icon-shopping-cart"></i> Giỏ hàng [<span class="cart-total-quantity">{{ \Cart::getTotalQuantity() }}</span>]</a></li>
-
+                        {{--  @if (!auth()->guard('client')->check())
+                        <li><a href="/login" class="menu-login"> Login</a></li>
+                        @endif  --}}
                         @guest('client')
                         <li><a href="/login" class="menu-login"> Login</a></li>
                         @endguest

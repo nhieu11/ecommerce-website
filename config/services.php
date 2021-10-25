@@ -29,9 +29,5 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-    'facebook' => [
-        'client_id' => env('FACEBOOK_APP_ID'),  //client face của bạn
-        'client_secret' => env('FACEBOOK_APP_SECRET'),  //client app service face của bạn
-        'redirect' => env('FACEBOOK_REDIRECT') //callback trả về
-    ],
+
 ];

@@ -56,7 +56,7 @@ class ProductController extends Controller
             //.gitignore ignore mọi thứ (.) thư mục trừ file .gitigore
             // print_r($request ->all());
             $product = Product::create($input);
-            return redirect("/admin/products");
+            return redirect("/admin/products/{$product->id}/edit");
         // print_r($request->all());die;
     }
     public function edit($product){
