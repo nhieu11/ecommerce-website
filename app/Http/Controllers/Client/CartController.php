@@ -129,7 +129,7 @@ class CartController extends Controller
         Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
         return view('client.cart.complete',compact('infoOrder','date_created'));
 
-        return redirect('/complete');
+        //return redirect('/complete');
     }
 
     public function add(Request $request)

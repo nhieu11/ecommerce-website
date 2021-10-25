@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
-// });
+//
 
 Route::group(['namespace' => 'client'], function() {
 
     //Route::view('login','client.auth.login');
 
     Route::group(['middleware' => 'guest:client'], function() {
+        Route::get('login-facebook','ClientLoginController@login_facebook');
+        Route::get('login/callback','ClientLoginController@callback_facebook');
+
         Route::get('login' , 'ClientLoginController@showLoginForm')->name('client.login');
         Route::post('login' , 'ClientLoginController@login');
     });

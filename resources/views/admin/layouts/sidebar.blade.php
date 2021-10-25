@@ -35,6 +35,8 @@
         </li>
         <li>
             <a href="/admin/coupon" class="menu-coupon">
+                <svg class="glyph stroked tag">
+                    <use xlink:href="#stroked-tag"/></svg>
                 Quản lý mã giảm giá
             </a>
         </li>
