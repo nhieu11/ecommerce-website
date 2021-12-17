@@ -63,7 +63,7 @@
 											</td>
 											<td> {{ number_format($item->price) }}</td>
 											<td>
-												<a class="btn btn-{{ $item->quantity>0 ? 'success' : 'danger' }}" href="#" role="button">{{$item->quantity>0 ? 'Còn hàng' : 'Hết hàng'}}</a>
+												<a class="btn btn-{{ $item->quantity>0 ? 'success' : 'danger' }}" href="#" role="button"><?php if($item->quantity>0){echo 'Còn '.$item->quantity.' sản phẩm';}else{echo 'Hết hàng';}?></a>
 											</td>
 											<td>{{ optional($item->category)->name }}</td> {{-- $item là 1 bản ghi product, hàm category() định nghĩa ở entities/product --}}
 											<td>
