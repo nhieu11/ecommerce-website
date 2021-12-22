@@ -48,7 +48,7 @@ class ClientLoginController extends Controller
     protected function credentials(Request $request)
     {
         $credentials = $request->only($this->username(), 'password');
-        $credentials['level'] = '2';
+        $credentials['level'] = '4';
         return $credentials;
     }
 

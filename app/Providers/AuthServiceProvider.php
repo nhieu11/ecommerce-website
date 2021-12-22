@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entities\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,6 +26,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('read-user', function($user){
+            if($user->level == '1' || $user->level == '2'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+        
+
     }
 }

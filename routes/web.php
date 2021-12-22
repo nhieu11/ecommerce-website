@@ -80,30 +80,35 @@ Route::group([
         Route::put('{product}', 'ProductController@update');
         Route::delete('{product}', 'ProductController@destroy');
         Route::get('{product}', 'ProductController@show');
-    });
+      });
 
     Route::group(['prefix' => 'orders'], function() {
         Route::get('','OrderController@index');
         Route::get('processed','OrderController@processed');
+        Route::get('delivery','OrderController@delivery');
+        Route::get('finished','OrderController@finished');
         Route::get('{order}/detail','OrderController@detail');
         Route::get('{order}','OrderController@update');
-    });
+        Route::get('complete/{order}','OrderController@complete');
+     });
 
         Route::post('logout','AdminLoginController@logout');
-   });
 
-   //Coupon
-   Route::group(['prefix' => 'coupon'], function() {
+        //Coupon
+    Route::group(['prefix' => 'coupon'], function() {
 
         Route::get('/insert_coupon','CouponController@insert_coupon');
         Route::get('/delete-coupon/{coupon_id}','CouponController@delete_coupon');
         Route::get('','CouponController@list_coupon');
         Route::post('/insert-coupon-code','CouponController@insert_coupon_code');
-    });
+        });
 
-    Route::group(['middleware' => 'guest'], function() {
-        Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');
-        Route::post('login','AdminLoginController@login');
+
+});
+
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('login','AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('login','AdminLoginController@login');
     });
 
 });

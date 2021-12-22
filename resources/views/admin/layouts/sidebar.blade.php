@@ -35,7 +35,7 @@
                     <li><a href="/admin/orders">Đơn hàng chưa duyệt</a></li>
                     <li><a href="/admin/orders/processed">Đơn hàng đã duyệt</a></li>
                     <li><a href="/admin/orders/delivery">Đơn hàng đang giao</a></li>
-                    <li><a href="">Đơn hàng hoàn thành</a></li>
+                    <li><a href="/admin/orders/finished">Đơn hàng hoàn thành</a></li>
                 </ul>
             </a>
         </li>

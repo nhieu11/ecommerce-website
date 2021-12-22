@@ -95,7 +95,7 @@
 									</tbody>
 								</table>
 								<div class="alert alert-primary" role="alert" align='right'>
-									<a onclick="return processed()" class="btn btn-success" href="/admin/orders/{{$order->id}}" role="button">Đã xử lý</a>
+									<a onclick="return complete()" class="btn btn-success" href="/admin/orders/complete/{{$order->id}}" role="button">Thu tiền</a>
 								</div>
 							</div>
                         </div>
@@ -113,7 +113,7 @@
 @endsection
 @push('adminJs')
     <script>
-        function processed(){
+        function complete(){
             return confirm("Đơn hàng sau khi xử lý sẽ được tính vào doanh thu!!")
         }
     </script>

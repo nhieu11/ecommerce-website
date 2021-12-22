@@ -26,9 +26,14 @@ class AdminLoginController extends Controller
             //     'level' => 'admin'
             // }
 
+            $credentialsSaler = $request->only(['email','password']);
+            $credentialsSaler['level'] = '2';
+
             if(Auth::guard('web')->attempt($credentials)){ //nếu ko có guard mặc định là web
                 return redirect('/admin');
-            } else {
+            }else if(Auth::guard('web')->attempt($credentialsSaler)){
+                return redirect('/admin/products');
+            }else{
                 return back()->withInput(['email'])
                     ->withErrors(['email' => 'Invalid credentials. ']);
             }

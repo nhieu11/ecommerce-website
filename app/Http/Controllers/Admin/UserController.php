@@ -7,9 +7,13 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
+// use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
-    public function index(){
+    public function index(User $user){
         // $client = new Client();
         // $res = $client->request('GET', 'https://api.github.com/users/nhieu11');
         // $content = json_decode($res->getBody()->getContents());
@@ -47,9 +51,18 @@ class UserController extends Controller
         // print_r($users);
         // die;
 
+       /*  if (! Gate::allows('read-user')) {
+            abort(403);
+        } */
+
+        if (!$this->userCan('read-user')) {
+            abort('403', __('Bạn không có quyền thực hiện thao tác này'));
+        }
+
             $users = User::with('roles')->get(); //roles vẫn là hàm ở Entities/User.php , lưu trên RAM, tốn bộ nhớ không tốn thời gian query
 
         debugbar()->info($users);
+
         return view('admin.users.index',[
             'users' => $users
         ]);
@@ -94,4 +107,10 @@ class UserController extends Controller
         }
         return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404);
     }
+
+    public function userCan($action, $option = NULL){
+    $user = Auth::user();
+    return Gate::forUser($user)->allows($action, $option);
+        }
+
 }
