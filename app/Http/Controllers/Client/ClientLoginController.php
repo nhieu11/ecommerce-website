@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Client;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -12,8 +13,14 @@ class ClientLoginController extends Controller
 
     protected $redirectTo = '/';
 
-    public function showLoginForm(){
+    public function showLoginForm()
+    {
         return view('client.auth.login');
+    }
+
+    public function showRegisterForm()
+    {
+        return view('client.auth.register');
     }
 
     // protected function credentials(Request $request)
@@ -52,10 +59,9 @@ class ClientLoginController extends Controller
         return $credentials;
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
-
-
 }
