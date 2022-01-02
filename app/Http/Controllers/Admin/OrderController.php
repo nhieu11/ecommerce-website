@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entities\Order;
 use App\Entities\OrderDetail;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -30,10 +31,15 @@ class OrderController extends Controller
         $order = Order::Find($order_id);
         return view('admin.orders.detail',compact('order'));
     }
+    public function deliveryDetail($order_id){
+        $order = Order::Find($order_id);
+        return view('admin.orders.deliveryDetail',compact('order'));
+    }
     public function complete($order_id){
         $order = Order::find($order_id);
         $order->processed = 3;
+        $order->dateCollection = Carbon::now();
         $order->save();
-        return redirect('/admin/orders/complete');
+        return redirect('/admin/orders/finished');
     }
 }

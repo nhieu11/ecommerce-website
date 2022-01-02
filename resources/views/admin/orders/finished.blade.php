@@ -26,7 +26,7 @@
                                             <th>ID</th>
                                             <th>Tên khách hàng</th>
                                             <th>Email</th>
-                                            <th>Sđt</th>
+                                            <th>Phone</th>
                                             <th>Địa chỉ</th>
                                             <th>Shipper</th>
                                             <th>Thời gian tạo đơn hàng</th>
@@ -44,9 +44,9 @@
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>
                                             <td>ABC</td>
-                                            <td>{{Carbon\Carbon::parse($item->updated_at)->format('d-m-Y')}}</td>
-                                            <td>123</td>
-                                            <td>456</td>
+                                            <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateHandOver)->toDayDateTimeString()}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateCollection)->toDayDateTimeString()}}</td>
                                             <td>
                                                 <a href="/admin/orders/{{$item->id}}/detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
                                             </td>

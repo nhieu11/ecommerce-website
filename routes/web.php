@@ -22,11 +22,11 @@ Route::group(['namespace' => 'client'], function () {
 
     //Route::view('login','client.auth.login');
     // Route::view('signin')
-    Route::get('register', 'ClientLoginController@showRegisterForm');
 
     Route::group(['middleware' => 'guest:client'], function () {
         Route::get('login', 'ClientLoginController@showLoginForm')->name('client.login');
         Route::post('login', 'ClientLoginController@login');
+        Route::get('register', 'ClientLoginController@showRegisterForm');
     });
 
     Route::group(['middleware' => 'auth:client'], function () {
@@ -70,8 +70,31 @@ Route::group([
     ]);
 
 
-    Route::group(['middleware' => 'auth'], function () {
-        Route::get('', 'DashboardController');
+   Route::group(['middleware' => 'auth'], function() {
+    Route::get('','DashboardController');
+
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('', 'ProductController@index');
+        Route::get('create', 'ProductController@create');
+        Route::post('', 'ProductController@store');
+        Route::get('{product}/edit', 'ProductController@edit');
+        Route::put('{product}', 'ProductController@update');
+        Route::delete('{product}', 'ProductController@destroy');
+        Route::get('{product}', 'ProductController@show');
+      });
+
+    Route::group(['prefix' => 'orders'], function() {
+        Route::get('','OrderController@index');
+        Route::get('processed','OrderController@processed');
+        Route::get('delivery','OrderController@delivery');
+        Route::get('finished','OrderController@finished');
+        Route::get('{order}/detail','OrderController@detail');
+        Route::get('{order}/delivery-detail','OrderController@deliveryDetail');
+        Route::get('{order}','OrderController@update');
+        Route::get('complete/{order}','OrderController@complete');
+     });
+
+        Route::post('logout','AdminLoginController@logout');
 
         Route::group(['prefix' => 'products'], function () {
             Route::get('', 'ProductController@index');

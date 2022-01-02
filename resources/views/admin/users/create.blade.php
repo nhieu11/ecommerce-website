@@ -35,8 +35,12 @@
                                 </div> --}}
                             </div>
                             <div class="form-group">
-                                <label>password</label>
+                                <label>Mật Khẩu</label>
                                 <input type="password" name="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Nhập Lại Mật Khẩu</label>
+                                <input type="password" name="password_confirmation" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Full name</label>
@@ -50,12 +54,12 @@
                                 <label>Phone</label>
                                 <input type="phone" name="phone" class="form-control">
                             </div>
-
                             <div class="form-group">
                                 <label>Level</label>
                                 <select name="level" class="form-control">
-                                    <option value="1">admin</option>
-                                    <option selected value="2">user</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">Keeper</option>
+                                    <option selected value="4">User</option>
                                 </select>
                             </div>
                         </div>

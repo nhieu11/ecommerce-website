@@ -42,10 +42,10 @@
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>
-                                            <td>{{Carbon\Carbon::parse($item->updated_at)->format('d-m-Y')}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                                             <td>123</td>
                                             <td>
-                                                <a href="/admin/orders/{{$item->id}}/detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
+                                                <a href="/admin/orders/{{$item->id}}/delivery-detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
                                             </td>
                                             <td>
                                                 <a onclick="return complete()" href="/admin/orders/complete/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Hoàn thành</a>

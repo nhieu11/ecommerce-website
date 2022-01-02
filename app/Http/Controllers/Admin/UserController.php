@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Entities\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -70,12 +71,14 @@ class UserController extends Controller
     public function create(){
         return view('admin.users.create');
     }
-    public function store(UpdateUserRequest $request){
-        $input = $request->only([
+    public function store(CreateUserRequest $request){
+
+       $input = $request->only([
             'email',
             'name',
             'address',
             'phone',
+            'level',
         ]);
         $input['password'] = bcrypt("$request->password");
         $user = User::create($input);

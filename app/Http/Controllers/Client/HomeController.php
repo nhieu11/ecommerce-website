@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\Request;
 use App\Entities\Product;
 
@@ -17,5 +18,17 @@ class HomeController extends Controller
     }
     public function contact(){
         return view('client.home.contact');
+    }
+    public function store(CreateUserRequest $request){
+        dd($input = $request->only([
+            'email',
+            'name',
+            'address',
+            'phone',
+        ]));
+        $input['level'] = '4';
+        $input['password'] = bcrypt("$request->password");
+        User::create($input);
+        return redirect("/login");
     }
 }

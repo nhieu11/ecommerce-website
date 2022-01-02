@@ -12,11 +12,17 @@ class ProductController extends Controller
 {
 
     public function index(Request $request){
-        if($request->start == null){
-            $products = Product::paginate(6);
-        }else{
+        if($request->start != null) {
             $products = Product::whereBetween('price',[$request->start, $request->end])->paginate();
+        }else if($request->color != null){
+            dd($request->color);
+        }else if($request->brand != null){
+            dd($request->brand);
         }
+        else{
+            $products = Product::paginate(6);
+        }
+
         $categories = Category::get(); //get không dùng dc relationship
         $parent = 0;
         return view('client.product.index',compact('products','categories','parent'));
