@@ -25,7 +25,7 @@
 
 
 <div class="container">
-     {{-- <div style="padding: 0 200px 0 200px;">
+     <div style="padding: 0 200px 0 200px;">
             @if ($errors->any())
             @component('admin.layouts.components.alert')
             @slot('type', 'danger')
@@ -33,7 +33,7 @@
             {{ $errors->first() }}
             @endcomponent
             @endif
-        </div> --}}
+        </div>
     <div class="row login-wrapper ">
         <div class="login-form">
             <form action="/login" method="POST">
@@ -68,7 +68,7 @@
                 {{-- <a href="#" class="btn btn-info" style="font-size:20px">Twitter</a> --}}
                 <a href="" class="btn btn-danger social-link" style="">Google</a>
             </div>
-            <p class="text-center text-muted small" style="font-size:16px">Don't have an account? 
+            <p class="text-center text-muted small" style="font-size:16px">Don't have an account?
                 <a href="/register" style="font-size:16px">Sign up here!</a>
             </p>
         </div>

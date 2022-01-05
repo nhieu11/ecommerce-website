@@ -1,15 +1,16 @@
-@extends('client.layouts.app', ['activePage' => 'register', 'title' => 'Join us'])
+@extends('client.layouts.app', ['activePage' => 'register', 'title' => 'Đăng kí'])
 @section('content')
 
 <div class="container">
     <div class="row login-wrapper">
         <div class="login-form">
+               <h2 class="text-center">Đăng Kí</h2>
             <form action="/register" method="POST">
                 @csrf
-                <h2 class="text-center">Đăng Kí</h2>
+
                 <div class="form-group">
                     <label for="exampleInputName1">Họ tên</label>
-                    <input type="text" class="form-control" placeholder="Họ tên của bạn" name="email">
+                    <input type="text" class="form-control" placeholder="Họ tên của bạn" name="name">
                 </div>
                {{--  <div class="form-group">
                     <label for="exampleInputEmail1">Ngày sinh</label>
@@ -17,12 +18,12 @@
                 </div> --}}
                 <div class="form-group">
                     <label for="exampleInputEmail1">Số điện thoai</label>
-                    <input type="tel" class="form-control" placeholder="Số điện thoại của bạn" name="email">
+                    <input type="tel" class="form-control" placeholder="Số điện thoại của bạn" name="phone">
                 </div>
 
                 <div class="form-group">
                     <label  for="exampleInputPassword1">Email</label>
-                    <input type="email" class="form-control" placeholder="Email của bạn " name="password">
+                    <input type="email" class="form-control" placeholder="Email của bạn " name="email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputAddress">Địa chỉ</label>
@@ -33,7 +34,7 @@
                     <input type="password" class="form-control" placeholder="Nhập mật khẩu" name="password">
                 </div>
                 <div class="form-group">
-                    <label  for="exampleInputPassword1">Nhận lại Password</label>
+                    <label  for="exampleInputPassword1">Nhập lại Password</label>
                     <input type="password" class="form-control" placeholder="Nhập lại Password" name="password_confirmation">
                 </div>
 

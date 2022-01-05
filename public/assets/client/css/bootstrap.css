@@ -659,7 +659,7 @@ a.bg-warning:focus {
 }
 
 .bg-danger {
-  background-color: #f2dede;
+  background-color: crimson;
 }
 
 a.bg-danger:hover,

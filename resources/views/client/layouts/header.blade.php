@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-2">
-                    <div id="colorlib-logo"><a href="/"><img src="/assets/client/images/logo.png" alt="" style="width: 125px;height: 61px;"></a></div>
+                    <div id="colorlib-logo"><a href="/"><img src="/assets/client/images/logo-hust.png" alt="" style=""></a></div>
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>

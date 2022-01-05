@@ -54,6 +54,11 @@ class ClientLoginController extends Controller
 
     protected function credentials(Request $request)
     {
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|min:6',
+        ]);
+
         $credentials = $request->only($this->username(), 'password');
         $credentials['level'] = '4';
         return $credentials;
