@@ -15,9 +15,9 @@ class ProductController extends Controller
         if($request->start != null) {
             $products = Product::whereBetween('price',[$request->start, $request->end])->paginate();
         }else if($request->color != null){
-            dd($request->color);
+            $products = Product::where('color',$request->color)->paginate();
         }else if($request->brand != null){
-            dd($request->brand);
+            $products = Product::where('brand',$request->brand)->paginate();
         }
         else{
             $products = Product::paginate(6);

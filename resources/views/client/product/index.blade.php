@@ -194,6 +194,50 @@
                             <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
                         </form>
                     </div>
+                    <div class="side">
+                        <h2>Màu Sắc</h2>
+                        <form action="/product" method="GET" class="colorlib-form-2">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="guests">Color</label>
+                                        <div class="form-field">
+                                            <i class="icon icon-arrow-down3"></i>
+                                            <select name="color" id="people" class="form-control">
+                                                <option value="black">Đen</option>
+                                                <option value="white">Trắng</option>
+                                               {{--   <option value="{{App\Entities\Product::max('price')}}">Max Price</option>  --}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
+                        </form>
+                    </div>
+                    <div class="side">
+                        <h2>Nhãn Hiệu</h2>
+                        <form action="/product" method="GET" class="colorlib-form-2">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="guests">Brand</label>
+                                        <div class="form-field">
+                                            <i class="icon icon-arrow-down3"></i>
+                                            <select name="brand" id="people" class="form-control">
+                                                <option value="highway">Highway</option>
+                                                <option value="zara">Zara</option>
+                                              {{--    <option value="{{App\Entities\Product::max('price')}}">Max Price</option>  --}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" style="width: 100%;border: none;height: 40px;">Tìm kiếm</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
