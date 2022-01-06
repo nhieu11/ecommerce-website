@@ -46,8 +46,8 @@
                                         <td>{{ $user->phone ?? '' }}</td>
                                         {{--  <td>{{ $user->created_at ?? '' }}</td>  --}}
                                         <td>
-                                        <a class="btn btn-{{ $user->level == 1 ? 'danger' : 'success' }}" role="button">
-                                            {{ $user->level == 1 ? 'Admin' : 'User' }}
+                                        <a class="btn btn-<?php if($user->level==2) {echo 'danger';} else if($user->level==4) {echo 'success';}else if($user->level==3){echo 'info';} else if($user->level==1){echo 'primary';}?>" role="button">
+                                            <?php if($user->level==2) {echo 'Admin';} else if($user->level==4) {echo 'User';} else if($user->level==3){echo 'Keeper';} else if($user->level==1){echo 'Super Admin';}?>
                                         </a>
                                         </td>
                                         <td>

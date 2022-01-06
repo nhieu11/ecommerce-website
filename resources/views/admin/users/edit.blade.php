@@ -55,8 +55,9 @@
                             <div class="form-group">
                                 <label>Level</label>
                                 <select name="level" class="form-control" value="">
-                                    <option value="1">admin</option>
-                                    <option selected value="2">user</option>
+                                    <option value="2">Admin</option>
+                                    <option value="3">Keeper</option>
+                                    <option selected value="4">User</option>
                                 </select>
                             </div>
                         </div>

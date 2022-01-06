@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 02, 2022 lúc 03:20 PM
+-- Thời gian đã tạo: Th1 06, 2022 lúc 05:30 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -125,6 +125,7 @@ CREATE TABLE `orders` (
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `total` decimal(15,2) NOT NULL,
+  `stockkepper_id` bigint(20) NOT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -137,18 +138,18 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`) VALUES
-(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL),
-(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35'),
-(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL),
-(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL),
-(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL),
-(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL),
-(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '0.00', 1, '2021-04-13 21:56:56', '2021-01-10 01:13:36', NULL, NULL, NULL),
-(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 1, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL),
-(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL),
-(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL),
-(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL);
+INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `stockkepper_id`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`) VALUES
+(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 0, 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL),
+(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 0, 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35'),
+(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL),
+(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 0, 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL),
+(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 0, 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL),
+(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 0, 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL),
+(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 2, '2021-04-13 21:56:56', '2021-01-10 01:13:36', NULL, NULL, NULL),
+(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 0, 2, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL),
+(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 0, 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL),
+(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 0, 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL),
+(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 0, 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,7 +232,8 @@ INSERT INTO `products` (`id`, `name`, `sku`, `quantity`, `price`, `featured`, `a
 (2, 'Tomas Cuban Shirt', 'sku005', 500, '540000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', 'Áo sơ mi', 'Vải Polyester , Cotton', 'black', 'highway', 1, '2020-10-19 05:50:19', '2020-10-19 05:50:19'),
 (3, 'Diego Cuban Shirt', 'sku006', 400, '580000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', 'Áo sơ mi', 'Vải Polyester , Cotton', 'black', 'highway', 1, '2020-10-19 05:52:37', '2020-10-19 05:52:37'),
 (4, 'Freedom T-shirt', 'sku007', 400, '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', 'Áo phông', 'Vải Cotton', 'white', 'highway', 1, '2020-10-19 05:55:22', '2020-10-19 05:55:22'),
-(5, 'Áo hình thang', 'sku002', 50, '200000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', 'Màu trắng', 'Vải đũi', 'white', 'zara', 2, '2020-10-19 07:37:28', '2020-10-19 07:37:28');
+(5, 'Áo hình thang', 'sku002', 50, '200000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', 'Màu trắng', 'Vải đũi', 'white', 'zara', 2, '2020-10-19 07:37:28', '2020-10-19 07:37:28'),
+(6, 'Áo polo', 'sku0078', 150, '350000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k8861d6690519a0b.jpg', 'Vải tre siêu thoáng mát', 'Áo khử mùi siêu chất', 'black', 'coolmate', 1, '2022-01-06 03:59:01', '2022-01-06 03:59:01');
 
 -- --------------------------------------------------------
 
@@ -310,9 +312,12 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `email_verified_at`, `password`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Baro Kiteer', 'barok@mail.com', '0123123', 'HN', NULL, '123123123', 4, NULL, '2020-03-24 06:24:58', '2020-03-24 06:24:58'),
 (4, 'Leoot', 'leo@mail.com', '0904515270', '24 ngõ TP', NULL, '123456', 4, NULL, NULL, '2020-10-16 21:12:05'),
-(8, 'Baro', 'baro@gmail.com', NULL, NULL, NULL, '$2y$10$qX0MdpPsZiocP6t21xwklOqXThq1N4R61HBVuSTRW52heRi11wwbm', 4, NULL, '2020-05-26 05:55:27', '2020-05-26 05:55:27'),
 (9, 'Hieu Bui', 'hieubui@mail.com', '0904515270', 'Hanoi Vietnam', NULL, '$2y$10$hhVetGU1RMDenPDgS78kDeUIoHHRx.f9JX8reFeF6DUkzz70QIyBS', 2, NULL, '2020-10-19 06:54:05', '2020-10-19 06:54:05'),
-(10, 'Hieu Bui', 'hieubui1@mail.com', '0904515270', 'Hanoi Vietnam', NULL, '$2y$10$gQPblpf544p3dY8.IPG6EOO1C/GGUipl5YXqeLqLvWm0rLc0YW/H6', 4, NULL, '2022-01-02 03:50:54', '2022-01-02 03:50:54');
+(10, 'Hieu Bui', 'hieubui1@mail.com', '0904515270', 'Hanoi Vietnam', NULL, '$2y$10$gQPblpf544p3dY8.IPG6EOO1C/GGUipl5YXqeLqLvWm0rLc0YW/H6', 4, NULL, '2022-01-02 03:50:54', '2022-01-02 03:50:54'),
+(11, 'Át Min', 'admin@mail.com', '+84904515270', '1 Đại Cồ Việt', NULL, '$2y$10$ZhbINI3PQ3yp3Q2zCwYgpOVEV7YSmEMNpPM1cXkPoM5Yf37cQY.bG', 2, NULL, '2022-01-06 04:05:30', '2022-01-06 04:05:30'),
+(12, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', NULL, '$2y$10$xSXpJe.uEaRlHYb9ZtPdsuxRITsJqwzXlWwU16GHFyMZRDXrI6l4u', 4, NULL, '2022-01-06 04:06:03', '2022-01-06 04:06:03'),
+(13, 'Kíp Pờ', 'keeper@mail.com', '+84904515270', '1 Đại Cồ Việt', NULL, '$2y$10$Pcgb/ElktCamh/JRjsnA2O0i3gBgzEO/s0vKPPAe6evlc9JCLcgo.', 3, NULL, '2022-01-06 04:06:48', '2022-01-06 04:06:48'),
+(14, 'Su Pờ Át Min', 'superadmin@mail.com', '+84904515270', '1 Đại Cồ Việt', NULL, '$2y$10$OPQRq3ViTeqiBSpvocb70uOs0jjB/bH4aEF7fZlMt5CpN6AFYrGjy', 1, NULL, '2022-01-06 04:26:09', '2022-01-06 04:26:09');
 
 -- --------------------------------------------------------
 
@@ -452,7 +457,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -464,7 +469,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

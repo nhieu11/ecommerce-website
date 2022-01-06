@@ -229,6 +229,7 @@
                                             <select name="brand" id="people" class="form-control">
                                                 <option value="highway">Highway</option>
                                                 <option value="zara">Zara</option>
+                                                <option value="coolmate">Coolmate</option>
                                               {{--    <option value="{{App\Entities\Product::max('price')}}">Max Price</option>  --}}
                                             </select>
                                         </div>

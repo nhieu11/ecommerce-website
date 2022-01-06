@@ -31,6 +31,8 @@ class ProductController extends Controller
             'sku' => 'required|unique:products',
             'name' => 'required',
             'price' =>'required|numeric|min:0',
+            'color' => 'required',
+            'brand' => 'required',
             'img' => 'sometimes|image',
         ], [
             'sku.required' => 'Thiếu mã sản phẩm'
@@ -40,6 +42,8 @@ class ProductController extends Controller
             'sku',
             'name',
             'price',
+            'color',
+            'brand',
             'quantity',
             'featured',
             'detail',
@@ -73,6 +77,8 @@ class ProductController extends Controller
             'sku',
             'name',
             'price',
+            'color',
+            'brand',
             'quantity',
             'featured',
             'detail',

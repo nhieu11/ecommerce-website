@@ -48,7 +48,7 @@
                                             <td>{{Carbon\Carbon::parse($item->dateHandOver)->toDayDateTimeString()}}</td>
                                             <td>{{Carbon\Carbon::parse($item->dateCollection)->toDayDateTimeString()}}</td>
                                             <td>
-                                                <a href="/admin/orders/{{$item->id}}/detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
+                                                <a href="/admin/orders/{{$item->id}}/finished-detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
                                             </td>
                                         </tr>
                                         @endforeach

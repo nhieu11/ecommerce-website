@@ -35,6 +35,10 @@ class OrderController extends Controller
         $order = Order::Find($order_id);
         return view('admin.orders.deliveryDetail',compact('order'));
     }
+    public function finishedDetail($order_id){
+        $order = Order::Find($order_id);
+        return view('admin.orders.finishedDetail',compact('order'));
+    }
     public function complete($order_id){
         $order = Order::find($order_id);
         $order->processed = 3;

@@ -18,8 +18,12 @@ class DashboardController extends Controller
         $month_now = carbon::now()->format('m');
         $year_now = carbon::now()->format('Y');
 
-        for ($i=1; $i <= $month_now ; $i++) {
+       /*  for ($i=1; $i <= $month_now ; $i++) {
             $data['Tháng '.$i] = Order::where('processed',3)->whereMonth('updated_at',$i)->whereYear('updated_at',$year_now)->sum('total');
+        } */
+
+        for ($i=1; $i <= 12 ; $i++) {
+            $data['Tháng '.$i] = Order::where('processed',3)->whereMonth('updated_at',$i)->whereYear('updated_at','2021')->sum('total');
         }
 
          $dh = Order::count();
