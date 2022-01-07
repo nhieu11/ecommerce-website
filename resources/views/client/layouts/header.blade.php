@@ -27,11 +27,14 @@
                         <li><a href="/login" class="menu-login"> Login</a></li>
                         @endguest
                         @auth('client')
-                        <li class="has-dropdown">
+                        <li class="has-dropdown menu-user">
                             <a href="#"> {{ auth()->guard('client')->user()->name }}</a>
                             <ul class="dropdown">
                                 <li>
-                                    <a href="#">Thông tin</a>
+                                    <a href="/user">Thông tin</a>
+                                </li>
+                                <li>
+                                    <a href="/user/orders">Đơn hàng</a>
                                 </li>
                                 <li>
                                     <a href="login.html" onclick="event.preventDefault();document.getElementById('logout-form').submit()">
