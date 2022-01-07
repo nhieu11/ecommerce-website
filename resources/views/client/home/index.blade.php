@@ -2,7 +2,7 @@
 
 @section('content')
 @include('client.layouts.banner')
-<div id="colorlib-featured-product">
+{{-- <div id="colorlib-featured-product">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -37,6 +37,43 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div> --}}
+
+<div id="colorlib-colection">
+    <div class="container">
+        <div class="row">
+            <div style="margin-bottom: 10px" class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+                <h2><span>Bộ Sưu Tập</span></h2>
+                <p>Đây là những bộ sưu tập mới nhất của chúng tôi</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="colorlib-colection-item">
+                    <img class="f-product-1" src="https://images.unsplash.com/photo-1524532787116-e70228437bbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80);">
+                    <div class="desc">
+                        <h2>Winter Hoodies</h2>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad aliquid velit quam <br/> Lorem ipsum dolor sit amet consectetur adipisicing .</p>
+                        <a  class='btn btn-primary'href="/">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="colorlib-colection-item">
+                    <img class="f-product-1" src="https://template.hasthemes.com/norda/norda/assets/images/banner/banner-2.jpg" alt="">
+                    <div class="desc">
+                        <h2>Winter Hoodies</h2>
+                        <p>Minimalist never cool, choose <br/>and make the simple great again!</p>
+                        <a  class='btn btn-primary'href="/">Mua ngay</a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>
