@@ -9,6 +9,7 @@ use App\Entities\Coupon;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMailToUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 // use Darryldecode\Cart\Cart;
 use Cart;
@@ -100,6 +101,7 @@ class CartController extends Controller
         $order->address = $request->address;
         $order->total = $request->bill;
         $order->processed = 0;
+        $order->user_id = Auth::id();
         $order->created_at = now();
         $order->updated_at = now();
         $order->save();

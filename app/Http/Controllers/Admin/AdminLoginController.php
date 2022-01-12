@@ -28,10 +28,13 @@ class AdminLoginController extends Controller
 
             $credentialsSaler = $request->only(['email','password']);
             $credentialsSaler['level'] = '2';
+            $credentialsKeeper['level'] = '3';
 
             if(Auth::guard('web')->attempt($credentials)){ //nếu ko có guard mặc định là web
                 return redirect('/admin');
             }else if(Auth::guard('web')->attempt($credentialsSaler)){
+                return redirect('/admin/products');
+            }else if(Auth::guard('web')->attempt($credentialsKeeper)){
                 return redirect('/admin/products');
             }else{
                 return back()->withInput(['email'])

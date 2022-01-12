@@ -665,6 +665,7 @@ figure {
     height: 350px;
     margin-bottom: 20px;
     position: relative;
+    border-radius: 25px;
 }
 .product-entry .product-img .tag {
     position: absolute;

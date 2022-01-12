@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 06, 2022 lúc 05:30 AM
+-- Thời gian đã tạo: Th1 12, 2022 lúc 02:35 PM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -125,6 +125,7 @@ CREATE TABLE `orders` (
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `total` decimal(15,2) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `stockkepper_id` bigint(20) NOT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -138,18 +139,18 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `stockkepper_id`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`) VALUES
-(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 0, 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL),
-(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 0, 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35'),
-(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL),
-(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 0, 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL),
-(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 0, 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL),
-(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 0, 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL),
-(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 2, '2021-04-13 21:56:56', '2021-01-10 01:13:36', NULL, NULL, NULL),
-(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 0, 2, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL),
-(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 0, 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL),
-(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 0, 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL),
-(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 0, 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL);
+INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `user_id`, `stockkepper_id`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`) VALUES
+(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 0, 0, 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL),
+(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 0, 0, 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35'),
+(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 0, 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL),
+(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 12, 0, 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL),
+(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 12, 0, 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL),
+(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 12, 0, 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL),
+(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '0.00', 12, 0, 2, '2021-04-13 21:56:56', '2021-01-10 01:13:36', NULL, NULL, NULL),
+(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 12, 0, 2, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL),
+(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 12, 0, 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL),
+(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 12, 0, 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL),
+(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 12, 0, 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
