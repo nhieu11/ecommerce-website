@@ -25,6 +25,7 @@
                                         <tr class="bg-primary">
                                             <th>ID</th>
                                             <th>Tên khách hàng</th>
+                                            <th>Tên shipper</th>
                                             <th>Email</th>
                                             <th>Sđt</th>
                                             <th>Địa chỉ</th>
@@ -36,6 +37,8 @@
                                         <tr>
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->name}}</td>
+                                            <td>{{($item->shipper)->name}}</td>
+
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>

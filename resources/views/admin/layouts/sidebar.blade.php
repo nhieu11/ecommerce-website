@@ -53,6 +53,15 @@
                 Quản lý thành viên
             </a>
         </li>
+        <li role="presentation" class="divider"></li>
+        <li>
+            <a href="/admin/shippers" class="menu-users">
+                <svg class="glyph stroked male-user">
+                    <use xlink:href="#stroked-male-user"></use>
+                </svg>
+                Quản lý shippers
+            </a>
+        </li>
     </ul>
 </div>
 

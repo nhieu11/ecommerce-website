@@ -7,6 +7,10 @@ use App\Entities\OrderDetail;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\UpdateOrderRequest;
+
+use Admin\ShipperController;
+use App\Entities\Shipper;
 
 class OrderController extends Controller
 {
@@ -16,7 +20,7 @@ class OrderController extends Controller
         return view('admin.orders.index',compact('orders'));
     }
     public function processed(){
-        $orders = Order::with('orderDetail')->where('processed',1)->orderby('updated_at','desc')->paginate(5);//Đã duyệt(phân công shipper xong, có hiển thị thông tin shipper,in bản kê,có nút chuyển trạng thái đang giao hàng)
+        $orders = Order::with('orderDetail','shipper')->where('processed',1)->orderby('updated_at','desc')->paginate(5);//Đã duyệt(phân công shipper xong, có hiển thị thông tin shipper,in bản kê,có nút chuyển trạng thái đang giao hàng)
         return view('admin.orders.processed',compact('orders'));
     }
     public function delivery(){
@@ -27,9 +31,27 @@ class OrderController extends Controller
         $orders = Order::with('orderDetail')->where('processed',3)->orderby('updated_at','desc')->paginate(5);//Hoàn thành(Thu tiền từ shipper)
         return view('admin.orders.finished',compact('orders'));
     }
-    public function detail($order_id){
-        $order = Order::Find($order_id);
-        return view('admin.orders.detail',compact('order'));
+    public function detail($order){
+        $order = Order::Find($order);
+        $shippers = Shipper::get();
+
+        return view('admin.orders.detail',compact('order','shippers'));
+
+
+    }
+    
+    public function update(update $request) {
+        // $input = $request->only([
+        //     'shipper_id',
+        // ]);
+        // $order = Order::findOrFail($order);
+        // $order->fill($input);
+        // $order->processed = 1;
+        // $order->save();
+        // return redirect("/admin/orders/processed");
+
+        dd($request->all());
+
     }
     public function deliveryDetail($order_id){
         $order = Order::Find($order_id);
@@ -39,6 +61,8 @@ class OrderController extends Controller
         $order = Order::Find($order_id);
         return view('admin.orders.finishedDetail',compact('order'));
     }
+
+
     public function complete($order_id){
         $order = Order::find($order_id);
         $order->processed = 3;

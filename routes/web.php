@@ -71,23 +71,16 @@ Route::group([
 
 ], function () {
     Route::resources([
-        'users' => 'UserController',
-        'categories' => 'CategoryController'
+        'users'=> 'UserController',
+        'categories'=> 'CategoryController',
+        'shippers' => 'ShipperController'
     ]);
 
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('', 'DashboardController');
 
-        Route::group(['prefix' => 'products'], function () {
-            Route::get('', 'ProductController@index');
-            Route::get('create', 'ProductController@create');
-            Route::post('', 'ProductController@store');
-            Route::get('{product}/edit', 'ProductController@edit');
-            Route::put('{product}', 'ProductController@update');
-            Route::delete('{product}', 'ProductController@destroy');
-            Route::get('{product}', 'ProductController@show');
-        });
+        Route::post('logout','AdminLoginController@logout');
 
         Route::group(['prefix' => 'orders'], function () {
             Route::get('', 'OrderController@index');
@@ -95,13 +88,12 @@ Route::group([
             Route::get('delivery', 'OrderController@delivery');
             Route::get('finished', 'OrderController@finished');
             Route::get('{order}/detail', 'OrderController@detail');
+            Route::put('{order}','OrderController@update');
             Route::get('{order}/delivery-detail', 'OrderController@deliveryDetail');
             Route::get('{order}/finished-detail', 'OrderController@finishedDetail');
-            Route::get('{order}', 'OrderController@update');
+
             Route::get('complete/{order}', 'OrderController@complete');
         });
-
-        Route::post('logout', 'AdminLoginController@logout');
 
         Route::group(['prefix' => 'products'], function () {
             Route::get('', 'ProductController@index');
@@ -113,17 +105,9 @@ Route::group([
             Route::get('{product}', 'ProductController@show');
         });
 
-        Route::group(['prefix' => 'orders'], function () {
-            Route::get('', 'OrderController@index');
-            Route::get('processed', 'OrderController@processed');
-            Route::get('delivery', 'OrderController@delivery');
-            Route::get('finished', 'OrderController@finished');
-            Route::get('{order}/detail', 'OrderController@detail');
-            Route::get('{order}', 'OrderController@update');
-            Route::get('complete/{order}', 'OrderController@complete');
-        });
+        
 
-        Route::post('logout', 'AdminLoginController@logout');
+
 
         //Coupon
         Route::group(['prefix' => 'coupon'], function () {

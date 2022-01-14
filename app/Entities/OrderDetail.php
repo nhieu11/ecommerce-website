@@ -10,4 +10,8 @@ class OrderDetail extends Model
     public function order(){
             return $this->belongsTo(Order::class, 'order_id', 'id');
     }
+
+    public function shipper(){
+        return $this->belongsTo(Shipper::class, 'shipper_id', 'id');
+    }
 }

@@ -26,7 +26,10 @@
                                 @endif
 
 					<div class="panel-body">
-                        <form action="/admin/orders/any" method="post" >
+                        <form action="/admin/orders/{{ $order->id }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
 						<div class="bootstrap-table">
 							<div class="table-responsive">
 								<div class="form-group">
@@ -57,6 +60,7 @@
 										</tr>
 									</thead>
 									<tbody>
+
                                             @foreach ($order->orderDetail as $item)
                                             <tr>
                                                 <td>{{$item->id}}</td>
@@ -81,6 +85,7 @@
 								</table>
 								<table class="table">
 									<thead>
+                                        
 										<tr>
 											<th width='70%'>
 												<h4 align='right'>Tổng Tiền :</h4>
@@ -94,12 +99,25 @@
 									<tbody>
 									</tbody>
 								</table>
+
+                                <div class="form-group">
+                                    <label>Chọn shipper</label>
+
+                                    <select name="shipper_id" class="form-control">
+                                        @foreach ($shippers as $shipper)
+                                            <option value='{{$shipper->id}}' >
+                                                {{$shipper->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 								<div class="alert alert-primary" role="alert" align='right'>
-									<a onclick="return complete()" class="btn btn-success" href="/admin/orders/complete/{{$order->id}}" role="button">Thu tiền</a>
+									<a onclick="return complete()" class="btn btn-success" type="submit" role="button">Bàn giao</a>
 								</div>
+
 							</div>
                         </div>
-                        </form>
+                        {{--  </form>  --}}</form>
 						<div class="clearfix"></div>
 					</div>
 				</div>
