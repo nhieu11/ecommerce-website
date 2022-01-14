@@ -698,6 +698,7 @@ figure {
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.8);
+    border-radius: 0px 0px 25px 25px;
     width: 100%;
     display: block;
     padding: 0 1em;
@@ -1074,7 +1075,7 @@ figure {
     display: block;
     float: left;
     border-bottom: 1px solid #e6e6e6;
-    padding-bottom: 1em;
+    /* padding-bottom: 1em; */
     margin-bottom: 1em;
 }
 .product-cart .one-forth,
@@ -2871,6 +2872,7 @@ input[type="password"] {
 
 .colorlib-shop .tracking-detail .tracking-left .order-img {
     height: 100px;
+    border-radius: 15px;
 }
 
 .colorlib-shop .tracking-detail .tracking-left .order-img img {

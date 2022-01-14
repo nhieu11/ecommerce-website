@@ -37,7 +37,7 @@ Route::group(['namespace' => 'client'], function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('', 'UserController@index');
             Route::get('orders', 'UserController@order');
-            Route::get('tracking', 'UserController@tracking');
+            Route::get('tracking/{product}', 'UserController@tracking');
         });
     });
 
