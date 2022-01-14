@@ -46,12 +46,25 @@
                         </div>
                         <div class="four text-center">
                             <div class="display-tc">
-                                <span class="price">Ngõ 356, Cầu Giấy, Hà Nội</span>
+                                <span class="price">{{ $order->address }}</span>
                             </div>
                         </div>
                         <div class="four text-center">
                             <div class="display-tc">
-                                <span class="price unit-price">Đang giao</span>
+                                <span class="price unit-price">
+                                    @if ($order->processed == 0) Đang chuẩn bị
+                                        hàng
+                                    @endif
+                                    @if ($order->processed == 1) Lấy hàng
+                                        thành công
+                                    @endif
+                                    @if ($order->processed == 2) Đang giao
+                                        hàng
+                                    @endif
+                                    @if ($order->processed == 3)Nhận hàng
+                                        thành công
+                                    @endif
+                                </span>
                             </div>
                         </div>
                         <div class="four text-center">
@@ -71,17 +84,16 @@
                     <div class="tracking-detail">
                         <div class="tracking-left">
                             <div class="img-container">
-                                <img class="order-img"
-                                    src="https://mcdn2-coolmate.cdn.vccloud.vn/uploads/November2021/2L6A8a954_copy.jpg"
-                                    alt="">
+                                <img class="order-img" src="{{ $product->avatar }}" alt="">
                             </div>
                             <div class="order-desc">
-                                <h4 class="order-name">Áo thun dài tay nam Cotton Compact phiên bản Premium</h4>
+                                <h4 class="order-name">{{ $product->name }}</h4>
                                 <p class="order-type">Loại hàng: <span>Xanh dương / XL</span></p>
+                                <p class="order-type">Mã hàng: <span>{{ $product->sku }}</span></p>
                             </div>
                         </div>
                         <div class="order-price">
-                            <span>289.000</span>
+                            <span>{{ number_format($product->price) }} đ</span>
                         </div>
                     </div>
 
@@ -89,7 +101,7 @@
                         <ul class="price-list">
                             <li class="price-item">
                                 <p class="right-content">Tổng tiền hàng</p>
-                                <p class="left-content">289.000</p>
+                                <p class="left-content">{{ number_format($product->price) }} đ</p>
                             </li>
                             <li class="price-item">
                                 <p class="right-content">Phí giao hàng</p>
