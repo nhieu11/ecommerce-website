@@ -26,9 +26,9 @@ class UserController extends Controller
 
     public function tracking($productID)
     {
-        $product = OrderDetail::find($productID);
-        // $orderID = $product -> order_id
+        $product = OrderDetail::find($productID); //tìm theo ID
         $order = Order::find($product->order_id);
-        return view('client.user.tracking', compact('product', 'order'));
+        $date =  (int)$order->created_at->format('d') + 4;
+        return view('client.user.tracking', compact('product', 'order', 'date'));
     }
 }

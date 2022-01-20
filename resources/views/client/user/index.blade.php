@@ -1,4 +1,4 @@
-@extends('client.layouts.app', ['activePage' => 'cart', 'title' => 'Thông tin'])
+@extends('client.layouts.app', ['activePage' => 'login', 'title' => 'Thông tin'])
 @section('content')
 Đây là trang thông tin khách hàng
 @endsection

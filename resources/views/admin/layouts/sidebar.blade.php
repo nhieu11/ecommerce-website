@@ -28,19 +28,24 @@
         <li>
             <a href="/admin/orders" class="menu-orders">
                 <svg class="glyph stroked notepad ">
-                    <use xlink:href="#stroked-notepad"/>
+                    <use xlink:href="#stroked-notepad" />
                 </svg>
                 Đơn hàng
-                <ul>
-                    <li><a href="/admin/orders">Đơn hàng chưa duyệt</a></li>
-                    <li><a href="/admin/orders/processed">Đơn hàng đã duyệt</a></li>
-                    <li><a href="/admin/orders/delivery">Đơn hàng đang giao</a></li>
-                    <li><a href="/admin/orders/finished">Đơn hàng hoàn thành</a></li>
-                </ul>
             </a>
         </li>
+
+        <ul>
+            <li><a class='order menu-order' href="/admin/orders">Đơn hàng chưa duyệt</a></li>
+            <li><a class='order menu-processed' href="/admin/orders/processed">Đơn hàng đã duyệt</a></li>
+            <li><a class='order menu-delivery' href="/admin/orders/delivery">Đơn hàng đang giao</a></li>
+            <li><a class='order menu-finished' href="/admin/orders/finished">Đơn hàng hoàn thành</a></li>
+        </ul>
+
         <li>
             <a href="/admin/coupon" class="menu-coupon">
+                <svg class="glyph stroked notepad ">
+                    <use xlink:href="#stroked-notepad" />
+                </svg>
                 Quản lý mã giảm giá
             </a>
         </li>
@@ -65,4 +70,4 @@
     </ul>
 </div>
 
-<input type="hidden" value="{{$activePage ?? ''}}" id="page-id" />
+<input type="hidden" value="{{ $activePage ?? '' }}" id="page-id" />

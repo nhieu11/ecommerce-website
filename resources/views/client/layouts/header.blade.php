@@ -27,8 +27,8 @@
                         <li><a href="/login" class="menu-login"> Login</a></li>
                         @endguest
                         @auth('client')
-                        <li class="has-dropdown menu-user">
-                            <a href="#"> {{ auth()->guard('client')->user()->name }}</a>
+                        <li class="has-dropdown ">
+                            <a class="menu-login" href="#"> {{ auth()->guard('client')->user()->name }}</a>
                             <ul class="dropdown">
                                 <li>
                                     <a href="/user">Thông tin</a>
