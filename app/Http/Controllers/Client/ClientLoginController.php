@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CreateUserRequest;
+use App\Entities\User;
 class ClientLoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -46,6 +47,20 @@ class ClientLoginController extends Controller
     //     }
 
     // }
+
+    public function create(CreateUserRequest $request)
+    {
+       $input = $request->only([
+            'email',
+            'name',
+            'address',
+            'phone',
+        ]);
+        $input['level'] = '4';
+        $input['password'] = bcrypt("$request->password");
+        User::create($input);
+        return redirect("/login");
+    }
 
     protected function guard()
     {
