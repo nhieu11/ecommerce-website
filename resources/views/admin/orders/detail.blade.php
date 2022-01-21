@@ -85,7 +85,7 @@
 								</table>
 								<table class="table">
 									<thead>
-                                        
+
 										<tr>
 											<th width='70%'>
 												<h4 align='right'>Tổng Tiền :</h4>
@@ -112,7 +112,7 @@
                                     </select>
                                 </div>
 								<div class="alert alert-primary" role="alert" align='right'>
-									<a onclick="return complete()" class="btn btn-success" type="submit" role="button">Bàn giao</a>
+									<button onclick="return complete()" class="btn btn-success" type="submit" role="button">Bàn giao</button>
 								</div>
 
 							</div>
