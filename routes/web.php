@@ -27,7 +27,7 @@ Route::group(['namespace' => 'client'], function () {
         Route::get('login', 'ClientLoginController@showLoginForm')->name('client.login');
         Route::post('login', 'ClientLoginController@login');
         Route::get('register', 'ClientLoginController@showRegisterForm');
-        Route::post('register', 'ClientLoginController@create');
+        Route::post('register', 'HomeController@store');
     });
 
     Route::group(['middleware' => 'auth:client'], function () {
@@ -37,7 +37,7 @@ Route::group(['namespace' => 'client'], function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('', 'UserController@index');
             Route::get('orders', 'UserController@order');
-            Route::get('tracking', 'UserController@tracking');
+            Route::get('tracking/{product}', 'UserController@tracking');
         });
     });
 
@@ -64,9 +64,6 @@ Route::group(['namespace' => 'client'], function () {
     });
 });
 
-/* Route::group(['namespace' => 'auth'], function () {
-    Route::post('register', 'RegisterController@create');
-}); */
 
 Route::group([
     'prefix' => 'admin',
@@ -108,7 +105,7 @@ Route::group([
             Route::get('{product}', 'ProductController@show');
         });
 
-
+        
 
 
 
