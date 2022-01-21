@@ -60,7 +60,7 @@
         </li>
         <li role="presentation" class="divider"></li>
         <li>
-            <a href="/admin/shippers" class="menu-users">
+            <a href="/admin/shippers" class="menu-shippers">
                 <svg class="glyph stroked male-user">
                     <use xlink:href="#stroked-male-user"></use>
                 </svg>
