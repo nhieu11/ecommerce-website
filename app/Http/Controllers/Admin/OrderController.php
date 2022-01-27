@@ -44,7 +44,7 @@ class OrderController extends Controller
 
     }
 
-    public function update(update $request) {
+    public function update(UpdateOrderRequest $request) {
         // $input = $request->only([
         //     'shipper_id',
         // ]);
@@ -57,6 +57,27 @@ class OrderController extends Controller
         dd($request->all());
 
     }
+
+    public function store(Request $request){
+        // dd($request);
+        // $product = Product::where('sku', $request->sku)->first();
+        // dd($product);
+
+        // return view('admin.orders.deliveryDetail', compact('order'));
+    }
+
+    
+    public function destroy($order_id, $product_id){
+        $orderDetail = OrderDetail::where('product_id', $product_id)->where('order_id', $order_id)->first();
+        if ($orderDetail) {
+            $deleted = OrderDetail::destroy($orderDetail->id);//Trả về 1,2,3 nếu tìm thấy 1,2,3 bản ghi ngược lại là 0
+        }
+        if ($deleted){
+            return response()->json([], 204); //204 No Content: Server đã xử lý thành công request nhưng không trả về bất cứ content nào.
+        }
+        return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404); //404 Not Found: Các tài nguyên hiện tại không được tìm thấy nhưng có thể có trong tương lai. Các request tiếp theo của Client được chấp nhận.
+    }
+
     public function deliveryDetail($order_id)
     {
         $order = Order::Find($order_id);

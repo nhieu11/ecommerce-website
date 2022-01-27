@@ -30,8 +30,7 @@
                                             <th>Địa chỉ</th>
                                             <th>Thời gian tạo đơn hàng</th>
                                             <th>Thời gian bàn giao hàng</th>
-                                            <th>Xem chi tiết</th>
-                                            <th>Xử lý</th>
+                                            <th>Xử lý đơn hàng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -44,11 +43,21 @@
                                             <td>{{$item->address}}</td>
                                             <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                                             <td>123</td>
-                                            <td>
-                                                <a href="/admin/orders/{{$item->id}}/delivery-detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
-                                            </td>
-                                            <td>
-                                                <a onclick="return complete()" href="/admin/orders/complete/{{$item->id}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Hoàn thành</a>
+                                            <td >
+                                                {{-- <a onclick="return complete()" class="{{ $item->processed ==  3 ? 'd-none' : 'btn btn-warning'  }}" href="/admin/orders/complete/{{$item->id}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>Hoàn thành
+                                                </a> --}}
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      Xử lý
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                      <a class="dropdown-item" onclick="return complete()"  href="/admin/orders/complete/{{$item->id}}">Thành công</a>
+                                                      <a class="dropdown-item" href="/admin/orders/{{$item->id}}/delivery-detail">Đổi hàng</a>
+                                                      <a class="dropdown-item" href="#">Trả 1 phần hàng</a>
+                                                      <a class="dropdown-item" href="#">Thất bại</a>
+                                                    </div>
+                                                  </div>
 											</td>
                                         </tr>
                                         @endforeach
