@@ -134,7 +134,7 @@
     $(document).ready(function(){
         $(".btn-destroy").on("click", function(e){
             e.preventDefault()
-            if (confirm("Bạn có chắc?")) {
+            if (confirm("Bạn có chắc muốn xóa sản phẩm này không ?")) {
                $.ajax({
                    url: $(this).attr('href'),
                    method: "POST",

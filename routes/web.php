@@ -89,8 +89,10 @@ Route::group([
             Route::get('finished', 'OrderController@finished');
             Route::get('{order}/detail', 'OrderController@detail');
             Route::put('{order}','OrderController@update');
+            Route::post('', 'OrderController@store');
             Route::get('{order}/delivery-detail', 'OrderController@deliveryDetail');
             Route::get('{order}/finished-detail', 'OrderController@finishedDetail');
+            Route::delete('{order}/{product}', 'OrderController@destroy');
 
             Route::get('complete/{order}', 'OrderController@complete');
         });
