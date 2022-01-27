@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('read-user', function($user){
+        Gate::define('admin', function($user){
             if($user->level == '1' || $user->level == '2'){
                 return true;
             }else{
@@ -34,7 +34,16 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        
+        Gate::define('superadmin', function($user){
+            if($user->level == '1'){
+                return true;
+            }else{
+                return false;
+            }
+        });
+
+
+
 
     }
 }
