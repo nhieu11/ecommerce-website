@@ -56,9 +56,10 @@ class UserController extends Controller
             abort(403);
         } */
 
-        if (!$this->userCan('read-user')) {
+        /* if (!$this->userCan('read-user')) {
             abort('403', __('Bạn không có quyền thực hiện thao tác này'));
-        }
+        } */
+        $this->authorize('admin');
 
             $users = User::with('roles')->get(); //roles vẫn là hàm ở Entities/User.php , lưu trên RAM, tốn bộ nhớ không tốn thời gian query
 
@@ -69,10 +70,11 @@ class UserController extends Controller
         ]);
     }
     public function create(){
+        $this->authorize('superadmin');
         return view('admin.users.create');
     }
     public function store(CreateUserRequest $request){
-
+        $this->authorize('cud-user');
        $input = $request->only([
             'email',
             'name',
@@ -85,10 +87,12 @@ class UserController extends Controller
         return redirect("/admin/users/{$user->id}/edit");
     }
     public function edit($user){ // User $user ?
+        $this->authorize('superadmin');
         $user = User::findOrFail($user);
         return view('admin.users.edit',compact('user'));
     }
     public function update(UpdateUserRequest $request, $user){
+        $this->authorize('superadmin');
         $input = $request->only([
             'email',
             'name',
@@ -104,16 +108,18 @@ class UserController extends Controller
     }
 
     public function destroy($user){
+        $this->authorize('superadmin');
         $deleted = User::destroy($user);
         if($deleted){
             return response()->json([], 204);
         }
         return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404);
     }
-
+/*
     public function userCan($action, $option = NULL){
     $user = Auth::user();
+    dd($user);
     return Gate::forUser($user)->allows($action, $option);
-        }
+        } */
 
 }

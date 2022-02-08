@@ -45,16 +45,14 @@ class OrderController extends Controller
     }
 
     public function update(UpdateOrderRequest $request) {
-        // $input = $request->only([
-        //     'shipper_id',
-        // ]);
-        // $order = Order::findOrFail($order);
-        // $order->fill($input);
-        // $order->processed = 1;
-        // $order->save();
-        // return redirect("/admin/orders/processed");
-
-        dd($request->all());
+         $input = $request->only([
+             'shipper_id',
+         ]);
+         $order = Order::findOrFail($order);
+         $order->fill($input);
+         $order->processed = 1;
+         $order->save();
+         return redirect("/admin/orders/processed");
 
     }
 
