@@ -34,6 +34,7 @@
 	<script src="/assets/admin/js/jquery-1.11.1.min.js"></script>
     <script src="/assets/admin/js/bootstrap.min.js"></script>
      <script src="/assets/admin/js/chart.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
 
     <script>
         $(document).ready(function() {

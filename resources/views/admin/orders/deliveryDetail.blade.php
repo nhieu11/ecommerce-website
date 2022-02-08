@@ -26,7 +26,7 @@
                                 @endif
 
 					<div class="panel-body">
-                        <form action="/admin/orders/any" method="post" >
+                        <form action="/admin/orders/{{ $order->id }}" method="post" >
 						<div class="bootstrap-table">
 							<div class="table-responsive">
 								<div class="form-group">
@@ -52,7 +52,7 @@
 								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 									Thêm sản phẩm
 								</button>
-								
+
 									{{-- {{ method_field('put') }} --}}
 									<!-- Modal -->
 									<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -157,7 +157,7 @@
         function complete(){
             return confirm("Đơn hàng sau khi xử lý sẽ được tính vào doanh thu!!")
         }
-		
+
 		$(document).ready(function(){
         $(".btn-destroy").on("click", function(e){
             e.preventDefault()

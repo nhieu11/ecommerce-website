@@ -93,6 +93,7 @@ Route::group([
             Route::get('{order}/delivery-detail', 'OrderController@deliveryDetail');
             Route::get('{order}/finished-detail', 'OrderController@finishedDetail');
             Route::delete('{order}/{product}', 'OrderController@destroy');
+            Route::put('{order}/delivery-detail/store123', 'OrderController@store123');
 
             Route::get('complete/{order}', 'OrderController@complete');
         });
@@ -107,7 +108,7 @@ Route::group([
             Route::get('{product}', 'ProductController@show');
         });
 
-        
+
 
 
 

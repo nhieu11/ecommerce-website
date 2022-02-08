@@ -66,7 +66,7 @@ class OrderController extends Controller
         // return view('admin.orders.deliveryDetail', compact('order'));
     }
 
-    
+
     public function destroy($order_id, $product_id){
         $orderDetail = OrderDetail::where('product_id', $product_id)->where('order_id', $order_id)->first();
         if ($orderDetail) {
@@ -77,12 +77,28 @@ class OrderController extends Controller
         }
         return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404); //404 Not Found: Các tài nguyên hiện tại không được tìm thấy nhưng có thể có trong tương lai. Các request tiếp theo của Client được chấp nhận.
     }
+    public function processedDetail($order_id)
+    {
+        $order = Order::Find($order_id);
+        return view('admin.orders.processedDetail', compact('order'));
+    }
+
+    public function store123(Request $request){
+        dd($request);
+    }
+
+    public function processedUpdate(Request $request, $order){
+        $order->processed += 1;
+        $order->save();
+        return redirect("/admin/orders/delivery");
+    }
 
     public function deliveryDetail($order_id)
     {
         $order = Order::Find($order_id);
         return view('admin.orders.deliveryDetail', compact('order'));
     }
+
     public function finishedDetail($order_id)
     {
         $order = Order::Find($order_id);
