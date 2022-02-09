@@ -39,6 +39,7 @@
             <li><a class='order menu-processed' href="/admin/orders/processed">Đơn hàng đã duyệt</a></li>
             <li><a class='order menu-delivery' href="/admin/orders/delivery">Đơn hàng đang giao</a></li>
             <li><a class='order menu-finished' href="/admin/orders/finished">Đơn hàng hoàn thành</a></li>
+            <li><a class='order menu-failed' href="/admin/orders/failed">Đơn hàng đã hủy</a></li>
         </ul>
 
         <li>

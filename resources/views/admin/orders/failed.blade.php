@@ -1,4 +1,4 @@
-@extends('admin.layouts.app', ['title' => 'Đơn đang vận chuyển', 'activePage' => 'delivery'])
+@extends('admin.layouts.app', ['title' => 'Đơn hàng đã hủy', 'activePage' => 'failed'])
 @section('content')
 	<!--main-->
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -15,7 +15,7 @@
 			<div class="col-xs-12 col-md-12 col-lg-12">
 
 				<div class="panel panel-primary">
-					<div class="panel-heading">Danh sách đơn đặt hàng đang vận chuyển</div>
+					<div class="panel-heading">Danh sách đơn hàng đã hủy</div>
 					<div class="panel-body">
 						<div class="bootstrap-table">
 							<div class="table-responsive">
@@ -26,11 +26,13 @@
                                             <th>ID</th>
                                             <th>Tên khách hàng</th>
                                             <th>Email</th>
-                                            <th>Sđt</th>
+                                            <th>Phone</th>
                                             <th>Địa chỉ</th>
+                                            <th>Shipper</th>
                                             <th>Thời gian tạo đơn hàng</th>
                                             <th>Thời gian bàn giao hàng</th>
-                                            <th>Xử lý đơn hàng</th>
+                                            <th>Thời gian hoàn thành đơn hàng</th>
+                                            <th>Xem chi tiết</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,24 +43,13 @@
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>
+                                            <td>ABC</td>
                                             <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
-                                            <td>123</td>
-                                            <td >
-                                                {{-- <a onclick="return complete()" class="{{ $item->processed ==  3 ? 'd-none' : 'btn btn-warning'  }}" href="/admin/orders/complete/{{$item->id}}">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>Hoàn thành
-                                                </a> --}}
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Xử lý
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                      <a class="dropdown-item" onclick="return complete()"  href="/admin/orders/complete/{{$item->id}}">Thành công</a>
-                                                      <a class="dropdown-item" href="/admin/orders/{{$item->id}}/delivery-detail">Đổi hàng</a>
-                                                      <a class="dropdown-item" href="/admin/orders/{{$item->id}}/delivery-detail">Trả 1 phần hàng</a>
-                                                      <a class="dropdown-item" onclick="return cancel()" href="/admin/orders/cancel/{{$item->id}}">Thất bại</a>
-                                                    </div>
-                                                  </div>
-											</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateHandOver)->toDayDateTimeString()}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateCollection)->toDayDateTimeString()}}</td>
+                                            <td>
+                                                <a href="/admin/orders/{{$item->id}}/failed-detail" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>Xem chi tiết</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -79,13 +70,3 @@
 	</div>
 	<!--end main-->
 @endsection
-@push('adminJs')
-    <script>
-        function complete(){
-            return confirm("Đơn hàng sau khi xử lý sẽ được tính vào doanh thu!!")
-        }
-        function cancel(){
-            return confirm("Bạn có chắc muốn hủy đơn hàng ?")
-        }
-    </script>
-@endpush

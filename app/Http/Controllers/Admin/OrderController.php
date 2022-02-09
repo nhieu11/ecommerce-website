@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entities\Order;
+use App\Entities\Product;
 use App\Entities\OrderDetail;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -35,6 +36,11 @@ class OrderController extends Controller
         $orders = Order::with('orderDetail')->where('processed', 3)->orderby('updated_at', 'desc')->paginate(5); //Hoàn thành(Thu tiền từ shipper)
         return view('admin.orders.finished', compact('orders'));
     }
+    public function failed()
+    {
+        $orders = Order::with('orderDetail')->where('processed', 4)->orderby('updated_at', 'desc')->paginate(5); //Hoàn thành(Thu tiền từ shipper)
+        return view('admin.orders.failed', compact('orders'));
+    }
     public function detail($order){
         $order = Order::Find($order);
         $shippers = Shipper::get();
@@ -56,18 +62,50 @@ class OrderController extends Controller
 
     }
 
-    public function store(Request $request){
-        // dd($request);
-        // $product = Product::where('sku', $request->sku)->first();
-        // dd($product);
+    public function storeAndUpdate(Request $request, $orderID){
+        $product = Product::where('sku', $request->sku)->first();
+        $hasProduct = OrderDetail::where('sku', $request->sku)->where('order_id', $orderID)->first();
 
-        // return view('admin.orders.deliveryDetail', compact('order'));
+        // Cộng tổng tiền
+        $orderOld = Order::findOrFail($orderID);
+        $orderOld->total+=$product->price;
+        $orderOld->save();
+
+        if ($hasProduct) {
+            $hasProduct->quantity += 1;
+            $hasProduct->save();
+        }else {
+            // Thêm product vào chi tiết đơn hàng
+            $input = [
+            "order_id" => $orderID,
+            "product_id" => $product->id,
+            "sku" => $product->sku,
+            "name" => $product->name,
+            "price" => $product->price,
+            "quantity" => 1,
+            "avatar" => $product->avatar
+            ];
+
+            OrderDetail::create($input);
+        }
+        
+        
+        $order = Order::Find($orderID);
+
+        return view('admin.orders.deliveryDetail', compact('order'));
     }
 
 
     public function destroy($order_id, $product_id){
         $orderDetail = OrderDetail::where('product_id', $product_id)->where('order_id', $order_id)->first();
         if ($orderDetail) {
+            
+            $product = Product::where('id', $product_id)->first();
+
+            // trừ tổng tiền
+            $orderOld = Order::findOrFail($order_id);
+            $orderOld->total-=$product->price;
+            $orderOld->save();
             $deleted = OrderDetail::destroy($orderDetail->id);//Trả về 1,2,3 nếu tìm thấy 1,2,3 bản ghi ngược lại là 0
         }
         if ($deleted){
@@ -102,6 +140,12 @@ class OrderController extends Controller
         $order = Order::Find($order_id);
         return view('admin.orders.finishedDetail', compact('order'));
     }
+
+    public function failedDetail($order_id)
+    {
+        $order = Order::Find($order_id);
+        return view('admin.orders.failedDetail', compact('order'));
+    }
     public function complete($order_id)
     {
         $order = Order::find($order_id);
@@ -109,5 +153,13 @@ class OrderController extends Controller
         $order->dateCollection = Carbon::now();
         $order->save();
         return redirect('/admin/orders/finished');
+    }
+    public function cancelOrder($order_id)
+    {
+        $order = Order::find($order_id);
+        $order->processed = 4;
+        $order->dateCollection = Carbon::now();
+        $order->save();
+        return redirect('/admin/orders/failed');
     }
 }

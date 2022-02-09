@@ -84,18 +84,21 @@ Route::group([
 
         Route::group(['prefix' => 'orders'], function () {
             Route::get('', 'OrderController@index');
+            Route::put('add-product/{order}', 'OrderController@storeAndUpdate');
             Route::get('processed', 'OrderController@processed');
             Route::get('delivery', 'OrderController@delivery');
             Route::get('finished', 'OrderController@finished');
+            Route::get('failed', 'OrderController@failed');
             Route::get('{order}/detail', 'OrderController@detail');
             Route::put('{order}','OrderController@update');
-            Route::post('', 'OrderController@store');
             Route::get('{order}/delivery-detail', 'OrderController@deliveryDetail');
             Route::get('{order}/finished-detail', 'OrderController@finishedDetail');
+            Route::get('{order}/failed-detail', 'OrderController@failedDetail');
             Route::delete('{order}/{product}', 'OrderController@destroy');
             Route::put('{order}/delivery-detail/store123', 'OrderController@store123');
 
             Route::get('complete/{order}', 'OrderController@complete');
+            Route::get('cancel/{order}', 'OrderController@cancelOrder');
         });
 
         Route::group(['prefix' => 'products'], function () {
