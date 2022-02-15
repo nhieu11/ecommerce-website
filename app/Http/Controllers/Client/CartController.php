@@ -32,67 +32,69 @@ class CartController extends Controller
     public function checkout(Request $request)
     {
         $user = auth()->guard('client')->user();
-        if(Session::get('coupon')){
+        if (Session::get('coupon')) {
             foreach (Session::get('coupon') as $key => $cou) {
-                if($cou['coupon_condition']==1){
-                    $total_coupon = (Cart::getTotal()*$cou['coupon_number'])/100;
-                    $bill=Cart::getTotal()-$total_coupon;
-                }elseif($cou['coupon_condition']==2){
+                if ($cou['coupon_condition'] == 1) {
+                    $total_coupon = (Cart::getTotal() * $cou['coupon_number']) / 100;
+                    $bill = Cart::getTotal() - $total_coupon;
+                } elseif ($cou['coupon_condition'] == 2) {
                     $total_coupon = Cart::getTotal() - $cou['coupon_number'];
-                    $bill=$total_coupon;
+                    $bill = $total_coupon;
                 }
             }
-        }else{
-            $bill=Cart::getTotal();
+        } else {
+            $bill = Cart::getTotal();
         }
-        return view('client.cart.checkout',compact('user','bill'));
+        return view('client.cart.checkout', compact('user', 'bill'));
     }
 
-    public function unset_coupon(){
-		$coupon = Session::get('coupon');
-        if($coupon==true){
+    public function unset_coupon()
+    {
+        $coupon = Session::get('coupon');
+        if ($coupon == true) {
 
             Session::forget('coupon');
-            return redirect()->back()->with('message','Xóa mã khuyến mãi thành công');
+            return redirect()->back()->with('message', 'Xóa mã khuyến mãi thành công');
         }
-	}
+    }
 
-    public function check_coupon(Request $request){
+    public function check_coupon(Request $request)
+    {
         $data = $request->all();
-        $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
-        if($coupon){
+        $coupon = Coupon::where('coupon_code', $data['coupon'])->first();
+        if ($coupon) {
             $count_coupon = $coupon->count();
-            if($count_coupon>0){
+            if ($count_coupon > 0) {
                 $coupon_session = Session::get('coupon');
-                if($coupon_session==true){
+                if ($coupon_session == true) {
                     $is_avaiable = 0;
-                    if($is_avaiable==0){
+                    if ($is_avaiable == 0) {
                         $cou[] = array(
                             'coupon_code' => $coupon->coupon_code,
                             'coupon_condition' => $coupon->coupon_condition,
                             'coupon_number' => $coupon->coupon_number,
 
                         );
-                        Session::put('coupon',$cou);
+                        Session::put('coupon', $cou);
                     }
-                }else{
+                } else {
                     $cou[] = array(
-                            'coupon_code' => $coupon->coupon_code,
-                            'coupon_condition' => $coupon->coupon_condition,
-                            'coupon_number' => $coupon->coupon_number,
+                        'coupon_code' => $coupon->coupon_code,
+                        'coupon_condition' => $coupon->coupon_condition,
+                        'coupon_number' => $coupon->coupon_number,
 
-                        );
-                    Session::put('coupon',$cou);
+                    );
+                    Session::put('coupon', $cou);
                 }
                 Session::save();
-                return redirect()->back()->with('message','Thêm mã giảm giá thành công');
+                return redirect()->back()->with('message', 'Thêm mã giảm giá thành công');
             }
-
-        }else{
-            return redirect()->back()->with('error','Mã giảm giá không đúng');
+        } else {
+            return redirect()->back()->with('error', 'Mã giảm giá không đúng');
         }
     }
-    public function postCheckout(Request $request){
+    public function postCheckout(Request $request)
+    {
 
         $order = new Order();
         $order->name = $request->name;
@@ -129,7 +131,7 @@ class CartController extends Controller
         $invoice->receiver = $request->name;
 
         Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
-        return view('client.cart.complete',compact('infoOrder','date_created'));
+        return view('client.cart.complete', compact('infoOrder', 'date_created'));
 
         return redirect('/complete');
     }
@@ -168,6 +170,12 @@ class CartController extends Controller
         Cart::remove($request->product_id);
 
         return response()->json([], 204);
+    }
+
+    public function removeAll()
+    {
+        Cart::clear();
+        return view("client.cart.index");
     }
 
     public function update(Request $request)

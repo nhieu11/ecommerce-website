@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function __invoke()
     {
-        $this->authorize('superadmin');
+        // $this->authorize('superadmin');
         $month_now = carbon::now()->format('m');
         $year_now = carbon::now()->format('Y');
 

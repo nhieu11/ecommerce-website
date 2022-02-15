@@ -88,57 +88,57 @@
                         Thông tin đơn hàng
                     </h4>
 
+                    @foreach ($orderDetail as $item)
                     <div class="product-cart">
                         <div class="one-forth">
                             <div class="product-img">
-                                <img class="img-thumbnail cart-img" src="{{ $product->avatar }}">
+                                <img class="img-thumbnail cart-img" src="{{ $item->avatar }}">
                             </div>
                             <div class="detail-buy">
-                                <h4 style="margin-top:10px; cursor: pointer"> <a href="/user/tracking/{{ $product->id }}"
-                                        style="color: black">{{ $product->name }}</a>
+                                <h4 style="margin-top:10px; cursor: pointer"> <a href="/user/tracking/{{ $item->id }}"
+                                        style="color: black">{{ $item->name }}</a>
                                 </h4>
                                 <h5>Loại hàng : Xanh / XL</h5>
-                                <h5>Mã hàng : {{ $product->sku }}</h5>
+                                <h5>Mã hàng : {{ $item->sku }}</h5>
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <span id="price" class="price prd-price">{{ number_format($product->price) }} đ</span>
+                                <span id="price" class="price prd-price">{{ number_format($item->price) }} đ</span>
                             </div>
                         </div>
                         <div class="one-eight text-center">
                             <div class="display-tc">
-                                <span id='number' class="price unit-price prd-quantity">{{ $product->quantity }}</span>
+                                <span id='number' class="price unit-price prd-quantity">{{ $item->quantity }}</span>
                             </div>
                         </div>
                         <div class="one-six">
                             <div class="display-tc">
                                 <span id='total' style='font-weight: bold;color: #ff9600'
                                     class="price unit-price total-price">
-                                    500.000 đ
+                                    {{ number_format($item->quantity * $item->price) }} đ
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div>             
+                    @endforeach
                 </div>
 
                 <div class="price-detail col-md-10 col-md-offset-1">
                     <ul class="price-list">
                         <li class="price-item">
                             <p class="right-content">Tổng tiền hàng</p>
-                            <p id='total' class="left-content">{{ number_format($product->price) }} đ</p>
+                            <p id='total' class="left-content">
+                                {{ number_format($order->total) }} đ</p>
                         </li>
-                        {{-- <li class="price-item">
-                            <p class="right-content">Phí giao hàng</p>
-                            <p class="left-content">20,000</p>
-                        </li> --}}
                         <li class="price-item">
                             <p class="right-content">Giảm giá</p>
                             <p class="left-content">0</p>
                         </li>
                         <li class="price-item">
                             <p style="align-self: center" class="right-content">Tổng tiền</p>
-                            <p class="left-content big-price">309.000</p>
+                            <p class="left-content big-price"> {{ number_format($order->total) }}
+                                đ</p>
                         </li>
                     </ul>
                 </div>
@@ -152,14 +152,6 @@
     <script src="/assets/admin/js/chart.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            const price = $("#price").text();
-            const number = $("#number").text();
-            $("#total").text((parseInt(price) * parseInt(number) * 1000).toString().replace(
-                /(\d)(?=(\d{3})+(?!\d))/g,
-                "$1,") + " đ");
-        })
-
         // tracking-process
         const tracking_id = parseInt(document.querySelector(".tracking-id").innerHTML) + 1
         const tracking = document.querySelectorAll('.tracking');
@@ -167,14 +159,9 @@
         tracking.forEach(element => {
             console.log(element.parentElement)
             if (parseInt(element.firstChild.innerHTML) <= tracking_id) {
-                console.log(parseInt(element.firstChild.innerHTML));
-                console.log(tracking_id);
                 element.parentElement.classList.add('active');
             }
         })
-
-
-        // console.log($order - > processed)
     </script>
 @endpush
 <input type="hidden" value="{{ $activePage ?? '' }}" id="page-id" />

@@ -4,45 +4,35 @@
         <div class="container">
             <div class="row row-pb-md">
                 <div class="col-md-10 col-md-offset-1">
-                    {{-- <div class="product-name">
-                        <div class="one-forth text-center">
-                            <span>Chi tiết sản phẩm</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>Giá</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>Số lượng</span>
-                        </div>
-                        <div class="one-six text-center">
-                            <span>Đơn giá</span>
-                        </div>
-                        <div class="one-eight text-center">
-                            <span>Trạng thái</span>
-                        </div>
-                    </div> --}}
-
                     @foreach ($orders as $orderDetail)
                         <div class="product-detail">
                             <div class="product-name product-status">
                                 <div class="right-side">
-                                    <span>
+                                    <a href="/user/trackingorder/{{ $orderDetail->id }}">
                                         Đơn hàng số
-                                        {{ $orderDetail->id }}</span>
+                                        {{ $orderDetail->id }}</a>
                                 </div>
                                 <div class="left-side">
                                     <span style="color:#26aa99; border-right: 1px solid #000">
-                                        @if ($orderDetail->processed == 0) Đang chuẩn bị
+                                        @if ($orderDetail->processed == 0)
+                                            Đang chuẩn bị
                                             hàng
+                                            <i class="fas fa-shipping-fast"></i>
                                         @endif
-                                        @if ($orderDetail->processed == 1) Lấy hàng
-                                            thành công
+                                        @if ($orderDetail->processed == 1)
+                                            Shipper nhận hàng
+
+                                            <i class="fas fa-shipping-fast"></i>
                                         @endif
-                                        @if ($orderDetail->processed == 2) Đang giao
+                                        @if ($orderDetail->processed == 2)
+                                            Đang giao
                                             hàng
+                                            <i class="fas fa-shipping-fast"></i>
                                         @endif
-                                        @if ($orderDetail->processed == 3) Giao hàng
+                                        @if ($orderDetail->processed == 3)
+                                            Giao hàng
                                             thành công
+                                            <i class="fa-solid fa-circle-check"></i>
                                         @endif
                                     </span>
                                     <span style="color: #ff9600">
@@ -62,7 +52,7 @@
                                         </div>
                                         <div class="detail-buy">
                                             <h4 style="margin-top:10px; cursor: pointer"> <a
-                                                    href="/user/tracking/{{ $item->id }}"
+                                                    href="/product/{{ $item->product_id }}"
                                                     style="color: black">{{ $item->name }}</a>
                                             </h4>
                                             <h5>Loại hàng : Xanh / XL</h5>
@@ -83,7 +73,7 @@
                                         <div class="display-tc">
                                             <span style='font-weight: bold;color: #ff9600'
                                                 class="price unit-price total-price">
-                                                500.000 đ
+                                                {{ number_format($item->quantity * $item->price) }} đ
                                             </span>
                                         </div>
                                     </div>
@@ -145,14 +135,6 @@
             }, 1000))
 
             const price = parseInt($(".prd-price").text());
-            console.log(price);
-            // const quantity = parseInt($('.prd-quantity').text())
-            // console.log(quantity);
-            // const total = price * quantity;
-            // console.log(total)
-            // $(".total-price").text(price * quantity)
-
         })
     </script>
-
 @endpush

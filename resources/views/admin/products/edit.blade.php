@@ -85,9 +85,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Thông tin</label>
-                                    <textarea name="description" style="width: 100%;height: 100px;">
-
-                                    </textarea>
+                                    <textarea name="description" style="width: 100%;height: 100px;" ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +93,12 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Miêu tả</label>
-                                    <textarea id="editor" name="description" style="width: 100%;height: 100px;">
-                                        {{-- {{ $product->category->name }} //lưu vào $product tốn ram, dùng 2,3 lần trở lên (property)
-                                        {{ $product->category->name }}
-                                        {{ $product->category->name }}
-                                        {{ $product->category->name }}
-                                        {{ $product->category->name }} --}}
-                                    </textarea>
+                                    <textarea id="editor" name="description">{{ $product->description }}</textarea>
+                                    {{-- {{ $product->category->name }} //lưu vào $product tốn ram, dùng 2,3 lần trở lên (property)
+                                    {{ $product->category->name }}
+                                    {{ $product->category->name }}
+                                    {{ $product->category->name }}
+                                    {{ $product->category->name }} --}}
                                 </div>
                                 <button class="btn btn-success" name="add-product" type="submit">Sửa sản phẩm</button>
                                 <button class="btn btn-danger" type="button" onclick="quay_lai_trang_truoc()">Huỷ bỏ</button>
@@ -146,3 +143,14 @@
         }
     </script>
     @endpush
+
+    @section('scripts')
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    
+    @endsection

@@ -37,7 +37,7 @@ Route::group(['namespace' => 'client'], function () {
         Route::group(['prefix' => 'user'], function () {
             Route::get('', 'UserController@index');
             Route::get('orders', 'UserController@order');
-            Route::get('tracking/{product}', 'UserController@tracking');
+            Route::get('trackingorder/{order}', 'UserController@trackingorder');
         });
     });
 
@@ -60,6 +60,7 @@ Route::group(['namespace' => 'client'], function () {
         Route::get('', 'CartController@index');
         Route::post('add', 'CartController@add');
         Route::post('remove', 'CartController@remove');
+        Route::get('removeAll', 'CartController@removeAll');
         Route::post('update', 'CartController@update');
     });
 });
@@ -71,8 +72,8 @@ Route::group([
 
 ], function () {
     Route::resources([
-        'users'=> 'UserController',
-        'categories'=> 'CategoryController',
+        'users' => 'UserController',
+        'categories' => 'CategoryController',
         'shippers' => 'ShipperController'
     ]);
 
@@ -80,7 +81,7 @@ Route::group([
     Route::group(['middleware' => 'auth'], function () {
         Route::get('', 'DashboardController');
 
-        Route::post('logout','AdminLoginController@logout');
+        Route::post('logout', 'AdminLoginController@logout');
 
         Route::group(['prefix' => 'orders'], function () {
             Route::get('', 'OrderController@index');

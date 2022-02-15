@@ -126,16 +126,20 @@
                         style="background-image: url({{$prd->avatar}});">
                         <div class="cart">
                             <p>
-                                <span class="addtocart"><a href="product/{{$prd->category_id}}/{{$prd->id}}"><i
+                                <span class="addtocart"> <a href="cart.html" class="btn-add-to-cart"
+                                    data-product-id="{{$prd->id}}"
+                                    data-name="{{$prd->name}}"
+                                    data-price="{{$prd->price}}"
+                                    ><i
                                             class="icon-shopping-cart"></i></a></span>
-                                <span><a href="product/{{$prd->category_id}}/{{$prd->id}}"><i class="icon-eye"></i></a></span>
+                                <span><a href="product/{{$prd->id}}"><i class="icon-eye"></i></a></span>
 
 
                             </p>
                         </div>
                     </div>
                     <div class="desc">
-                        <h3><a href="product/{{$prd->category_id}}/{{$prd->id}}">{{$prd->name}}</a></h3>
+                        <h3><a href="product/{{$prd->id}}">{{$prd->name}}</a></h3>
                         <p class="price"><span>{{number_format($prd->price,0,'',',')}} VND</span></p>
                     </div>
                 </div>
@@ -162,16 +166,18 @@
                         <p class="tag"><span class="new">New</span></p>
                         <div class="cart">
                             <p>
-                                <span class="addtocart"><a href="product/{{$prd->category_id}}/{{$prd->id}}"><i
-                                            class="icon-shopping-cart"></i></a></span>
-                                <span><a href="product/{{$prd->category_id}}/{{$prd->id}}"><i class="icon-eye"></i></a></span>
-
-
+                                <span class="addtocart">
+                                    <a href="cart.html" class="btn-add-to-cart"
+                                    data-product-id="{{$prd->id}}"
+                                    data-name="{{$prd->name}}"
+                                    data-price="{{$prd->price}}">
+                                    <i class="icon-shopping-cart"></i></a></span>
+                                <span><a href="product/{{$prd->id}}"><i class="icon-eye"></i></a></span>
                             </p>
                         </div>
                     </div>
                     <div class="desc">
-                        <h3><a href="product/{{$prd->category_id}}/{{$prd->id}}">{{$prd->name}}</a></h3>
+                        <h3><a href="product/{{$prd->id}}">{{$prd->name}}</a></h3>
                         <p class="price"><span>{{number_format($prd->price,0,'',',')}} VND</span></p>
                     </div>
                 </div>
@@ -181,3 +187,37 @@
     </div>
 </div>
 @endsection
+@push('js')
+<script>
+$(document).ready(function() {
+
+    $(".btn-add-to-cart").on('click',function(e){
+        e.preventDefault()
+
+        const product_id = $(this).data('product-id')
+        const name = $(this).data('name')
+        const price = $(this).data('price')
+        const quantity = 1
+
+        $.ajax({
+            url:'/cart/add',
+            data: {
+                _token: "{{ csrf_token() }}",
+                product_id: product_id,
+                name: name,
+                price: price,
+                quantity: quantity
+            },
+            method:"POST",
+            success: function(response) {
+                $(".cart-total-quantity").text(response.cartTotalQuantity)
+                window.location.reload(false)
+            }
+        })
+    })
+
+})
+// {{-- debounce --}}
+
+</script>
+@endpush
