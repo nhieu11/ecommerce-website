@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 14, 2022 lúc 02:34 PM
--- Phiên bản máy phục vụ: 10.4.21-MariaDB
--- Phiên bản PHP: 8.0.12
+-- Thời gian đã tạo: Th2 20, 2022 lúc 09:55 AM
+-- Phiên bản máy phục vụ: 10.4.22-MariaDB
+-- Phiên bản PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -127,31 +127,41 @@ CREATE TABLE `orders` (
   `total` decimal(15,2) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `shipper_id` bigint(20) DEFAULT NULL,
-  `stockkepper_id` bigint(20) NOT NULL,
+  `stockkepper_id` bigint(20) DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `dateAssign` timestamp NULL DEFAULT NULL,
   `dateHandOver` timestamp NULL DEFAULT NULL,
-  `dateCollection` timestamp NULL DEFAULT NULL
+  `dateCollection` timestamp NULL DEFAULT NULL,
+  `coupon_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `user_id`, `shipper_id`, `stockkepper_id`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`) VALUES
-(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 0, 9, 0, 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL),
-(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 0, 8, 0, 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35'),
-(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 1, 0, 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL),
-(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 12, 4, 0, 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL),
-(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 12, 1, 0, 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL),
-(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 12, 9, 0, 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL),
-(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '0.00', 12, 8, 0, 2, '2021-04-13 21:56:56', '2021-01-10 01:13:36', NULL, NULL, NULL),
-(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 12, 1, 0, 2, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL),
-(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 12, 4, 0, 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL),
-(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 12, 1, 0, 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL),
-(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 12, 4, 0, 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL);
+INSERT INTO `orders` (`id`, `name`, `email`, `phone`, `address`, `total`, `user_id`, `shipper_id`, `stockkepper_id`, `processed`, `created_at`, `updated_at`, `dateAssign`, `dateHandOver`, `dateCollection`, `coupon_id`) VALUES
+(1, 'abccbâbc', 'abc@mail.com', '0202020202', 'hhghghghghghgh', '350000.00', 0, 9, 0, 3, '2020-11-13 21:47:35', '2021-12-23 08:35:28', NULL, '2020-12-01 09:57:05', NULL, 0),
+(2, 'abcabcabcabc', 'aaa@mail.com', '6060606060', 'zxcvbnnm', '350000.00', 0, 8, 0, 3, '2020-11-13 21:47:37', '2021-12-23 09:40:35', NULL, '2021-12-08 09:18:35', '2021-12-23 09:40:35', 0),
+(3, 'Baro', 'baro@gmail.com', '0904515270', 'Hanoi', '0.00', 0, 1, 0, 1, '2020-11-13 21:47:32', '2021-01-10 01:13:40', NULL, NULL, NULL, 0),
+(4, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '600.00', 12, 4, 0, 3, '2020-11-13 21:52:21', '2020-11-13 21:52:21', NULL, NULL, NULL, 0),
+(5, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '500.00', 12, 1, 0, 1, '2020-11-13 21:52:22', '2020-07-13 21:52:22', NULL, NULL, NULL, 0),
+(6, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '900.00', 12, 9, 0, 1, '2021-03-13 21:55:56', '2020-11-13 21:55:56', NULL, NULL, NULL, 0),
+(7, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '2240000.00', 12, 8, 0, 4, '2021-04-13 21:56:56', '2022-02-09 13:49:50', NULL, NULL, '2022-02-09 13:49:50', 0),
+(8, 'Hieu Bui', 'hieubuimedia@gmail.com', '0904515270', 'Hanoi', '400000.00', 12, 1, 0, 2, '2021-06-14 06:20:56', '2021-01-10 01:13:04', NULL, NULL, NULL, 0),
+(9, 'Baro', 'baro@gmail.com', '0123456789', '1 Dai Co Viet', '680000.00', 12, 4, 0, 0, '2021-07-19 03:26:37', '2021-07-19 03:26:37', NULL, NULL, NULL, 0),
+(10, 'Jake', 'jake@gmail.com', '0987654321', '1 Tran Dai Nghia', '1740000.00', 12, 1, 0, 1, '2021-07-19 03:28:59', '2021-07-19 03:46:18', NULL, NULL, NULL, 0),
+(11, 'Bùi Ngọc Hiếu', 'hieubui@mail.com', '0904515270', '1 Dai Co Viet', '848000.00', 12, 4, 0, 0, '2021-07-19 14:22:34', '2021-07-19 14:22:34', NULL, NULL, NULL, 0),
+(12, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '464000.00', 12, NULL, NULL, 0, '2022-02-13 14:12:51', '2022-02-13 14:12:51', NULL, NULL, NULL, 1),
+(13, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '0.00', 12, NULL, NULL, 0, '2022-02-13 14:14:44', '2022-02-13 14:14:44', NULL, NULL, NULL, 1),
+(14, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '0.00', 12, NULL, NULL, 0, '2022-02-13 14:15:34', '2022-02-13 14:15:34', NULL, NULL, NULL, 1),
+(15, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '580000.00', 12, NULL, NULL, 0, '2022-02-20 08:32:58', '2022-02-20 08:32:58', NULL, NULL, NULL, NULL),
+(16, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '1120000.00', 12, NULL, NULL, 0, '2022-02-20 08:35:35', '2022-02-20 08:35:35', NULL, NULL, NULL, NULL),
+(17, 'Iu Sờ', 'bun2809@gmail.com', '+84904515270', '1 Đại Cồ Việt', '1120000.00', 12, NULL, NULL, 0, '2022-02-20 08:48:25', '2022-02-20 08:48:25', NULL, NULL, NULL, NULL),
+(18, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '896000.00', 12, NULL, NULL, 0, '2022-02-20 08:49:19', '2022-02-20 08:49:19', NULL, NULL, NULL, 1),
+(19, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '896000.00', 12, NULL, NULL, 0, '2022-02-20 08:51:28', '2022-02-20 08:51:28', NULL, NULL, NULL, 1),
+(20, 'Iu Sờ', 'user@mail.com', '+84904515270', '1 Đại Cồ Việt', '664000.00', 12, NULL, NULL, 0, '2022-02-20 08:52:18', '2022-02-20 08:52:18', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -167,29 +177,41 @@ CREATE TABLE `order_details` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` decimal(15,2) NOT NULL DEFAULT 0.00,
   `quantity` int(10) UNSIGNED NOT NULL,
+  `color` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `avatar` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `brand` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `sku`, `name`, `price`, `quantity`, `avatar`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'sku001', NULL, '350000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL),
-(2, 6, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL),
-(3, 6, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL),
-(4, 6, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL),
-(5, 7, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL),
-(6, 7, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL),
-(7, 7, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL),
-(8, 8, 5, 'sku002', 'Áo hình thang', '200000.00', 2, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', NULL, NULL),
-(9, 9, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL),
-(10, 9, 5, 'sku002', 'Áo hình thang', '200000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', NULL, NULL),
-(11, 10, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 3, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL),
-(12, 11, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL),
-(13, 11, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL);
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `sku`, `name`, `price`, `quantity`, `color`, `avatar`, `created_at`, `updated_at`, `brand`) VALUES
+(1, 2, 1, 'sku001', NULL, '350000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, NULL),
+(2, 6, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 2, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, NULL),
+(3, 6, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, NULL),
+(4, 6, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL, NULL),
+(5, 7, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 2, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, NULL),
+(6, 7, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL, NULL),
+(7, 7, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, NULL),
+(8, 8, 5, 'sku002', 'Áo hình thang', '200000.00', 2, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', NULL, NULL, NULL),
+(9, 9, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL, NULL),
+(10, 9, 5, 'sku002', 'Áo hình thang', '200000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', NULL, NULL, NULL),
+(11, 10, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 3, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, NULL),
+(12, 11, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, NULL),
+(13, 11, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL, NULL),
+(19, 7, 7, 'sku0017', 'Áo Nam', '100000.00', 1, NULL, NULL, NULL, NULL, NULL),
+(20, 12, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, NULL, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, NULL),
+(21, 17, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, 'highway'),
+(22, 17, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, 'highway'),
+(23, 18, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, 'highway'),
+(24, 18, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, 'highway'),
+(25, 19, 2, 'sku005', 'Tomas Cuban Shirt', '540000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8b8b3b07b.jpg', NULL, NULL, 'highway'),
+(26, 19, 3, 'sku006', 'Diego Cuban Shirt', '580000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', NULL, NULL, 'highway'),
+(27, 20, 4, 'sku007', 'Freedom T-shirt', '480000.00', 1, 'white', 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', NULL, NULL, 'highway'),
+(28, 20, 6, 'sku0078', 'Áo polo', '350000.00', 1, 'black', 'http://127.0.0.1:8000/files/images/products/vietpro_k8861d6690519a0b.jpg', NULL, NULL, 'coolmate');
 
 -- --------------------------------------------------------
 
@@ -235,7 +257,9 @@ INSERT INTO `products` (`id`, `name`, `sku`, `quantity`, `price`, `featured`, `a
 (3, 'Diego Cuban Shirt', 'sku006', 400, '580000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8c1521a5c.jpg', 'Áo sơ mi', 'Vải Polyester , Cotton', 'black', 'highway', 1, '2020-10-19 05:52:37', '2020-10-19 05:52:37'),
 (4, 'Freedom T-shirt', 'sku007', 400, '480000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8d8cba35914.jpg', 'Áo phông', 'Vải Cotton', 'white', 'highway', 1, '2020-10-19 05:55:22', '2020-10-19 05:55:22'),
 (5, 'Áo hình thang', 'sku002', 50, '200000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k885f8da4a851da6.png', 'Màu trắng', 'Vải đũi', 'white', 'zara', 2, '2020-10-19 07:37:28', '2020-10-19 07:37:28'),
-(6, 'Áo polo', 'sku0078', 150, '350000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k8861d6690519a0b.jpg', 'Vải tre siêu thoáng mát', 'Áo khử mùi siêu chất', 'black', 'coolmate', 1, '2022-01-06 03:59:01', '2022-01-06 03:59:01');
+(6, 'Áo polo', 'sku0078', 150, '350000.00', 1, 'http://127.0.0.1:8000/files/images/products/vietpro_k8861d6690519a0b.jpg', 'Vải tre siêu thoáng mát', 'Áo khử mùi siêu chất', 'black', 'coolmate', 1, '2022-01-06 03:59:01', '2022-01-06 03:59:01'),
+(7, 'Áo Nam', 'sku0017', 12, '100000.00', 0, NULL, NULL, NULL, 'đỏ', 'highway', 1, '2022-01-18 15:58:15', '2022-01-18 15:58:15'),
+(8, 'Áo Nam', 'sku001345', 123, '1231243.00', 0, NULL, NULL, NULL, 'đỏ', 'highway', 3, '2022-01-27 13:27:10', '2022-01-27 13:27:10');
 
 -- --------------------------------------------------------
 
@@ -447,19 +471,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
