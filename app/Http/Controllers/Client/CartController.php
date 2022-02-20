@@ -73,15 +73,21 @@ class CartController extends Controller
                             'coupon_code' => $coupon->coupon_code,
                             'coupon_condition' => $coupon->coupon_condition,
                             'coupon_number' => $coupon->coupon_number,
+                            'coupon_name' => $coupon->coupon_name,
+                            'coupon_time' => $coupon->coupon_time,
+                            'coupon_id' => $coupon->coupon_id,
 
                         );
                         Session::put('coupon', $cou);
                     }
                 } else {
                     $cou[] = array(
-                        'coupon_code' => $coupon->coupon_code,
-                        'coupon_condition' => $coupon->coupon_condition,
-                        'coupon_number' => $coupon->coupon_number,
+                            'coupon_code' => $coupon->coupon_code,
+                            'coupon_condition' => $coupon->coupon_condition,
+                            'coupon_number' => $coupon->coupon_number,
+                            'coupon_name' => $coupon->coupon_name,
+                            'coupon_time' => $coupon->coupon_time,
+                            'coupon_id' => $coupon->coupon_id,
 
                     );
                     Session::put('coupon', $cou);
@@ -95,7 +101,7 @@ class CartController extends Controller
     }
     public function postCheckout(Request $request)
     {
-
+        
         $order = new Order();
         $order->name = $request->name;
         $order->email = $request->email;
@@ -104,6 +110,9 @@ class CartController extends Controller
         $order->total = $request->bill;
         $order->processed = 0;
         $order->user_id = Auth::id();
+        if (Session::has('coupon')) {
+            $order->coupon_id = Session::get('coupon')[0]['coupon_id'];
+        }
         $order->created_at = now();
         $order->updated_at = now();
         $order->save();
@@ -117,6 +126,8 @@ class CartController extends Controller
             $orderDetail->price = $item->price;
             $orderDetail->quantity = $item->quantity;
             $orderDetail->avatar = $item->attributes['avatar'];
+            $orderDetail->brand = $item->attributes['brand'];
+            $orderDetail->color = $item->attributes['color'];
             $orderDetail->save();
         }
 
@@ -155,7 +166,9 @@ class CartController extends Controller
             'quantity' => $request->quantity,
             'attributes' => [
                 'sku' => $product->sku,
-                'avatar' => $product->avatar
+                'avatar' => $product->avatar,
+                'color' => $product->color,
+                'brand' => $product->brand
             ]
         ]);
         return back()->with('cartTotalQuantity', Cart::getTotalQuantity());
