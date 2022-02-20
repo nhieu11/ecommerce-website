@@ -92,6 +92,9 @@ Route::group([
             Route::get('failed', 'OrderController@failed');
             Route::get('{order}/detail', 'OrderController@detail');
             Route::put('{order}','OrderController@update');
+            Route::get('{order}/processed', 'OrderController@processedDetail');
+            Route::get('{order}/processed-detail', 'OrderController@delivering');
+
             Route::get('{order}/delivery-detail', 'OrderController@deliveryDetail');
             Route::get('{order}/finished-detail', 'OrderController@finishedDetail');
             Route::get('{order}/failed-detail', 'OrderController@failedDetail');

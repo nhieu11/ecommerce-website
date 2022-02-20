@@ -50,7 +50,7 @@ class OrderController extends Controller
 
     }
 
-    public function update(UpdateOrderRequest $request) {
+    public function update(UpdateOrderRequest $request,$order) {
          $input = $request->only([
              'shipper_id',
          ]);
@@ -88,8 +88,8 @@ class OrderController extends Controller
 
             OrderDetail::create($input);
         }
-        
-        
+
+
         $order = Order::Find($orderID);
 
         return view('admin.orders.deliveryDetail', compact('order'));
@@ -99,7 +99,7 @@ class OrderController extends Controller
     public function destroy($order_id, $product_id){
         $orderDetail = OrderDetail::where('product_id', $product_id)->where('order_id', $order_id)->first();
         if ($orderDetail) {
-            
+
             $product = Product::where('id', $product_id)->first();
 
             // trừ tổng tiền
@@ -113,20 +113,23 @@ class OrderController extends Controller
         }
         return response()->json(['message'=>'Sản phẩm cần xóa không tồn tại.'], 404); //404 Not Found: Các tài nguyên hiện tại không được tìm thấy nhưng có thể có trong tương lai. Các request tiếp theo của Client được chấp nhận.
     }
-    public function processedDetail($order_id)
+
+    public function delivering($order_id)
     {
-        $order = Order::Find($order_id);
-        return view('admin.orders.processedDetail', compact('order'));
+        $order = Order::find($order_id);
+        $order->processed = 2;
+        $order->dateCollection = Carbon::now();
+        $order->save();
+        return redirect('/admin/orders/delivery');
     }
 
     public function store123(Request $request){
         dd($request);
     }
 
-    public function processedUpdate(Request $request, $order){
-        $order->processed += 1;
-        $order->save();
-        return redirect("/admin/orders/delivery");
+    public function processedDetail($order_id){
+        $order = Order::Find($order_id);
+        return view('admin.orders.processedDetail', compact('order'));
     }
 
     public function deliveryDetail($order_id)

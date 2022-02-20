@@ -25,13 +25,11 @@
                                 @endcomponent
                                 @endif
 
-					<div class="panel-body">
-                        <form action="/admin/orders/any" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
+					<div class="panel-body" >
+
 						<div class="bootstrap-table">
 							<div class="table-responsive">
-                                <div class="invoice">
+                                <div class="invoice" id="bill">
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -101,14 +99,16 @@
                                 </div>
 
 
-
+                                @foreach ($order->orderDetail as $item)
                                 <div class="alert alert-primary" role="alert" align='right'>
-									<button onclick="return complete()" class="btn btn-success" type="submit" role="button">Bàn giao</button>
-								</div>
+                                    <button onclick="return complete()" class="btn btn-success btn_print" type="submit" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>In sao kê</button>
 
+                                    <a href="/admin/orders/{{$item->id}}/processed-detail" class="btn btn-warning">Giao hàng</a>
+								</div>
+                                @endforeach
 							</div>
                         </div>
-                        </form>
+
 
 						<div class="clearfix"></div>
 					</div>
@@ -122,7 +122,20 @@
 	<!--end main-->
 @endsection
 @push('adminJs')
-    <script>
+    <script type="text/javascript">
+        $(document).ready(function($)
+{
+    $(document).on('click', '.btn_print', function(event)
+  {
+       event.preventDefault();
+       //credit : https://ekoopmans.github.io/html2pdf.js
+       var element = document.getElementById('bill');
+       //easy
+       html2pdf().from(element).save();
+       //custom file name
+       //html2pdf().set({filename: js.AutoCode()+'.pdf'}).from(element).save();
+  })
+});
         function complete(){
             return confirm("Đơn hàng sau khi xử lý sẽ được tính vào doanh thu!!")
         }

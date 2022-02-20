@@ -44,7 +44,7 @@
                                             <td>{{$item->address}}</td>
                                             <td>{{Carbon\Carbon::parse($item->updated_at)->format('d-m-Y')}}</td>
                                             <td>
-                                                <a href="/admin/orders/{{$item->id}}/processed-detail" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
+                                                <a href="/admin/orders/{{$item->id}}/processed" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
                                             </td>
                                         </tr>
                                         @endforeach

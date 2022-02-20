@@ -10,6 +10,8 @@
     <link href="assets/admin/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="assets/admin/css/styles.css" rel="stylesheet">
+    <!-- download pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.js"></script>
     <!--Icons-->
     <script src="assets/admin/js/lumino.glyphs.js"></script>
     <link rel="stylesheet" href="assets/admin/Awesome/css/all.css">
