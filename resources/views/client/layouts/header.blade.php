@@ -30,9 +30,9 @@
                         <li class="has-dropdown ">
                             <a class="menu-login" href="#"> {{ auth()->guard('client')->user()->name }}</a>
                             <ul class="dropdown">
-                                <li>
+                                {{-- <li>
                                     <a href="/user">Thông tin</a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="/user/orders">Đơn hàng</a>
                                 </li>

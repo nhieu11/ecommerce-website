@@ -55,9 +55,9 @@
                 <div class="colorlib-colection-item">
                     <img class="f-product-1" src="https://images.unsplash.com/photo-1524532787116-e70228437bbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80);">
                     <div class="desc">
-                        <h2>Winter Hoodies</h2>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad aliquid velit quam <br/> Lorem ipsum dolor sit amet consectetur adipisicing .</p>
-                        <a  class='btn btn-primary'href="/">Mua ngay</a>
+                        <h2>Áo Nam</h2>
+                        <p>Những chiếc áo phông nam năng động cho mùa hè <br/> Hãy mua ngay</p>
+                        <a  class='btn btn-primary'href="/product/categorize_byID/3">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -66,9 +66,9 @@
                 <div class="colorlib-colection-item">
                     <img class="f-product-1" src="https://template.hasthemes.com/norda/norda/assets/images/banner/banner-2.jpg" alt="">
                     <div class="desc">
-                        <h2>Winter Hoodies</h2>
-                        <p>Minimalist never cool, choose <br/>and make the simple great again!</p>
-                        <a  class='btn btn-primary'href="/">Mua ngay</a>
+                        <h2>Áo Nữ</h2>
+                        <p>Tối giản sự lựa chọn  <br/>làm tăng vẻ đẹp.</p>
+                        <a  class='btn btn-primary'href="/product/categorize_byID/5">Mua ngay</a>
                     </div>
                 </div>
 

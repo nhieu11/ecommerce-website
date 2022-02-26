@@ -54,9 +54,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Sửa danh mục</button>
                             </form>
-                            @foreach ($category->products()->get() as $item)
+                            {{-- @foreach ($category->products()->get() as $item)
                             {{ $item->name }}
-                            @endforeach
+                            @endforeach --}}
                         </div>
                     </div>
                 </div>

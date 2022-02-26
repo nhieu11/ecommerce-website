@@ -1,4 +1,4 @@
-@extends('client.layouts.app', ['activePage' => 'home', 'title' => 'Chi tiết sản phẩm'])
+@extends('client.layouts.app', ['activePage' => 'product', 'title' => 'Chi tiết sản phẩm'])
 @section('content')
     <!-- main -->
     <div class="colorlib-shop">

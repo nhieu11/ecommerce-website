@@ -29,11 +29,15 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label>Danh mục</label>
-                                    <select name="category" class="form-control">
+                                    {{-- <select name="category" class="form-control">
                                         <option value='1' selected>Nam</option>
                                         <option value='3'>---|Áo khoác nam</option>
                                         <option value='2'>Nữ</option>
                                         <option value='4'>---|Áo khoác nữ</option>
+                                    </select> --}}
+                                    <select class="form-control" name="parent" >
+                                        <option>----ROOT----</option>
+                                        @include('admin.categories.option', ['level' => 0])
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -50,11 +54,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Màu sắc sản phẩm</label>
-                                    <input type="text" name="color" class="form-control">
+                                    <input type="text" name="color" class="form-control"  value="{{ $product->color }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Nhãn hiệu sản phẩm</label>
-                                    <input type="text" name="brand" class="form-control">
+                                    <input type="text" name="brand" class="form-control"value="{{ $product->brand }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Sản phẩm có nổi bật</label>

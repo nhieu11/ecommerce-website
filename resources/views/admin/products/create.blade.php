@@ -93,7 +93,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Miêu tả</label>
-                                    <textarea id="editor" name="description" style="width: 100%;height: 100px;"></textarea>
+                                    <textarea id="editor" name="description"></textarea>
+                                    {{-- <textarea id="editor" name="description" style="width: 100%;height: 100px;"></textarea> --}}
                                 </div>
                                 <button class="btn btn-success" type="submit">Thêm sản phẩm</button>
                                 <button class="btn btn-danger" type="button" onclick="quay_lai_trang_truoc()">Huỷ bỏ</button>
@@ -140,3 +141,13 @@
 
 </script>
 @endpush
+@section('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+@endsection

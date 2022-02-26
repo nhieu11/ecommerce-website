@@ -20,7 +20,8 @@ class UserController extends Controller
     public function order()
     {
         $userID = (auth()->guard('client')->user()->id);
-        $orders = Order::with('orderDetail')->where('user_id', $userID)->orderby('updated_at', 'desc')->get();
+        $orders = Order::with('orderDetail')->where('user_id', $userID)->orderby('id', 'desc')->get();
+        // dd($orders);
         return view('client.user.orders', compact('orders'));
     }
 
