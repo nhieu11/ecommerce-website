@@ -141,7 +141,7 @@ class CartController extends Controller
         $invoice->name = $infoOrder->orderDetail;
         $invoice->receiver = $request->name;
 
-        Mail::to("bun2809@gmail.com")->send(new SendMailToUser($invoice));
+        Mail::to($request->email)->send(new SendMailToUser($invoice));
         return view('client.cart.complete', compact('infoOrder', 'date_created'));
 
         return redirect('/complete');
