@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateOrderRequest;
+use Redirect;
 
 use Admin\ShipperController;
 use App\Entities\Shipper;
@@ -65,35 +66,40 @@ class OrderController extends Controller
 
     public function storeAndUpdate(Request $request, $orderID){
         $product = Product::where('sku', $request->sku)->first();
-        $hasProduct = OrderDetail::where('sku', $request->sku)->where('order_id', $orderID)->first();
+        if ($product) {
+            $hasProduct = OrderDetail::where('sku', $request->sku)->where('order_id', $orderID)->first();
 
-        // Cộng tổng tiền
-        $orderOld = Order::findOrFail($orderID);
-        $orderOld->total+=$product->price;
-        $orderOld->save();
+            // Cộng tổng tiền
+            $orderOld = Order::findOrFail($orderID);
+            $orderOld->total+=$product->price;
+            $orderOld->save();
 
-        if ($hasProduct) {
-            $hasProduct->quantity += 1;
-            $hasProduct->save();
-        }else {
-            // Thêm product vào chi tiết đơn hàng
-            $input = [
-            "order_id" => $orderID,
-            "product_id" => $product->id,
-            "sku" => $product->sku,
-            "name" => $product->name,
-            "price" => $product->price,
-            "quantity" => 1,
-            "avatar" => $product->avatar
-            ];
+            if ($hasProduct) {
+                $hasProduct->quantity += 1;
+                $hasProduct->save();
+            }else {
+                // Thêm product vào chi tiết đơn hàng
+                $input = [
+                "order_id" => $orderID,
+                "product_id" => $product->id,
+                "sku" => $product->sku,
+                "name" => $product->name,
+                "price" => $product->price,
+                "quantity" => 1,
+                "avatar" => $product->avatar
+                ];
 
-            OrderDetail::create($input);
+                OrderDetail::create($input);
+            }
+
+
+            $order = Order::Find($orderID);
+
+            return view('admin.orders.deliveryDetail', compact('order'));
+        
+        }else{
+            return Redirect::back()->withErrors(['Failed' => 'Mã sản phẩm không tồn tại']);
         }
-
-
-        $order = Order::Find($orderID);
-
-        return view('admin.orders.deliveryDetail', compact('order'));
     }
 
 
