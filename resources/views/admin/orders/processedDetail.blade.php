@@ -99,13 +99,13 @@
                                 </div>
 
 
-                                @foreach ($order->orderDetail as $item)
+
                                 <div class="alert alert-primary" role="alert" align='right'>
                                     <button onclick="return complete()" class="btn btn-success btn_print" type="submit" role="button"><i class="fa fa-pencil" aria-hidden="true"></i>In sao kê</button>
 
-                                    <a href="/admin/orders/{{$item->id}}/processed-detail" class="btn btn-warning">Giao hàng</a>
+                                    <a href="/admin/orders/{{$order->id}}/processed-detail" class="btn btn-warning">Giao hàng</a>
 								</div>
-                                @endforeach
+
 							</div>
                         </div>
 
