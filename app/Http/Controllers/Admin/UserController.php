@@ -74,7 +74,7 @@ class UserController extends Controller
         return view('admin.users.create');
     }
     public function store(CreateUserRequest $request){
-        $this->authorize('cud-user');
+      /*   $this->authorize('cud-user'); */
        $input = $request->only([
             'email',
             'name',

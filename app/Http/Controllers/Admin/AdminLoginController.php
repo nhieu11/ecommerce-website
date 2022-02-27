@@ -29,7 +29,7 @@ class AdminLoginController extends Controller
             $credentialsSaler = $request->only(['email','password']);
             $credentialsSaler['level'] = '2';
 
-            $credentialsSaler = $request->only(['email','password']);
+            $credentialsKeeper = $request->only(['email','password']);
             $credentialsKeeper['level'] = '3';
 
             if(Auth::guard('web')->attempt($credentials)){ //nếu ko có guard mặc định là web

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
 
 class ClientLoginController extends Controller
 {
@@ -46,6 +48,20 @@ class ClientLoginController extends Controller
     //     }
 
     // }
+
+    public function create(CreateUserRequest $request)
+    {
+       $input = $request->only([
+            'email',
+            'name',
+            'address',
+            'phone',
+        ]);
+        $input['level'] = '4';
+        $input['password'] = bcrypt("$request->password");
+        User::create($input);
+        return redirect("/login");
+    }
 
     protected function guard()
     {
