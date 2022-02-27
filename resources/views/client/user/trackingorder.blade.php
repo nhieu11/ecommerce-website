@@ -58,16 +58,20 @@
                             <div class="display-tc">
                                 <span id='tracking-pro' class="price unit-price">
                                     <a style="display:none" class="tracking-id "> {{ $order->processed }} </a>
-                                    @if ($order->processed == 0) Đang chuẩn bị
+                                    @if ($order->processed == 0)
+                                        Đang chuẩn bị
                                         hàng
                                     @endif
-                                    @if ($order->processed == 1) Lấy hàng
+                                    @if ($order->processed == 1)
+                                        Lấy hàng
                                         thành công
                                     @endif
-                                    @if ($order->processed == 2) Đang giao
+                                    @if ($order->processed == 2)
+                                        Đang giao
                                         hàng
                                     @endif
-                                    @if ($order->processed == 3)Nhận hàng
+                                    @if ($order->processed == 3)
+                                        Nhận hàng
                                         thành công
                                     @endif
                                 </span>
@@ -89,38 +93,39 @@
                     </h4>
 
                     @foreach ($orderDetail as $item)
-                    <div class="product-cart">
-                        <div class="one-forth">
-                            <div class="product-img">
-                                <img class="img-thumbnail cart-img" src="{{ $item->avatar }}">
+                        <div class="product-cart">
+                            <div class="one-forth">
+                                <div class="product-img">
+                                    <img class="img-thumbnail cart-img" src="{{ $item->avatar }}">
+                                </div>
+                                <div class="detail-buy">
+                                    <h4 style="margin-top:10px; cursor: pointer"> <a
+                                            href="/user/tracking/{{ $item->id }}"
+                                            style="color: black">{{ $item->name }}</a>
+                                    </h4>
+                                    <h5>Loại hàng : Xanh / XL</h5>
+                                    <h5>Mã hàng : {{ $item->sku }}</h5>
+                                </div>
                             </div>
-                            <div class="detail-buy">
-                                <h4 style="margin-top:10px; cursor: pointer"> <a href="/user/tracking/{{ $item->id }}"
-                                        style="color: black">{{ $item->name }}</a>
-                                </h4>
-                                <h5>Loại hàng : Xanh / XL</h5>
-                                <h5>Mã hàng : {{ $item->sku }}</h5>
+                            <div class="one-eight text-center">
+                                <div class="display-tc">
+                                    <span id="price" class="price prd-price">{{ number_format($item->price) }} đ</span>
+                                </div>
+                            </div>
+                            <div class="one-eight text-center">
+                                <div class="display-tc">
+                                    <span id='number' class="price unit-price prd-quantity">{{ $item->quantity }}</span>
+                                </div>
+                            </div>
+                            <div class="one-six">
+                                <div class="display-tc">
+                                    <span id='total' style='font-weight: bold;color: #ff9600'
+                                        class="price unit-price total-price">
+                                        {{ number_format($item->quantity * $item->price) }} đ
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span id="price" class="price prd-price">{{ number_format($item->price) }} đ</span>
-                            </div>
-                        </div>
-                        <div class="one-eight text-center">
-                            <div class="display-tc">
-                                <span id='number' class="price unit-price prd-quantity">{{ $item->quantity }}</span>
-                            </div>
-                        </div>
-                        <div class="one-six">
-                            <div class="display-tc">
-                                <span id='total' style='font-weight: bold;color: #ff9600'
-                                    class="price unit-price total-price">
-                                    {{ number_format($item->quantity * $item->price) }} đ
-                                </span>
-                            </div>
-                        </div>
-                    </div>             
                     @endforeach
                 </div>
 
@@ -129,11 +134,11 @@
                         <li class="price-item">
                             <p class="right-content">Tổng tiền hàng</p>
                             <p id='total' class="left-content">
-                                {{ number_format($order->total) }} đ</p>
+                                {{ number_format($order->total + ($order->total / (100 - $coupon)) * $coupon) }} đ</p>
                         </li>
                         <li class="price-item">
                             <p class="right-content">Giảm giá</p>
-                            <p class="left-content">0</p>
+                            <p class="left-content">{{ $coupon }}%</p>
                         </li>
                         <li class="price-item">
                             <p style="align-self: center" class="right-content">Tổng tiền</p>
