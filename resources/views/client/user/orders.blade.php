@@ -9,7 +9,7 @@
                             <div class="product-name product-status">
                                 <div class="right-side">
                                     <a href="/user/trackingorder/{{ $orderDetail->id }}">
-                                        Đơn hàng số
+                                        Đơn hàng
                                         {{ $orderDetail->id }}</a>
                                 </div>
                                 <div class="left-side">
