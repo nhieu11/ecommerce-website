@@ -24,7 +24,7 @@ class DashboardController extends Controller
         } */
 
         for ($i=1; $i <= 12 ; $i++) {
-            $data['Tháng '.$i] = Order::where('processed',3)->whereMonth('updated_at',$i)->whereYear('updated_at','2021')->sum('total');
+            $data['Tháng '.$i] = Order::where('processed',3)->whereMonth('updated_at',$i)->whereYear('updated_at',$year_now)->sum('total');
         }
 
          $dh = Order::count();

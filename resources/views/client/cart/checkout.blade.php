@@ -108,7 +108,7 @@
                         <li><p></p></li>
                         <li><span>Tổng tiền đơn hàng</span> <span>{{ number_format($bill) }} đ</span></li>
                     </ul>
-                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                   {{--  <button type="submit" class="btn btn-primary">Thanh toán</button> --}}
                 </div>
 
                 {{-- <div class="row">

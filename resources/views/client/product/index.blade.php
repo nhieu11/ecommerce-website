@@ -230,7 +230,8 @@
                                                 <option value="highway">Highway</option>
                                                 <option value="zara">Zara</option>
                                                 <option value="coolmate">Coolmate</option>
-                                              {{--    <option value="{{App\Entities\Product::max('price')}}">Max Price</option>  --}}
+                                                <option value="360bontique">360 Bontique</option>
+                                              {{--    <option value="{{App\Entitie  s\Product::max('price')}}">Max Price</option>  --}}
                                             </select>
                                         </div>
                                     </div>

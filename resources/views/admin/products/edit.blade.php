@@ -35,8 +35,8 @@
                                         <option value='2'>Nữ</option>
                                         <option value='4'>---|Áo khoác nữ</option>
                                     </select> --}}
-                                    <select class="form-control" name="parent" >
-                                        <option>----ROOT----</option>
+                                    <select name="category_id" class="form-control"  >
+                                       
                                         @include('admin.categories.option', ['level' => 0])
                                     </select>
                                 </div>
@@ -156,5 +156,5 @@
                 console.error( error );
             } );
     </script>
-    
+
     @endsection

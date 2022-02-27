@@ -118,7 +118,7 @@ class OrderController extends Controller
     {
         $order = Order::find($order_id);
         $order->processed = 2;
-        $order->dateCollection = Carbon::now();
+        $order->dateHandOver = Carbon::now();
         $order->save();
         return redirect('/admin/orders/delivery');
     }
