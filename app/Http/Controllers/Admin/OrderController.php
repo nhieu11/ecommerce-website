@@ -57,6 +57,7 @@ class OrderController extends Controller
          $order = Order::findOrFail($order);
          $order->fill($input);
          $order->processed = 1;
+         $order->dateAssign = Carbon::now();
          $order->save();
          return redirect("/admin/orders/processed");
 
