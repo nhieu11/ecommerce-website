@@ -122,7 +122,7 @@
                                             </select>
                                         </div>
                                         <div class="alert alert-primary" role="alert" align='right'>
-											<button onclick="return complete()" class="btn btn-success" type="submit">Bàn giao</button>
+											<button onclick="return complete()" class="btn btn-success" type="submit">Duyệt</button>
                                         </div>
 
                                     </div>

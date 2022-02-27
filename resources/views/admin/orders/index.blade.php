@@ -28,7 +28,7 @@
 											<th>Tên khách hàng</th>
 											<th>Sđt</th>
 											<th>Địa chỉ</th>
-
+                                            <th>Thời gian tạo đơn hàng</th>
 											<th>Xử lý</th>
 										</tr>
                                     </thead>
@@ -39,6 +39,7 @@
 											<td>{{$order->name}}</td>
 											<td>{{$order->phone}}</td>
 											<td>{{$order->address}}</td>
+                                            <td>{{$order->created_at}}</td>
 											<td>
                                                 <a href="/admin/orders/{{$order->id}}/detail" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
 											</td>

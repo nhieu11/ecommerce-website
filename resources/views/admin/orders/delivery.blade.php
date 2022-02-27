@@ -42,7 +42,7 @@
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>
                                             <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
-                                            <td>123</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateHandOver)->toDayDateTimeString()}}</td>
                                             <td >
                                                 {{-- <a onclick="return complete()" class="{{ $item->processed ==  3 ? 'd-none' : 'btn btn-warning'  }}" href="/admin/orders/complete/{{$item->id}}">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>Hoàn thành

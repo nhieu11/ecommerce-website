@@ -29,7 +29,9 @@
                                             <th>Email</th>
                                             <th>Sđt</th>
                                             <th>Địa chỉ</th>
-                                            <th>Thời gian</th>
+                                            <th>Thời gian tạo đơn hàng</th>
+                                            <th>Thời gian duyệt đơn hàng</th>
+                                            <th>Xử lý</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,25 +40,16 @@
                                             <td>{{$item->id}}</td>
                                             <td>{{$item->name}}</td>
                                             <td>{{($item->shipper)->name}}</td>
-
                                             <td>{{$item->email}}</td>
                                             <td>{{$item->phone}}</td>
                                             <td>{{$item->address}}</td>
-                                            <td>{{Carbon\Carbon::parse($item->updated_at)->format('d-m-Y')}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
+                                            <td>{{Carbon\Carbon::parse($item->dateAssign)->toDayDateTimeString()}}</td>
                                             <td>
                                                 <a href="/admin/orders/{{$item->id}}/processed" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i>Xử lý</a>
                                             </td>
                                         </tr>
                                         @endforeach
-
-                                        {{-- <tr>
-                                            <td>1</td>
-                                            <td>Nguyễn thế phúc</td>
-                                            <td>admin@gmail.com</td>
-                                            <td>0906013526</td>
-                                            <td>Thường tín , hà nội</td>
-                                            <td>2018-12-06 02:05:30</td>
-                                        </tr> --}}
                                     </tbody>
                                 </table>
 							</div>
